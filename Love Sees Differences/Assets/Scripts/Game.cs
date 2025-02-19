@@ -21,6 +21,7 @@ public class Game : MonoBehaviour
 
     [SerializeField] public GameObject GeneratorCanvas;
     [SerializeField] public GameObject UICanvas;
+    [SerializeField] public GameObject EndScreenCanvas;
 
     [SerializeField] public GameObject loadingAudio;
     [SerializeField] public GameObject gameAudio;
@@ -79,6 +80,7 @@ public class Game : MonoBehaviour
         // GeneratorCanvas should be enabled, and UI canvas should be disabled.
         GeneratorCanvas.SetActive(true);
         UICanvas.SetActive(false);
+        EndScreenCanvas.SetActive(false);
 
         // Play loadingAudio
         loadingAudio.SetActive(true);
@@ -223,6 +225,7 @@ public class Game : MonoBehaviour
         gameActive = false;
         FreezePlayer();
         Debug.Log("Game Over! Final Score: " + (deliveries - collisions));
+        EndScreenCanvas.SetActive(true);
     }
 
     private IEnumerator RegeneratePeople()

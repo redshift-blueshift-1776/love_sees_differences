@@ -1,0 +1,111 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneChanger : MonoBehaviour
+{
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    
+    public void LoadTutorial()
+    {
+        SceneManager.LoadScene(1);
+    }
+
+    public void LoadMaze()
+    {
+        SceneManager.LoadScene(2);
+    }
+
+    public void LoadSlide2()
+    {
+        SceneManager.LoadScene(3);
+    }
+
+    public void LoadFail2()
+    {
+        SceneManager.LoadScene(4);
+    }
+
+    public void LoadSlide3()
+    {
+        SceneManager.LoadScene(5);
+    }
+
+    public void LoadFail3()
+    {
+        SceneManager.LoadScene(6);
+    }
+
+    public void LoadSlide4()
+    {
+        SceneManager.LoadScene(7);
+    }
+
+    public void LoadFail4()
+    {
+        SceneManager.LoadScene(8);
+    }
+
+    public void LoadSlide5()
+    {
+        SceneManager.LoadScene(9);
+    }
+
+    public void LoadFail5()
+    {
+        SceneManager.LoadScene(10);
+    }
+
+    public void LoadSlide6()
+    {
+        SceneManager.LoadScene(11);
+    }
+
+    public void LoadFail6()
+    {
+        SceneManager.LoadScene(12);
+    }
+
+    public void LoadSlide7()
+    {
+        SceneManager.LoadScene(13);
+    }
+
+    public void LoadFail7()
+    {
+        SceneManager.LoadScene(14);
+    }
+
+    public void LoadSlide8()
+    {
+        SceneManager.LoadScene(15);
+    }
+
+    public void LoadFail8()
+    {
+        SceneManager.LoadScene(16);
+    }
+
+    public void LoadSlide9()
+    {
+        SceneManager.LoadScene(17);
+    }
+
+    public void LoadFail9()
+    {
+        SceneManager.LoadScene(18);
+    }
+
+    
+
+    public void restartLevel() {
+        int returnTo = PlayerPrefs.GetInt("returnTo");
+        //Debug.Log(returnTo);
+        SceneManager.LoadScene(returnTo);
+    }
+}
