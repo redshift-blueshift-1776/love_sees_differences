@@ -50,21 +50,62 @@ public class Player_Movement : MonoBehaviour
     {
         // Controls here
         // If W, A, S, or D pressed, swap the value of the bool for polar of that letter
-
+        if (Input.GetKeyDown(KeyCode.W))
+            polarW = !polarW;
+        if (Input.GetKeyDown(KeyCode.A))
+            polarA = !polarA;
+        if (Input.GetKeyDown(KeyCode.S))
+            polarS = !polarS;
+        if (Input.GetKeyDown(KeyCode.D))
+            polarD = !polarD;
         // If space pressed, swap the value of selfPolar
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+            selfPolar = !selfPolar;
         // Actual Movement here:
         // Get vectors towards Buildings W, A, S, and D.
-
+        Vector3 vecW = BuildingW.transform.position - transform.position;
+        Vector3 vecA = BuildingA.transform.position - transform.position;
+        Vector3 vecS = BuildingS.transform.position - transform.position;
+        Vector3 vecD = BuildingD.transform.position - transform.position;
         // Normalize the four vectors.
-
+        vecW.Normalize();
+        vecA.Normalize();
+        vecS.Normalize();
+        vecD.Normalize();
         // If polarW is the same as selfPolar, reverse the direction for the vector towards W.
         // Same for A, S, and D.
-
+        if (polarW == selfPolar)
+            vecW = -vecW;
+        if (polarA == selfPolar)
+            vecA = -vecA;
+        if (polarS == selfPolar)
+            vecS = -vecS;
+        if (polarD == selfPolar)
+            vecD = -vecD;
         // Add the four vectors, and move the character in that direction
+        Vector3 move = vecW + vecA + vecS + vecD;
+
+        move *= playerSpeed;
         // If left shift pressed, multiply the speed by speedUp.
+        if (Input.GetKey(KeyCode.LeftShift))
+            move *= speedUp;
+        
+        groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+        controller.Move(move * Time.deltaTime);
 
         // If B pressed, jump
+        if (Input.GetKeyDown(KeyCode.B) && groundedPlayer)
+        {
+            playerVelocity.y = jumpVelocity;
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
 
     }
 
