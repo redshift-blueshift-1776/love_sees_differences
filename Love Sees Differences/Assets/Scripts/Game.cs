@@ -56,6 +56,10 @@ public class Game : MonoBehaviour
 
     private const int maxCarryCapacity = 10;
     private const float pickupRadius = 30.0f;
+
+    private const int maxPeopleAtBuilding = 20; // Maximum people a building can hold
+    private const int regenerationAmount = 2;  // How many people regenerate each cycle
+    private const float regenerationInterval = 5f; // Time in seconds between regenerations
     // Start is called before the first frame update
     void Start()
     {
@@ -83,6 +87,9 @@ public class Game : MonoBehaviour
         playerMovement = player.GetComponent<Player_Movement>();
 
         SetupUIToggles();
+
+        // Start the people regeneration coroutine
+        StartCoroutine(RegeneratePeople());
         
     }
 
@@ -216,5 +223,23 @@ public class Game : MonoBehaviour
         gameActive = false;
         FreezePlayer();
         Debug.Log("Game Over! Final Score: " + (deliveries - collisions));
+    }
+
+    private IEnumerator RegeneratePeople()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(regenerationInterval);
+
+            if (gameActive)
+            {
+                peopleAtW = Mathf.Min(peopleAtW + regenerationAmount, maxPeopleAtBuilding);
+                peopleAtA = Mathf.Min(peopleAtA + regenerationAmount, maxPeopleAtBuilding);
+                peopleAtS = Mathf.Min(peopleAtS + regenerationAmount, maxPeopleAtBuilding);
+                peopleAtD = Mathf.Min(peopleAtD + regenerationAmount, maxPeopleAtBuilding);
+                
+                UpdateScore();
+            }
+        }
     }
 }
