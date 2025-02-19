@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Maze_Generator : MonoBehaviour
 {
-    [SerializeField] public int size;
+    [SerializeField] public int size = 5;
 
     private Dictionary<int, List<(int neighbor, float weight)>> graph;
     private List<(int from, int to)> mstEdges;
@@ -73,7 +73,7 @@ public class Maze_Generator : MonoBehaviour
         HashSet<int> visited = new HashSet<int>();
         List<(int from, int to, float weight)> edges = new List<(int, int, float)>();
 
-        int startVertex = (size * size + 1) / 2;
+        int startVertex = (size * size - 1) / 2;
         visited.Add(startVertex);
 
         foreach (var edge in graph[startVertex])
@@ -82,7 +82,7 @@ public class Maze_Generator : MonoBehaviour
         }
 
         // Loop until we visit all vertices
-        while (visited.Count < size * size)
+        while (mstEdges.Count < size * size - 1)
         {
             // Sort edges by weight
             edges.Sort((x, y) => x.weight.CompareTo(y.weight));
@@ -122,7 +122,7 @@ public class Maze_Generator : MonoBehaviour
             }
         }
 
-        Debug.Log("Maze Generated! Use VisualizeMapGeneration or DeleteAllWallsAtOnce to see it.");
+        Debug.Log($"Maze Generated! Expected edges: {size * size - 1}, Found edges: {mstEdges.Count}");
     }
 
     // Update is called once per frame
@@ -134,6 +134,7 @@ public class Maze_Generator : MonoBehaviour
     public void VisualizeMapGeneration() {
         // Once the MST is determined, delete the walls in the MST one by one
         // at a rate of 10 walls per second.
+        Debug.Log("Visualizing");
         StartCoroutine(DeleteWallsOneByOne());
     }
 
@@ -142,25 +143,27 @@ public class Maze_Generator : MonoBehaviour
         foreach (var edge in mstEdges)
         {
             string wallName = GetWallName(edge.from, edge.to);
-            GameObject wallToDelete = walls.Find(wall => wall.name == wallName);
+            GameObject wallToDelete = FindWall(wallName);
 
             if (wallToDelete)
             {
+                walls.Remove(wallToDelete);
                 Destroy(wallToDelete);
-                yield return new WaitForSeconds(0.1f); // 10 walls per second
             }
+            yield return new WaitForSeconds(0.1f); // 10 walls per second
         }
     }
 
-    public void DeleteAllWallsAtOnce() {
-        // Once MST is determined, delete all the walls at once
+    public void DeleteAllWallsAtOnce()
+    {
         foreach (var edge in mstEdges)
         {
             string wallName = GetWallName(edge.from, edge.to);
-            GameObject wallToDelete = walls.Find(wall => wall.name == wallName);
+            GameObject wallToDelete = FindWall(wallName);
 
             if (wallToDelete)
             {
+                walls.Remove(wallToDelete);
                 Destroy(wallToDelete);
             }
         }
@@ -171,5 +174,17 @@ public class Maze_Generator : MonoBehaviour
         int a = Mathf.Min(from, to);
         int b = Mathf.Max(from, to);
         return $"Wall_{a}_{b}";
+    }
+
+    private GameObject FindWall(string wallName)
+    {
+        foreach (GameObject wall in walls)
+        {
+            if (wall != null && wall.name == wallName)
+            {
+                return wall;
+            }
+        }
+        return null;
     }
 }
