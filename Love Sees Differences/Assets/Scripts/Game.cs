@@ -58,7 +58,7 @@ public class Game : MonoBehaviour
     private const int maxCarryCapacity = 10;
     private const float pickupRadius = 30.0f;
 
-    private const int maxPeopleAtBuilding = 20; // Maximum people a building can hold
+    private const int maxPeopleAtBuilding = 10; // Maximum people a building can hold
     private const int regenerationAmount = 2;  // How many people regenerate each cycle
     private const float regenerationInterval = 5f; // Time in seconds between regenerations
     // Start is called before the first frame update
