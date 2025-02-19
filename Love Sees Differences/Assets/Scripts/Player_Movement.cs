@@ -10,7 +10,7 @@ public class Player_Movement : MonoBehaviour
 
     private Vector3 playerVelocity = new Vector3(0,0,0);
     private bool groundedPlayer;
-    private float playerSpeed = 5.0f;
+    [SerializeField] private float playerSpeed = 5.0f;
     private float jumpHeight = 10.0f;
     private float gravityValue = -20f;
 
@@ -20,19 +20,19 @@ public class Player_Movement : MonoBehaviour
 
     private float mouseSensitivity = 1;
 
-    private float speedUp = 5f;
+    [SerializeField] private float speedUp = 5f;
 
     [SerializeField] public GameObject BuildingW;
     [SerializeField] public GameObject BuildingA;
     [SerializeField] public GameObject BuildingS;
     [SerializeField] public GameObject BuildingD;
 
-    private bool polarW;
-    private bool polarA;
-    private bool polarS;
-    private bool polarD;
+    public bool polarW;
+    public bool polarA;
+    public bool polarS;
+    public bool polarD;
 
-    private bool selfPolar;
+    public bool selfPolar;
 
     private void Start()
     {
@@ -41,9 +41,14 @@ public class Player_Movement : MonoBehaviour
         controller = gameObject.GetComponent<CharacterController>();
         // set the skin width appropriately according to Unity documentation: https://docs.unity3d.com/Manual/class-CharacterController.html
         controller.skinWidth = 0.1f * controller.radius;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
         mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity", 1.0f);
+        polarW = false;
+        polarA = false;
+        polarS = false;
+        polarD = false;
+        selfPolar = false;
     }
 
     void Update()
@@ -90,7 +95,7 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
             move *= speedUp;
         
-        groundedPlayer = controller.isGrounded;
+        groundedPlayer = (transform.position.y < 6);
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;

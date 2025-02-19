@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 5, y: 2, z: 5}
+  m_LocalScale: {x: 10, y: 2, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5675318434382356238}
@@ -115,7 +115,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5675318434382356238}
   - component: {fileID: 3792119607926397551}
-  - component: {fileID: 4920915117216094000}
+  - component: {fileID: 3499851625697555639}
+  - component: {fileID: 5487297494621523706}
   m_Layer: 0
   m_Name: Truck_Thing
   m_TagString: Untagged
@@ -152,7 +153,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea4b75b6bf754ec2b78571f4b1b99dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!143 &4920915117216094000
+  playerSpeed: 10
+  speedUp: 5
+  BuildingW: {fileID: 0}
+  BuildingA: {fileID: 0}
+  BuildingS: {fileID: 0}
+  BuildingD: {fileID: 0}
+  polarW: 0
+  polarA: 0
+  polarS: 0
+  polarD: 0
+  selfPolar: 0
+--- !u!143 &3499851625697555639
 CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,12 +184,33 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 3
   m_Height: 2
-  m_Radius: 0.5
+  m_Radius: 5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!65 &5487297494621523706
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844583227466237896}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 2, z: 10}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &8124204665136130670
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,13 +237,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8124204665136130670}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.58778524, y: 0, z: 0, w: 0.809017}
-  m_LocalPosition: {x: 0, y: 100, z: -5}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0, y: 100, z: -100}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5675318434382356238}
-  m_LocalEulerAnglesHint: {x: 72, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!20 &1156333705146697429
 Camera:
   m_ObjectHideFlags: 0
