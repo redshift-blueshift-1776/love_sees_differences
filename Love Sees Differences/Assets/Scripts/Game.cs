@@ -55,7 +55,7 @@ public class Game : MonoBehaviour
     private Player_Movement playerMovement;
 
     private const int maxCarryCapacity = 10;
-    private const float pickupRadius = 10.0f;
+    private const float pickupRadius = 30.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -176,7 +176,7 @@ public class Game : MonoBehaviour
     private void UpdateScore()
     {
         // Score = deliveries - collisions. Display on the UI.
-        timerText.text = $"Timer: {timer}";
+        timerText.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
         int score = deliveries - collisions;
         scoreText.text = $"Score: {score}";
         peopleAtWText.text = $"People at W: {peopleAtW}";
