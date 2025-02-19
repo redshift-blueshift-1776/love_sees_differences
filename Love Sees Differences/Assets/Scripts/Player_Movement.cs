@@ -21,6 +21,19 @@ public class Player_Movement : MonoBehaviour
     private float mouseSensitivity = 1;
 
     private float speedUp = 5f;
+
+    [SerializeField] public GameObject BuildingW;
+    [SerializeField] public GameObject BuildingA;
+    [SerializeField] public GameObject BuildingS;
+    [SerializeField] public GameObject BuildingD;
+
+    private bool polarW;
+    private bool polarA;
+    private bool polarS;
+    private bool polarD;
+
+    private bool selfPolar;
+
     private void Start()
     {
         jumpVelocity = Mathf.Sqrt(-2 * gravityValue * jumpHeight);
@@ -35,50 +48,23 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
+        // Controls here
+        // If W, A, S, or D pressed, swap the value of the bool for polar of that letter
 
-        // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += jumpVelocity;
-        }
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        playerVelocity.x = 0;
-        playerVelocity.z = 0;
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            playerSpeed = 5f * speedUp;
-        } else {
-            playerSpeed = 5f;
-        }
-        if (Input.GetKey(KeyCode.F)) {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            int sceneID = SceneManager.GetActiveScene().buildIndex;
-            SceneManager.LoadScene(sceneID + 1);
-        }
-        if (Input.GetKey(KeyCode.P)) {
-            //Cursor.visible = true;
-            //Cursor.lockState = CursorLockMode.None;
-            int sceneID = SceneManager.GetActiveScene().buildIndex;
-            if (sceneID == 17) {
-                Cursor.visible = true;
-                Cursor.lockState = CursorLockMode.None;
-            }
-            SceneManager.LoadScene(sceneID + 2);
-        }
-        playerVelocity += (gameObject.transform.right * Input.GetAxis("Horizontal") + gameObject.transform.forward * Input.GetAxis("Vertical")) * playerSpeed;
-        controller.Move(playerVelocity * Time.deltaTime);
+        // If space pressed, swap the value of selfPolar
+        
+        // Actual Movement here:
+        // Get vectors towards Buildings W, A, S, and D.
 
+        // Normalize the four vectors.
 
-        // Rotates the camera
-        float rotX = Input.GetAxis("Mouse X") * mouseSensitivity;
-        float rotY = Math.Clamp(-Input.GetAxis("Mouse Y") * mouseSensitivity, -90, 90);
-        //Camera.main.transform.Rotate(rotY, 0, 0);
-        gameObject.transform.Rotate(0, rotX, 0);
+        // If polarW is the same as selfPolar, reverse the direction for the vector towards W.
+        // Same for A, S, and D.
+
+        // Add the four vectors, and move the character in that direction
+        // If left shift pressed, multiply the speed by speedUp.
+
+        // If B pressed, jump
 
     }
 
