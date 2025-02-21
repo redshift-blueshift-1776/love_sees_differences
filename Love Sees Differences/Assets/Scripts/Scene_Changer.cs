@@ -11,27 +11,27 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(0);
     }
     
-    public void LoadTutorial()
+    public void LoadFeelingsInTheHeart()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void LoadMaze()
+    public void LoadChampion()
     {
         SceneManager.LoadScene(2);
     }
 
-    public void LoadSlide2()
+    public void LoadLoveUnderTheStars()
     {
         SceneManager.LoadScene(3);
     }
 
-    public void LoadFail2()
+    public void LoadLevelSelect()
     {
         SceneManager.LoadScene(4);
     }
 
-    public void LoadSlide3()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(5);
     }
