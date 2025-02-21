@@ -34,6 +34,10 @@ public class Player_Movement : MonoBehaviour
 
     public bool selfPolar;
 
+    [SerializeField] public GameObject game;
+
+    private Game gameScript;
+
     private void Start()
     {
         jumpVelocity = Mathf.Sqrt(-2 * gravityValue * jumpHeight);
@@ -53,6 +57,9 @@ public class Player_Movement : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.M)) {
+            SceneManager.LoadScene(0);
+        }
         // Controls here
         // If W, A, S, or D pressed, swap the value of the bool for polar of that letter
         if (Input.GetKeyDown(KeyCode.W))
@@ -112,6 +119,10 @@ public class Player_Movement : MonoBehaviour
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
+    }
+
+    public void addCollision() {
+        gameScript.addCollision();
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit) {

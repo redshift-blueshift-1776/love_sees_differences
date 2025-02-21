@@ -12,13 +12,17 @@ public class Person_Movement : MonoBehaviour
 
     [SerializeField] public GameObject game;
 
+    [SerializeField] public AudioSource sound;
+
     private Game gameScript;
 
     public Vector3 startingPos;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Truck_Thing");
         playerMovement = player.GetComponent<Player_Movement>();
+        game = GameObject.Find("Game");
         gameScript = game.GetComponent<Game>();
     }
 
@@ -36,13 +40,27 @@ public class Person_Movement : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider c) {
-        Debug.Log("Hit Something!");
-        Debug.Log(c.name);
+        //Debug.Log("Hit Something!");
+        //Debug.Log(c.name);
         if (c.name == "Truck_Thing") {
-            // collision
-            gameScript.addCollision();
-            Destroy(gameObject);
+            sound.Play();
+            Die();
             return;
         }
     }
+
+    void Die() {
+        StartCoroutine(DieCoroutine());
+    }
+
+
+    private IEnumerator DieCoroutine()
+    {
+        // collision
+        gameScript.addCollision();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        yield return null;
+    }
+
 }

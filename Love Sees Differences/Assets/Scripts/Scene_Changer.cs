@@ -31,12 +31,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(4);
     }
 
-    public void LoadHowToPlay()
+    public void LoadOurYouthfulBlossomingMoments()
     {
         SceneManager.LoadScene(5);
     }
 
-    public void LoadFail3()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(6);
     }

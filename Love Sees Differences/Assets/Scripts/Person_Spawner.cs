@@ -23,12 +23,13 @@ public class Person_Spawner : MonoBehaviour
     {
         direction = new Vector3(xSpeed, 0, zSpeed);
         gameScript = game.GetComponent<Game>();
+        StartCoroutine(RegeneratePeople());
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(RegeneratePeople());
+
     }
 
     void spawnPerson(Vector3 size, Vector3 walkDirection, float speed) {
@@ -45,12 +46,13 @@ public class Person_Spawner : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(spawnInterval);
-
             if (gameScript.gameActive)
             {
                 Vector3 vec = new Vector3(1, 1, 1);
                 spawnPerson(vec, direction, 2);
             }
+
+            
         }
     }
 }

@@ -39,6 +39,10 @@ public class Game : MonoBehaviour
     [SerializeField] private Toggle polarDToggle;
     [SerializeField] private Toggle selfPolarToggle;
 
+    [SerializeField] private TextMeshProUGUI finalScoreText;
+    [SerializeField] private TextMeshProUGUI finalDeliveriesText;
+    [SerializeField] private TextMeshProUGUI finalCollisionsText;
+
     private int deliveries;
     private int collisions;
 
@@ -225,7 +229,12 @@ public class Game : MonoBehaviour
         gameActive = false;
         FreezePlayer();
         Debug.Log("Game Over! Final Score: " + (deliveries - collisions));
+        UICanvas.SetActive(false);
         EndScreenCanvas.SetActive(true);
+        int score = deliveries - collisions;
+        finalScoreText.text = $"Score: {score}";
+        finalDeliveriesText.text = $"Deliveries: {deliveries}";
+        finalCollisionsText.text = $"Collisions: {collisions}";
     }
 
     private IEnumerator RegeneratePeople()
