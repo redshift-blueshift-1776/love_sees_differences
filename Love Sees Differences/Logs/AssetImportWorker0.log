@@ -5709,3 +5709,445 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 836.801664 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8d19cee539d1c95c59cdffd058c3069d') in 0.020795 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.962 seconds
+Refreshing native plugins compatible for Editor in 0.87 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.538 seconds
+Domain Reload Profiling: 3501ms
+	BeginReloadAssembly (411ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (46ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (87ms)
+	RebuildCommonClasses (38ms)
+	RebuildNativeTypeToScriptingClass (11ms)
+	initialDomainReloadingComplete (86ms)
+	LoadAllAssembliesAndSetupDomain (417ms)
+		LoadAssemblies (587ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (46ms)
+			TypeCache.Refresh (29ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (8ms)
+			ResolveRequiredComponents (8ms)
+	FinalizeReload (2539ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1895ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (19ms)
+			SetLoadedEditorAssemblies (7ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (108ms)
+			ProcessInitializeOnLoadAttributes (1670ms)
+			ProcessInitializeOnLoadMethodAttributes (89ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (11ms)
+Refreshing native plugins compatible for Editor in 0.86 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3123 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 20 unused Assets / (30.4 KB). Loaded Objects now: 3886.
+Memory consumption went from 0.80 GB to 0.80 GB.
+Total: 2.968250 ms (FindLiveObjects: 0.221958 ms CreateObjectMapping: 0.057250 ms MarkObjects: 2.621375 ms  DeleteObjects: 0.066917 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:CustomObjectIndexerAttribute: 43b350a4d6e6d1791af0b5038c4bea17 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 3918e3fc78b5a79bad01e8451be0beb8 -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 15.315086 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.003200 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.028401 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000804 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.017017 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000251 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.148455 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000307 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.005007 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000250 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.001238 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000304 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.022694 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000308 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.106636 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000343 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.100970 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000474 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.001125 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000270 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.097084 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000490 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.103595 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000481 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.108358 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000510 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.090970 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000407 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.102509 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000493 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.103958 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000351 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.088560 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000489 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.103125 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000459 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.110263 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000691 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.087203 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000418 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.104215 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000433 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.103290 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000506 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.098856 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000582 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.115831 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.002439 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.003520 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000523 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.071032 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000484 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.201709 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000442 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 0.011923 seconds.
+  path: Assets/Scripts/Screen_Tint.cs
+  artifactKey: Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Screen_Tint.cs using Guid(febf389642e6e49918c9ec774a800e79) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '00000000000000000000000000000000') in 0.000420 seconds
+Import Error Code:(4)
+Message: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+  ERROR: Build asset version error: assets/scripts/screen_tint.cs in SourceAssetDB has modification time of '2025-02-21T05:56:30Z' while content on disk has modification time of '2025-02-21T05:56:44Z'
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.722 seconds
+Refreshing native plugins compatible for Editor in 0.77 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  2.555 seconds
+Domain Reload Profiling: 3279ms
+	BeginReloadAssembly (314ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (32ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (79ms)
+	RebuildCommonClasses (33ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (68ms)
+	LoadAllAssembliesAndSetupDomain (298ms)
+		LoadAssemblies (417ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (22ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (7ms)
+			ResolveRequiredComponents (6ms)
+	FinalizeReload (2556ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (1923ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (18ms)
+			SetLoadedEditorAssemblies (6ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (109ms)
+			ProcessInitializeOnLoadAttributes (1665ms)
+			ProcessInitializeOnLoadMethodAttributes (124ms)
+			AfterProcessingInitializeOnLoad (1ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (13ms)
+Refreshing native plugins compatible for Editor in 0.91 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3123 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 20 unused Assets / (30.2 KB). Loaded Objects now: 3889.
+Memory consumption went from 0.81 GB to 0.81 GB.
+Total: 3.121167 ms (FindLiveObjects: 0.198125 ms CreateObjectMapping: 0.051584 ms MarkObjects: 2.814083 ms  DeleteObjects: 0.056583 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:CustomObjectIndexerAttribute: 43b350a4d6e6d1791af0b5038c4bea17 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: 3918e3fc78b5a79bad01e8451be0beb8 -> 
+  custom:framework-osx-AVFoundation: e770b220cccbd017edd2c1fefb359320 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
