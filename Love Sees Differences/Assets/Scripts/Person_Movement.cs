@@ -8,13 +8,18 @@ public class Person_Movement : MonoBehaviour
 
     [SerializeField] public GameObject player;
 
+    private Player_Movement playerMovement;
+
     [SerializeField] public GameObject game;
+
+    private Game gameScript;
 
     public Vector3 startingPos;
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerMovement = player.GetComponent<Player_Movement>();
+        gameScript = game.GetComponent<Game>();
     }
 
     // Update is called once per frame
@@ -31,9 +36,13 @@ public class Person_Movement : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider c) {
+        Debug.Log("Hit Something!");
+        Debug.Log(c.name);
         if (c.name == "Truck_Thing") {
             // collision
-            game.addCollision();
+            gameScript.addCollision();
+            Destroy(gameObject);
+            return;
         }
     }
 }
