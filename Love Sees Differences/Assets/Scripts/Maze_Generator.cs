@@ -7,7 +7,7 @@ public class Maze_Generator : MonoBehaviour
     [SerializeField] public int size = 5;
 
     private Dictionary<int, List<(int neighbor, float weight)>> graph;
-    private List<(int from, int to)> mstEdges;
+    public List<(int from, int to)> mstEdges;
 
     private List<GameObject> walls;
     // Start is called before the first frame update
@@ -186,5 +186,9 @@ public class Maze_Generator : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public List<(int from, int to)> getMST() {
+        return mstEdges;
     }
 }
