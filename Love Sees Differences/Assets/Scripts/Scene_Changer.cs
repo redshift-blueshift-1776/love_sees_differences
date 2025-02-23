@@ -46,12 +46,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(7);
     }
 
-    public void LoadHowToPlay()
+    public void LoadEATDH()
     {
         SceneManager.LoadScene(8);
     }
 
-    public void LoadSlide5()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(9);
     }
