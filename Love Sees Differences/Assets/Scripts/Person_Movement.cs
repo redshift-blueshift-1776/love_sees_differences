@@ -16,6 +16,8 @@ public class Person_Movement : MonoBehaviour
 
     private Game gameScript;
 
+    private Screen_Tint screenTint;
+
     public Vector3 startingPos;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class Person_Movement : MonoBehaviour
         playerMovement = player.GetComponent<Player_Movement>();
         game = GameObject.Find("Game");
         gameScript = game.GetComponent<Game>();
+        screenTint = game.GetComponent<Screen_Tint>();
     }
 
     // Update is called once per frame
@@ -57,6 +60,7 @@ public class Person_Movement : MonoBehaviour
     private IEnumerator DieCoroutine()
     {
         // collision
+        screenTint.TintAndFade();
         gameScript.addCollision();
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);

@@ -51,14 +51,14 @@ public class Screen_Tint : MonoBehaviour
         // }
 
         // Step 2: Pause for a moment (optional)
-        yield return new WaitForSeconds(0.5f);
+        //yield return new WaitForSeconds(0.5f);
 
         // Step 3: Fade Out (restore normal color)
         timer = 0;
         while (timer <= fadeDuration)
         {
             timer += Time.deltaTime;
-            color.a = Mathf.Lerp(0.2f, 0, timer / fadeDuration);
+            color.a = Mathf.Lerp(0.9f, 0, timer / fadeDuration);
             tintImage.color = color;
             yield return null;
         }
@@ -67,8 +67,8 @@ public class Screen_Tint : MonoBehaviour
         isFading = false;
     }
 
-    public void SetTintEnabled(bool isEnabled) {
-        isTintEnabled = isEnabled;
-        PlayerPrefs.SetInt("ScreenTintEnabled", isEnabled ? 1 : 0);
-    }
+    // public void SetTintEnabled(bool isEnabled) {
+    //     isTintEnabled = isEnabled;
+    //     PlayerPrefs.SetInt("ScreenTintEnabled", isEnabled ? 1 : 0);
+    // }
 }

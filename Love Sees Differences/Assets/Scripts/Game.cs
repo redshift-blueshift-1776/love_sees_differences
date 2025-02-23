@@ -149,8 +149,11 @@ public class Game : MonoBehaviour
 
     private void HandleBuildingInteraction()
     {
-        // If player gets within a certain radius of a building, they will pick up as many people
-        // as they can, with the maximum they can carry at a time being 10.
+        // Additionally, if the player goes to building W, they will drop off everyone from S.
+        // Same for S and W.
+        // Same for A and D.
+        // Same for D and A.
+        // For every person dropped off, add 1 to deliveries.
         float distanceW = Vector3.Distance(player.transform.position, BuildingW.transform.position);
         float distanceA = Vector3.Distance(player.transform.position, BuildingA.transform.position);
         float distanceS = Vector3.Distance(player.transform.position, BuildingS.transform.position);
@@ -166,11 +169,8 @@ public class Game : MonoBehaviour
 
     private void HandlePickupAndDropoff(ref int peopleAtBuilding, ref int peopleToDrop, ref int peopleToPickup)
     {
-        // Additionally, if the player goes to building W, they will drop off everyone from S.
-        // Same for S and W.
-        // Same for A and D.
-        // Same for D and A.
-        // For every person dropped off, add 1 to deliveries.
+        // If player gets within a certain radius of a building, they will pick up as many people
+        // as they can, with the maximum they can carry at a time being 10.
         deliveries += peopleToDrop;
         peopleToDrop = 0;
 
