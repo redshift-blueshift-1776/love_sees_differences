@@ -5,6 +5,16 @@ using UnityEngine;
 public class Person_Pathfinding : MonoBehaviour
 {
     [SerializeField] private float speed = 2f;
+    [SerializeField] private float despawnRadius = 20f; // Distance at which pedestrian despawns
+
+    [SerializeField] public GameObject player;
+    private Player_Movement playerMovement;
+
+    [SerializeField] public GameObject game;
+    [SerializeField] public AudioSource sound;
+
+    private Game gameScript;
+    private Screen_Tint screenTint;
     
     [Header("Maze Configuration")]
     [SerializeField] private Maze_Generator mazeGenerator;  // Reference to the maze
@@ -85,6 +95,10 @@ public class Person_Pathfinding : MonoBehaviour
             {
                 pathQueue.Dequeue();
             }
+        }
+        if (Vector3.Distance(transform.position, GridToWorld(goalCell)) <= despawnRadius)
+        {
+            Destroy(gameObject); // Despawn pedestrian
         }
     }
 
@@ -189,12 +203,36 @@ public class Person_Pathfinding : MonoBehaviour
     private Vector3 GridToWorld(Vector2Int gridPos)
     {
         float worldX = gridPos.x * cellSize + topLeftX;
-        float worldZ = gridPos.y * cellSize + topLeftZ;
+        float worldZ = topLeftZ - gridPos.y * cellSize;
         return new Vector3(worldX, 0, worldZ);
     }
 
     private bool IsValidCell(Vector2Int cell)
     {
         return cell.x >= 0 && cell.x < mazeWidth && cell.y >= 0 && cell.y < mazeHeight;
+    }
+
+    private void OnTriggerEnter(Collider c)
+    {
+        if (c.name == "Truck_Thing")
+        {
+            sound.Play();
+            Die();
+            return;
+        }
+    }
+
+    void Die()
+    {
+        StartCoroutine(DieCoroutine());
+    }
+
+    private IEnumerator DieCoroutine()
+    {
+        screenTint.TintAndFade();
+        gameScript.addCollision();
+        yield return new WaitForSeconds(0.5f);
+        Destroy(gameObject);
+        yield return null;
     }
 }
