@@ -47,6 +47,7 @@ public class Person_Pathfinding : MonoBehaviour
         adjacencyList = BuildAdjacencyList(mazeGenerator);
 
         startCell = WorldToGrid(transform.position);
+        Debug.Log(startCell);
 
         // Choose a random goal
         if (goalPoints.Length > 0)
@@ -67,6 +68,7 @@ public class Person_Pathfinding : MonoBehaviour
             foreach (var pos in path)
             {
                 pathQueue.Enqueue(pos);
+                Debug.Log(pos);
             }
             isMoving = true;
         }
@@ -124,7 +126,7 @@ public class Person_Pathfinding : MonoBehaviour
 
             if (current == goal)
                 break;
-
+            //Debug.Log(current);
             int currentIndex = GridToIndex(current);
             if (!adjacencyList.ContainsKey(currentIndex))
             {
@@ -179,8 +181,8 @@ public class Person_Pathfinding : MonoBehaviour
 
     private Vector2Int WorldToGrid(Vector3 worldPos)
     {
-        int gridX = Mathf.RoundToInt(worldPos.x - topLeftX / cellSize);
-        int gridY = Mathf.RoundToInt(worldPos.z - topLeftZ / cellSize);
+        int gridX = Mathf.RoundToInt((worldPos.x - topLeftX) / cellSize);
+        int gridY = Mathf.RoundToInt((topLeftZ - worldPos.z) / cellSize);
         return new Vector2Int(gridX, gridY);
     }
 
