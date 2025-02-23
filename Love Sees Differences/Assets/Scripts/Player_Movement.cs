@@ -128,7 +128,7 @@ public class Player_Movement : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit) {
         if (hit.rigidbody != null) {
             Vector3 horizontalDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-            hit.rigidbody.AddForce(horizontalDir * 10);
+            hit.rigidbody.AddForce(horizontalDir * 100);
         }
 
         if (hit.gameObject.name == "Death Zone") {
