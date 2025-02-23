@@ -40,7 +40,7 @@ public class Screen_Tint : MonoBehaviour
         // Step 1: Fade In (make the screen green)
         float timer = 0;
         Color color = tintImage.color;
-        color.a = 0.2f;
+        color.a = 0.9f;
         tintImage.color = color;
         // while (timer <= fadeDuration)
         // {
