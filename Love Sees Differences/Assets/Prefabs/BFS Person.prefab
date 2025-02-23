@@ -161,7 +161,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 6, z: 2}
+  m_Size: {x: 3, y: 6, z: 3}
   m_Center: {x: 0, y: 3, z: 0}
 --- !u!54 &4797806674246854564
 Rigidbody:
@@ -202,8 +202,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ca8e7dfaf3f34047918a617443e9156, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  despawnRadius: 20
+  speed: 10
+  despawnRadius: 15
   player: {fileID: 0}
   game: {fileID: 0}
   sound: {fileID: 154832955552008379}
@@ -213,7 +213,11 @@ MonoBehaviour:
   cellSize: 50
   topLeftX: -100
   topLeftZ: 100
-  goalPoints: []
+  goalPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &3859052816874093223
 GameObject:
   m_ObjectHideFlags: 0

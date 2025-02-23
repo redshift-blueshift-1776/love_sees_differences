@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Person_Pathfinding : MonoBehaviour
 {
-    [SerializeField] private float speed = 2f;
-    [SerializeField] private float despawnRadius = 20f; // Distance at which pedestrian despawns
+    [SerializeField] public float speed = 20f;
+    [SerializeField] public float despawnRadius = 20f; // Distance at which pedestrian despawns
 
     [SerializeField] public GameObject player;
     private Player_Movement playerMovement;
@@ -17,18 +17,18 @@ public class Person_Pathfinding : MonoBehaviour
     private Screen_Tint screenTint;
     
     [Header("Maze Configuration")]
-    [SerializeField] private Maze_Generator mazeGenerator;  // Reference to the maze
-    [SerializeField] private int mazeWidth = 5;  // X-axis size
-    [SerializeField] private int mazeHeight = 5; // Y-axis size
+    [SerializeField] public Maze_Generator mazeGenerator;  // Reference to the maze
+    [SerializeField] public int mazeWidth = 5;  // X-axis size
+    [SerializeField] public int mazeHeight = 5; // Y-axis size
 
     [Header("Grid Settings")]
-    [SerializeField] private float cellSize = 50f;  // Distance between grid points in Unity world units
-    [SerializeField] private float topLeftX = -100f;  // Distance between grid points in Unity world units
-    [SerializeField] private float topLeftZ = 100f;  // Distance between grid points in Unity world units
+    [SerializeField] public float cellSize = 50f;  // Distance between grid points in Unity world units
+    [SerializeField] public float topLeftX = -100f;  // Distance between grid points in Unity world units
+    [SerializeField] public float topLeftZ = 100f;  // Distance between grid points in Unity world units
 
 
     [Header("Goal Points")]
-    [SerializeField] private Transform[] goalPoints;  // Assign in Unity Inspector
+    [SerializeField] public Transform[] goalPoints;  // Assign in Unity Inspector
 
     private Queue<Vector3> pathQueue = new Queue<Vector3>();
     private bool isMoving = false;
@@ -37,8 +37,16 @@ public class Person_Pathfinding : MonoBehaviour
     private Vector2Int goalCell;
     private Dictionary<int, List<int>> adjacencyList;
 
+    private Vector3 lastPosition;
+    private float stuckTime = 0f;
+
     void Start()
     {
+        player = GameObject.Find("Truck_Thing");
+        playerMovement = player.GetComponent<Player_Movement>();
+        game = GameObject.Find("Game");
+        gameScript = game.GetComponent<Game>();
+        screenTint = game.GetComponent<Screen_Tint>();
         // Ensure maze reference is assigned
         if (!mazeGenerator)
         {
@@ -57,7 +65,7 @@ public class Person_Pathfinding : MonoBehaviour
         adjacencyList = BuildAdjacencyList(mazeGenerator);
 
         startCell = WorldToGrid(transform.position);
-        Debug.Log(startCell);
+        //Debug.Log(startCell);
 
         // Choose a random goal
         if (goalPoints.Length > 0)
@@ -78,7 +86,7 @@ public class Person_Pathfinding : MonoBehaviour
             foreach (var pos in path)
             {
                 pathQueue.Enqueue(pos);
-                Debug.Log(pos);
+                //Debug.Log(pos);
             }
             isMoving = true;
         }
@@ -91,7 +99,7 @@ public class Person_Pathfinding : MonoBehaviour
             Vector3 nextPos = pathQueue.Peek();
             transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
 
-            if (Vector3.Distance(transform.position, nextPos) < 0.1f)
+            if (Vector3.Distance(transform.position, nextPos) < 15f)
             {
                 pathQueue.Dequeue();
             }
@@ -100,6 +108,23 @@ public class Person_Pathfinding : MonoBehaviour
         {
             Destroy(gameObject); // Despawn pedestrian
         }
+        if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
+        {
+            stuckTime += Time.deltaTime;
+            if (stuckTime > 1f)
+            {
+                Debug.Log("Pedestrian is stuck, forcing movement!");
+                Vector3 goABit = new Vector3(5, 0, 5);
+                transform.Translate(goABit * Time.deltaTime);
+                stuckTime = 0;
+            }
+        }
+        else
+        {
+            stuckTime = 0;
+        }
+
+        lastPosition = transform.position;
     }
 
     private Dictionary<int, List<int>> BuildAdjacencyList(Maze_Generator maze)
@@ -214,6 +239,7 @@ public class Person_Pathfinding : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
+        Debug.Log(c.name);
         if (c.name == "Truck_Thing")
         {
             sound.Play();
