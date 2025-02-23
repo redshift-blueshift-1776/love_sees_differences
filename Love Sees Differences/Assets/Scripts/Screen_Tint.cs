@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class Screen_Tint : MonoBehaviour
 {
     [SerializeField] public Image tintImage; // Drag the ScreenTint Image here in the Inspector
-    public float fadeDuration = 1.0f; // Duration for fade in and out
+    public float fadeDuration = 0.5f; // Duration for fade in and out
 
     //public bool isTintEnabled = true;
 
@@ -40,7 +40,7 @@ public class Screen_Tint : MonoBehaviour
         // Step 1: Fade In (make the screen green)
         float timer = 0;
         Color color = tintImage.color;
-        color.a = 0.9f;
+        color.a = 0.99f;
         tintImage.color = color;
         // while (timer <= fadeDuration)
         // {
@@ -58,7 +58,7 @@ public class Screen_Tint : MonoBehaviour
         while (timer <= fadeDuration)
         {
             timer += Time.deltaTime;
-            color.a = Mathf.Lerp(0.9f, 0, timer / fadeDuration);
+            color.a = Mathf.Lerp(0.99f, 0, timer / fadeDuration);
             tintImage.color = color;
             yield return null;
         }

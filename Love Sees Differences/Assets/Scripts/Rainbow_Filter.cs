@@ -50,7 +50,7 @@ public class Rainbow_Filter : MonoBehaviour
             // Step 1: Fade In (make the screen green)
             float timer = 0;
             Color color = rainbow1.color;
-            color.a = 0.5f;
+            color.a = 0.3f;
             rainbow1.color = color;
 
             // Step 2: Fade Out (restore normal color)
@@ -58,7 +58,7 @@ public class Rainbow_Filter : MonoBehaviour
             while (timer <= fadeDuration1)
             {
                 timer += Time.deltaTime;
-                color.a = Mathf.Lerp(0.5f, 0, timer / fadeDuration1);
+                color.a = Mathf.Lerp(0.3f, 0, timer / fadeDuration1);
                 rainbow1.color = color;
                 yield return null;
             }

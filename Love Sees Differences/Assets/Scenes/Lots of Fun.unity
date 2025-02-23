@@ -8431,6 +8431,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1421320084}
+    - target: {fileID: 3205745550526379375, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3719589322219885200, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8503,9 +8507,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1421320084}
+    - target: {fileID: 7929891856137643525, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8322409856256257792, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_Name
       value: Game
+      objectReference: {fileID: 0}
+    - target: {fileID: 8338530393892349010, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8600,34 +8612,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration1
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration2
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration3
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration4
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573339305027896683, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5941506689172312310, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5941506689172312310, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8418444798184555744, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
       propertyPath: m_Name
       value: Rainbow_Filter
@@ -8641,6 +8625,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 5820100910235751296}
   - {fileID: 825761928970987109}
   - {fileID: 723161803}
   - {fileID: 1333350489}
@@ -8681,4 +8666,3 @@ SceneRoots:
   - {fileID: 1910151329}
   - {fileID: 235215884}
   - {fileID: 1128154049}
-  - {fileID: 5820100910235751296}

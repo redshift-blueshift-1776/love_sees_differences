@@ -1972,7 +1972,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9b1478ed337f448419883c5cf814c922, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 7e5e52a47ed584e4fbebfd6e4fff22c1, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2549,6 +2549,10 @@ PrefabInstance:
       propertyPath: loadingAudio
       value: 
       objectReference: {fileID: 1040524792}
+    - target: {fileID: 3873065332179084371, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: levelLengthInSeconds
+      value: 298
+      objectReference: {fileID: 0}
     - target: {fileID: 5778785678674229839, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -2670,41 +2674,9 @@ PrefabInstance:
       propertyPath: game
       value: 
       objectReference: {fileID: 1105454952}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration1
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration2
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration3
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3054176534792291758, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: fadeDuration4
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4573339305027896683, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5941506689172312310, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5941506689172312310, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_Color.r
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8418444798184555744, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
       propertyPath: m_Name
       value: Rainbow_Filter
-      objectReference: {fileID: 0}
-    - target: {fileID: 8418444798184555744, guid: 1cc7c18615ce6484394b12723c2a123f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2715,6 +2687,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 5820100910235751296}
   - {fileID: 825761928970987109}
   - {fileID: 723161803}
   - {fileID: 1333350489}
@@ -2738,4 +2711,3 @@ SceneRoots:
   - {fileID: 815988449}
   - {fileID: 854533284}
   - {fileID: 967146235}
-  - {fileID: 5820100910235751296}
