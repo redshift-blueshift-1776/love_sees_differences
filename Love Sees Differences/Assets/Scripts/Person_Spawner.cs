@@ -11,7 +11,7 @@ public class Person_Spawner : MonoBehaviour
 
     [SerializeField] public GameObject game;
 
-    private Game gameScript;
+    private Game_2 gameScript;
 
     private GameObject newPerson;
 
@@ -22,7 +22,7 @@ public class Person_Spawner : MonoBehaviour
     void Start()
     {
         direction = new Vector3(xSpeed, 0, zSpeed);
-        gameScript = game.GetComponent<Game>();
+        gameScript = game.GetComponent<Game_2>();
         StartCoroutine(RegeneratePeople());
     }
 
