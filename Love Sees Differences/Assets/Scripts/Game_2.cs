@@ -32,6 +32,10 @@ public class Game_2 : MonoBehaviour
 
     [SerializeField] private AudioSource deliverSound;
 
+    [SerializeField] private GameObject screenTint;
+
+    private Screen_Tint screenTintScript;
+
     private int deliveries;
     private int peopleCarried;
 
@@ -64,6 +68,8 @@ public class Game_2 : MonoBehaviour
 
         loadingAudio.SetActive(true);
         gameAudio.SetActive(false);
+
+        screenTintScript = screenTint.GetComponent<Screen_Tint>();
 
         // Initialize passenger counts at buildings
         peopleAtW = Random.Range(3, 10); // Adjust these numbers as needed
@@ -149,6 +155,7 @@ public class Game_2 : MonoBehaviour
             if (peopleCarried > 0)
             {
                 deliverSound.Play();
+                screenTintScript.TintAndFade();
                 deliveries += peopleCarried;
                 peopleCarried = 0;
                 passengers.Clear();

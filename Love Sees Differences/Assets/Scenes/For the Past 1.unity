@@ -2578,7 +2578,7 @@ GameObject:
   - component: {fileID: 4948383185037753342}
   - component: {fileID: 263179407788055613}
   m_Layer: 5
-  m_Name: Red Tint
+  m_Name: Green Tint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2780,7 +2780,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -5048,6 +5048,7 @@ GameObject:
   - component: {fileID: 8704854653203579447}
   - component: {fileID: 153373677169263979}
   - component: {fileID: 8730049133941303015}
+  - component: {fileID: 8730049133941303016}
   m_Layer: 5
   m_Name: UI Canvas
   m_TagString: Untagged
@@ -5380,6 +5381,7 @@ MonoBehaviour:
   finalScoreText: {fileID: 3257322677733165270}
   finalDeliveriesText: {fileID: 5719302812532869613}
   deliverSound: {fileID: 6126899251064518717}
+  screenTint: {fileID: 7712747214006721059}
   buildingW: {fileID: 820104697}
   buildingA: {fileID: 379913884}
   buildingS: {fileID: 53002229}
@@ -5424,6 +5426,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8730049133941303016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7712747214006721059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: febf389642e6e49918c9ec774a800e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tintImage: {fileID: 263179407788055613}
+  fadeDuration: 0.5
 --- !u!114 &8734535739566819897
 MonoBehaviour:
   m_ObjectHideFlags: 0
