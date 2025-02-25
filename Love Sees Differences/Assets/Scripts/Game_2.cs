@@ -73,10 +73,10 @@ public class Game_2 : MonoBehaviour
         screenTintScript = screenTint.GetComponent<Screen_Tint>();
 
         // Initialize passenger counts at buildings
-        peopleAtW = Random.Range(3, 10); // Adjust these numbers as needed
-        peopleAtA = Random.Range(3, 10);
-        peopleAtS = Random.Range(3, 10);
-        peopleAtD = Random.Range(3, 10);
+        peopleAtW = Random.Range(1, 3); // Adjust these numbers as needed
+        peopleAtA = Random.Range(1, 3);
+        peopleAtS = Random.Range(1, 3);
+        peopleAtD = Random.Range(1, 3);
         StartCoroutine(RegeneratePeople());
     }
 
@@ -193,10 +193,10 @@ public class Game_2 : MonoBehaviour
 
             if (gameActive)
             {
-                peopleAtW += Random.Range(1, 5);
-                peopleAtA += Random.Range(1, 5);
-                peopleAtS += Random.Range(1, 5);
-                peopleAtD += Random.Range(1, 5);
+                peopleAtW += Random.Range(1, 2);
+                peopleAtA += Random.Range(1, 2);
+                peopleAtS += Random.Range(1, 2);
+                peopleAtD += Random.Range(1, 2);
                 
                 UpdateUI();
             }

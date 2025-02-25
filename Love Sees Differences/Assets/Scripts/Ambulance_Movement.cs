@@ -15,10 +15,14 @@ public class Ambulance_Movement : MonoBehaviour
     private float currentTurnSpeed = 0f;
     private Rigidbody rb;
 
+    [SerializeField] private GameObject lightSource;
+    private float lightInterval = 1f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true; // Prevent the ambulance from tipping over
+        StartCoroutine(Lights());
     }
 
     void Update()
@@ -64,5 +68,17 @@ public class Ambulance_Movement : MonoBehaviour
         // Apply movement and rotation using Rigidbody
         rb.velocity = transform.forward * currentSpeed;
         rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Time.deltaTime, 0));
+    }
+
+    private IEnumerator Lights() {
+        while (true)
+        {
+            yield return new WaitForSeconds(lightInterval);
+            if (lightSource.activeSelf) {
+                lightSource.SetActive(false);
+            } else {
+                lightSource.SetActive(true);
+            }
+        }
     }
 }
