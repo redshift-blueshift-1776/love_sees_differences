@@ -16,7 +16,7 @@ public class Ambulance_Movement : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField] private GameObject lightSource;
-    private float lightInterval = 1f;
+    private float lightInterval = 0.37f;
 
     void Start()
     {
@@ -43,9 +43,9 @@ public class Ambulance_Movement : MonoBehaviour
 
         // Steering left and right
         if (Input.GetKey(KeyCode.A))
-            turnInput = -1f;
+            turnInput = -1f * moveInput;
         if (Input.GetKey(KeyCode.D))
-            turnInput = 1f;
+            turnInput = 1f * moveInput;
 
         // Speed boost
         float speedFactor = (Input.GetKey(KeyCode.LeftShift)) ? speedMultiplier : 1f;

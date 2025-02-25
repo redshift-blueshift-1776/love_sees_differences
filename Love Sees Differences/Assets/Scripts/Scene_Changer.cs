@@ -51,17 +51,17 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(8);
     }
 
-    public void LoadForThePastNight()
+    public void LoadLevelSelectNight()
     {
         SceneManager.LoadScene(9);
     }
 
-    public void LoadHowToPlay()
+    public void LoadForThePastNight()
     {
         SceneManager.LoadScene(10);
     }
 
-    public void LoadSlide6()
+    public void LoadLoadHowToPlay()
     {
         SceneManager.LoadScene(11);
     }

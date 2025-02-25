@@ -39,7 +39,7 @@ public class Game_2 : MonoBehaviour
     private int deliveries;
     private int peopleCarried;
 
-    private const float pickupRadius = 30.0f;
+    private const float pickupRadius = 20.0f;
     private const float dropoffRadius = 50.0f;
     private List<GameObject> passengers = new List<GameObject>();
 
