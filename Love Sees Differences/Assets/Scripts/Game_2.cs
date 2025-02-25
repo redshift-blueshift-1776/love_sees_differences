@@ -49,6 +49,8 @@ public class Game_2 : MonoBehaviour
     private int peopleAtS;
     private int peopleAtD;
 
+    private const float regenerationInterval = 10f; // Time in seconds between regenerations
+
     void Start()
     {
         gameActive = false;
@@ -68,6 +70,7 @@ public class Game_2 : MonoBehaviour
         peopleAtA = Random.Range(3, 10);
         peopleAtS = Random.Range(3, 10);
         peopleAtD = Random.Range(3, 10);
+        StartCoroutine(RegeneratePeople());
     }
 
     void Update()
@@ -172,5 +175,23 @@ public class Game_2 : MonoBehaviour
 
         finalScoreText.text = $"Score: {deliveries}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";
+    }
+
+    private IEnumerator RegeneratePeople()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(regenerationInterval);
+
+            if (gameActive)
+            {
+                peopleAtW += Random.Range(1, 5);
+                peopleAtA += Random.Range(1, 5);
+                peopleAtS += Random.Range(1, 5);
+                peopleAtD += Random.Range(1, 5);
+                
+                UpdateUI();
+            }
+        }
     }
 }
