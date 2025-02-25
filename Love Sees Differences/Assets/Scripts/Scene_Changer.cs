@@ -51,12 +51,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(8);
     }
 
-    public void LoadHowToPlay()
+    public void LoadForThePastNight()
     {
         SceneManager.LoadScene(9);
     }
 
-    public void LoadFail5()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(10);
     }
