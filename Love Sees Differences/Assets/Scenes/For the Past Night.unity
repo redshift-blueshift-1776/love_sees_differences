@@ -821,6 +821,93 @@ MonoBehaviour:
   spawnInterval: 2
   game: {fileID: 8649886232169826661}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
+--- !u!1001 &457312115
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      propertyPath: m_Name
+      value: Intestinewoman College House-2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8164078558771037576, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 457312117}
+  m_SourcePrefab: {fileID: 100100000, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+--- !u!1 &457312116 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8164078558771037576, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
+  m_PrefabInstance: {fileID: 457312115}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &457312117
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457312116}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2432090755550338912, guid: e5b6048571dc84c17b9750fa6e8f6e6d, type: 3}
 --- !u!1 &465637994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1154,6 +1241,10 @@ PrefabInstance:
     - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: maxSpeed
       value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
+      propertyPath: turnSpeed
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: acceleration
@@ -6239,8 +6330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7938e961b0b647abafeb429b37aac2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rainbow1: {fileID: 4415240404270899833}
-  rainbow2: {fileID: 194039800838128502}
+  rainbow1: {fileID: 194039800838128502}
+  rainbow2: {fileID: 4415240404270899833}
   rainbow3: {fileID: 8048747474191554283}
   rainbow4: {fileID: 8301027029367188938}
   fadeDuration1: 7
@@ -6313,3 +6404,4 @@ SceneRoots:
   - {fileID: 307331157}
   - {fileID: 1190828240}
   - {fileID: 969598954}
+  - {fileID: 457312115}
