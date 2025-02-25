@@ -1305,10 +1305,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3291589347347016295, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5675318434382356238, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1350,16 +1346,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
+      propertyPath: friction
+      value: 0.98
+      objectReference: {fileID: 0}
+    - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: maxSpeed
-      value: 1000
+      value: 750
       objectReference: {fileID: 0}
     - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: turnSpeed
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: acceleration
-      value: 250
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6708154747459494566, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
       propertyPath: speedMultiplier
@@ -1372,43 +1372,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7844583227466237896, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 706788308}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
 --- !u!1 &706788302 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7844583227466237896, guid: 36a4b0cbbd12f4317bbf244c692c69bf, type: 3}
   m_PrefabInstance: {fileID: 706788301}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &706788308
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 706788302}
-  serializedVersion: 4
-  m_Mass: 1000
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &723161799
 GameObject:
   m_ObjectHideFlags: 0
@@ -6410,7 +6380,7 @@ MonoBehaviour:
   player: {fileID: 706788302}
   destination: {fileID: 688105426}
   gameActive: 0
-  levelLengthInSeconds: 120
+  levelLengthInSeconds: 298
   GeneratorCanvas: {fileID: 525942424752256157}
   UICanvas: {fileID: 7712747214006721059}
   EndScreenCanvas: {fileID: 4923401479485148084}
@@ -6603,13 +6573,16 @@ SceneRoots:
   - {fileID: 379913888}
   - {fileID: 820104701}
   - {fileID: 53002233}
-  - {fileID: 465637997}
+  - {fileID: 2079120739}
+  - {fileID: 149857903}
+  - {fileID: 438515604}
+  - {fileID: 279707358}
   - {fileID: 427214650}
   - {fileID: 815988449}
   - {fileID: 854533284}
   - {fileID: 967146235}
-  - {fileID: 279707358}
   - {fileID: 706788301}
+  - {fileID: 465637997}
   - {fileID: 324982229}
   - {fileID: 219555154}
   - {fileID: 333139028}
@@ -6618,6 +6591,3 @@ SceneRoots:
   - {fileID: 307331157}
   - {fileID: 1190828240}
   - {fileID: 969598954}
-  - {fileID: 2079120739}
-  - {fileID: 149857903}
-  - {fileID: 438515604}
