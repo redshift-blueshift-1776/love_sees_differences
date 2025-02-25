@@ -40,6 +40,7 @@ public class Game_2 : MonoBehaviour
     private int peopleCarried;
 
     private const float pickupRadius = 30.0f;
+    private const float dropoffRadius = 50.0f;
     private List<GameObject> passengers = new List<GameObject>();
 
     // Buildings and their assigned passengers
@@ -150,7 +151,7 @@ public class Game_2 : MonoBehaviour
 
     private void HandlePassengerDropoff()
     {
-        if (Vector3.Distance(player.transform.position, destination.transform.position) < pickupRadius)
+        if (Vector3.Distance(player.transform.position, destination.transform.position) < dropoffRadius)
         {
             if (peopleCarried > 0)
             {
