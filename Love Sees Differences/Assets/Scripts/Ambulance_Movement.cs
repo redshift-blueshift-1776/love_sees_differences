@@ -13,7 +13,13 @@ public class Ambulance_Movement : MonoBehaviour
 
     private float currentSpeed = 0f;
     private float currentTurnSpeed = 0f;
-    private Vector3 velocity;
+    private Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true; // Prevent the ambulance from tipping over
+    }
 
     void Update()
     {
@@ -55,8 +61,8 @@ public class Ambulance_Movement : MonoBehaviour
         if (currentSpeed != 0)
             currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Abs(currentSpeed)));
 
-        // Apply movement
-        transform.Rotate(0, currentTurnSpeed * Time.deltaTime, 0);
-        transform.Translate(Vector3.forward * currentSpeed * Time.deltaTime);
+        // Apply movement and rotation using Rigidbody
+        rb.velocity = transform.forward * currentSpeed;
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Time.deltaTime, 0));
     }
 }
