@@ -2949,7 +2949,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Ambulance_Movement_Lights_mF14
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Coroutine_t85EA685566A254C23F3FD77AB5BDFFFF8799596B* MonoBehaviour_StartCoroutine_m4CAFF732AA28CD3BDC5363B44A863575530EC812 (MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71* __this, RuntimeObject* ___0_routine, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ambulance_Movement_HandleMovement_m92379D13751F8192D9BEB9B3F73FE3689A29AF87 (Ambulance_Movement_tDD93711147EE8CFEBE129504F96D9C2AD3186577* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Input_GetKey_mE5681EF775F3CEBA7EAD7C63984F7B34C8E8D434 (int32_t ___0_key, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865 (const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Time_get_fixedDeltaTime_m43136893D00AF5D5FE80AD05609558F6E2381381 (const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp_mEB9AEA827D27D20FCC787F7375156AF46BB12BBF_inline (float ___0_value, float ___1_min, float ___2_max, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR float Mathf_Clamp01_mA7E048DBDA832D399A581BE4D6DED9FA44CE0F14_inline (float ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Transform_tB27202C6F4E36D225EE28A13E4D662BF99785DB1* Component_get_transform_m2919A1D81931E6932C7F06D4C2F0AB8DDA9A5371 (Component_t39FBE53E5EFCF4409111FB22C15FF73717632EC3* __this, const RuntimeMethod* method) ;
@@ -2995,6 +2995,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Game_addCollision_mBF75BF870FBAC24B5EC28
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Game_SetupUIToggles_mB640F7C5037D291AD199FBC40975F0726DDB56B5 (Game_tA6A98F81416961C425C0982A763372581DF081F1* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Game_RegeneratePeople_mB9F3D0854CD04193884975A476C1D7158F5B45BD (Game_tA6A98F81416961C425C0982A763372581DF081F1* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Game_FreezePlayer_mF943F755C6710E10227BFA6672E7417F69AEF58A (Game_tA6A98F81416961C425C0982A763372581DF081F1* __this, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR float Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865 (const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Game_EndGame_mBB6853080D3186DF8D5AE48B1C534B309713A371 (Game_tA6A98F81416961C425C0982A763372581DF081F1* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Game_HandleBuildingInteraction_mC7F6FDD7C61500D0299E041826D231384BE995A6 (Game_tA6A98F81416961C425C0982A763372581DF081F1* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Game_UpdateScore_mB8D5455B18ED29C732F3B339A92E526321EAACC8 (Game_tA6A98F81416961C425C0982A763372581DF081F1* __this, const RuntimeMethod* method) ;
@@ -3506,7 +3507,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ambulance_Movement_Start_mCD2205410E4A50
 		return;
 	}
 }
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ambulance_Movement_Update_mFAE2B768FDA5334BA65AACEE1809DE57E5CCEFC9 (Ambulance_Movement_tDD93711147EE8CFEBE129504F96D9C2AD3186577* __this, const RuntimeMethod* method) 
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ambulance_Movement_FixedUpdate_m588F96467B59AEE1C6A01C4949220CECEFCE1446 (Ambulance_Movement_tDD93711147EE8CFEBE129504F96D9C2AD3186577* __this, const RuntimeMethod* method) 
 {
 	{
 		Game_2_t86E19106D1076127CA701373FC7C98DFE24EDA79* L_0 = __this->___gameScript;
@@ -3612,16 +3613,16 @@ IL_0065:
 		float L_8 = __this->___currentSpeed;
 		float L_9 = V_0;
 		float L_10 = __this->___acceleration;
-		float L_11 = V_2;
-		float L_12;
-		L_12 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
-		__this->___currentSpeed = ((float)il2cpp_codegen_add(L_8, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(L_9, L_10)), L_11)), L_12))));
-		float L_13 = __this->___currentSpeed;
+		float L_11;
+		L_11 = Time_get_fixedDeltaTime_m43136893D00AF5D5FE80AD05609558F6E2381381(NULL);
+		__this->___currentSpeed = ((float)il2cpp_codegen_add(L_8, ((float)il2cpp_codegen_multiply(((float)il2cpp_codegen_multiply(L_9, L_10)), L_11))));
+		float L_12 = __this->___currentSpeed;
+		float L_13 = __this->___maxSpeed;
 		float L_14 = __this->___maxSpeed;
-		float L_15 = __this->___maxSpeed;
-		float L_16;
-		L_16 = Mathf_Clamp_mEB9AEA827D27D20FCC787F7375156AF46BB12BBF_inline(L_13, ((-L_14)), L_15, NULL);
-		__this->___currentSpeed = L_16;
+		float L_15;
+		L_15 = Mathf_Clamp_mEB9AEA827D27D20FCC787F7375156AF46BB12BBF_inline(L_12, ((-L_13)), L_14, NULL);
+		float L_16 = V_2;
+		__this->___currentSpeed = ((float)il2cpp_codegen_multiply(L_15, L_16));
 		float L_17 = __this->___currentSpeed;
 		float L_18 = __this->___friction;
 		__this->___currentSpeed = ((float)il2cpp_codegen_multiply(L_17, L_18));
@@ -3643,7 +3644,7 @@ IL_0065:
 		float L_21 = __this->___currentSpeed;
 		float L_22 = __this->___brakeForce;
 		float L_23;
-		L_23 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
+		L_23 = Time_get_fixedDeltaTime_m43136893D00AF5D5FE80AD05609558F6E2381381(NULL);
 		__this->___currentSpeed = ((float)il2cpp_codegen_subtract(L_21, ((float)il2cpp_codegen_multiply(L_22, L_23))));
 	}
 
@@ -3683,7 +3684,7 @@ IL_0115:
 		L_37 = Rigidbody_get_rotation_m07882A7024FB3F96BA13EC577A96163BBB621AA1(L_36, NULL);
 		float L_38 = __this->___currentTurnSpeed;
 		float L_39;
-		L_39 = Time_get_deltaTime_mC3195000401F0FD167DD2F948FD2BC58330D0865(NULL);
+		L_39 = Time_get_fixedDeltaTime_m43136893D00AF5D5FE80AD05609558F6E2381381(NULL);
 		Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 L_40;
 		L_40 = Quaternion_Euler_m9262AB29E3E9CE94EF71051F38A28E82AEC73F90_inline((0.0f), ((float)il2cpp_codegen_multiply(L_38, L_39)), (0.0f), NULL);
 		Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 L_41;
