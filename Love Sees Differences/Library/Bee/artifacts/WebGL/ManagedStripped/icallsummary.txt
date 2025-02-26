@@ -181,6 +181,7 @@ UnityEngine.Font::get_dynamic
 UnityEngine.Font::get_fontSize
 UnityEngine.Font::get_material
 UnityEngine.GameObject::GetComponentsInternal
+UnityEngine.GameObject::CompareTag
 UnityEngine.GameObject::get_activeInHierarchy
 UnityEngine.GameObject::get_activeSelf
 UnityEngine.GameObject::get_layer
@@ -414,6 +415,7 @@ UnityEngine.Physics::SendOnCollisionExit
 UnityEngine.Physics::SendOnCollisionStay
 UnityEngine.Physics::get_defaultPhysicsScene_Injected
 UnityEngine.Physics::GetColliderByInstanceID
+UnityEngine.Physics::OverlapSphere_Internal_Injected
 UnityEngine.Physics::GetBodyByInstanceID
 UnityEngine.Physics::Internal_RaycastAll_Injected
 UnityEngine.PhysicsScene::Internal_RaycastTest_Injected
@@ -500,6 +502,10 @@ UnityEngine.Resources::GetBuiltinResource
 UnityEngine.ResourcesAPIInternal::Load
 UnityEngine.ResourcesAPIInternal::FindShaderByName
 UnityEngine.Rigidbody::AddForce_Injected
+UnityEngine.Rigidbody::MoveRotation_Injected
+UnityEngine.Rigidbody::get_rotation_Injected
+UnityEngine.Rigidbody::set_freezeRotation
+UnityEngine.Rigidbody::set_velocity_Injected
 UnityEngine.SceneManagement.Scene::GetBuildIndexInternal
 UnityEngine.SceneManagement.SceneManager::get_sceneCount
 UnityEngine.SceneManagement.SceneManager::GetActiveScene_Injected
