@@ -40,6 +40,7 @@ public class Game_2 : MonoBehaviour
     private int peopleCarried;
 
     private const float pickupRadius = 20.0f;
+    private const float buildingPickupRadius = 30.0f;
     private const float dropoffRadius = 50.0f;
     private List<GameObject> passengers = new List<GameObject>();
 
@@ -113,22 +114,22 @@ public class Game_2 : MonoBehaviour
 
     private void HandleBuildingPickup()
     {
-        if (Vector3.Distance(player.transform.position, buildingW.transform.position) < pickupRadius && peopleAtW > 0)
+        if (Vector3.Distance(player.transform.position, buildingW.transform.position) < buildingPickupRadius && peopleAtW > 0)
         {
             peopleCarried += peopleAtW;
             peopleAtW = 0;
         }
-        if (Vector3.Distance(player.transform.position, buildingA.transform.position) < pickupRadius && peopleAtA > 0)
+        if (Vector3.Distance(player.transform.position, buildingA.transform.position) < buildingPickupRadius && peopleAtA > 0)
         {
             peopleCarried += peopleAtA;
             peopleAtA = 0;
         }
-        if (Vector3.Distance(player.transform.position, buildingS.transform.position) < pickupRadius && peopleAtS > 0)
+        if (Vector3.Distance(player.transform.position, buildingS.transform.position) < buildingPickupRadius && peopleAtS > 0)
         {
             peopleCarried += peopleAtS;
             peopleAtS = 0;
         }
-        if (Vector3.Distance(player.transform.position, buildingD.transform.position) < pickupRadius && peopleAtD > 0)
+        if (Vector3.Distance(player.transform.position, buildingD.transform.position) < buildingPickupRadius && peopleAtD > 0)
         {
             peopleCarried += peopleAtD;
             peopleAtD = 0;
@@ -142,8 +143,9 @@ public class Game_2 : MonoBehaviour
         {
             if (hitCollider.CompareTag("Passenger"))
             {
-                passengers.Add(hitCollider.gameObject);
-                hitCollider.gameObject.SetActive(false);
+                //passengers.Add(hitCollider.gameObject);
+                //hitCollider.gameObject.SetActive(false);
+                Destroy(hitCollider.gameObject);
                 peopleCarried++;
             }
         }
@@ -159,7 +161,7 @@ public class Game_2 : MonoBehaviour
                 screenTintScript.TintAndFade();
                 deliveries += peopleCarried;
                 peopleCarried = 0;
-                passengers.Clear();
+                //passengers.Clear();
             }
         }
     }
