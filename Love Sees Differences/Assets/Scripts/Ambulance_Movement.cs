@@ -30,7 +30,7 @@ public class Ambulance_Movement : MonoBehaviour
         StartCoroutine(Lights());
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (gameScript.gameActive) {
             HandleMovement();
@@ -58,7 +58,7 @@ public class Ambulance_Movement : MonoBehaviour
         float speedFactor = (Input.GetKey(KeyCode.LeftShift)) ? speedMultiplier : 1f;
 
         // Accelerate/decelerate
-        currentSpeed += moveInput * acceleration * speedFactor * Time.deltaTime;
+        currentSpeed += moveInput * acceleration * speedFactor * Time.fixedDeltaTime;
         currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 
         // Apply friction to slow down gradually
@@ -66,7 +66,7 @@ public class Ambulance_Movement : MonoBehaviour
 
         // Braking (reduce speed faster when pressing S)
         if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
-            currentSpeed -= brakeForce * Time.deltaTime;
+            currentSpeed -= brakeForce * Time.fixedDeltaTime;
 
         // Steering is based on speed (higher speed, harder to turn)
         if (currentSpeed != 0)
@@ -74,7 +74,7 @@ public class Ambulance_Movement : MonoBehaviour
 
         // Apply movement and rotation using Rigidbody
         rb.velocity = transform.forward * currentSpeed;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Time.deltaTime, 0));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Time.fixedDeltaTime, 0));
     }
 
     private IEnumerator Lights() {
