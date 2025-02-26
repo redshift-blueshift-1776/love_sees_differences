@@ -58,8 +58,8 @@ public class Ambulance_Movement : MonoBehaviour
         float speedFactor = (Input.GetKey(KeyCode.LeftShift)) ? speedMultiplier : 1f;
 
         // Accelerate/decelerate
-        currentSpeed += moveInput * acceleration * speedFactor * Time.fixedDeltaTime;
-        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
+        currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
+        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed) * speedFactor;
 
         // Apply friction to slow down gradually
         currentSpeed *= friction;

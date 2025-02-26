@@ -915,13 +915,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa8198cfc4cc49b6bb5e6293c29ce52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 300
-  maxSpeed: 750
+  acceleration: 75
+  maxSpeed: 25
   turnSpeed: 50
   brakeForce: 20
-  friction: 0.98
+  friction: 0.95
   speedMultiplier: 3
   lightSource: {fileID: 8394719267458610227}
+  game: {fileID: 0}
 --- !u!143 &3291589347347016295
 CharacterController:
   m_ObjectHideFlags: 0
