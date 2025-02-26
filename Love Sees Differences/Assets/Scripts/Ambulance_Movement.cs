@@ -18,16 +18,23 @@ public class Ambulance_Movement : MonoBehaviour
     [SerializeField] private GameObject lightSource;
     private float lightInterval = 0.37f;
 
+    [SerializeField] public GameObject game;
+
+    private Game_2 gameScript;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        gameScript = game.GetComponent<Game_2>();
         rb.freezeRotation = true; // Prevent the ambulance from tipping over
         StartCoroutine(Lights());
     }
 
     void Update()
     {
-        HandleMovement();
+        if (gameScript.gameActive) {
+            HandleMovement();
+        }
     }
 
     void HandleMovement()
