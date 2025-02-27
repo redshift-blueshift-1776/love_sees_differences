@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ambulance_Movement : MonoBehaviour
 {
@@ -28,6 +29,12 @@ public class Ambulance_Movement : MonoBehaviour
         gameScript = game.GetComponent<Game_2>();
         rb.freezeRotation = true; // Prevent the ambulance from tipping over
         StartCoroutine(Lights());
+    }
+
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.M)) {
+            SceneManager.LoadScene(0);
+        }
     }
 
     void FixedUpdate()

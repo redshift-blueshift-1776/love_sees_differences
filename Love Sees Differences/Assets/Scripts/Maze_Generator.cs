@@ -9,10 +9,15 @@ public class Maze_Generator : MonoBehaviour
     private Dictionary<int, List<(int neighbor, float weight)>> graph;
     public List<(int from, int to)> mstEdges;
 
+    [SerializeField] public GameObject cam1;
+    [SerializeField] public GameObject cam2;
+
     private List<GameObject> walls;
     // Start is called before the first frame update
     void Start()
     {
+        cam1.SetActive(true);
+        cam2.SetActive(false);
         // Creates a maze out of a square grid measuring size by size.
         // The grid spaces are considered with 0 as the top left, then 1 being the space to the right,
         // Then 2 being to the right of that, etc.
@@ -135,6 +140,8 @@ public class Maze_Generator : MonoBehaviour
         // Once the MST is determined, delete the walls in the MST one by one
         // at a rate of 10 walls per second.
         Debug.Log("Visualizing");
+        cam2.SetActive(true);
+        cam1.SetActive(false);
         StartCoroutine(DeleteWallsOneByOne());
     }
 
@@ -156,6 +163,8 @@ public class Maze_Generator : MonoBehaviour
 
     public void DeleteAllWallsAtOnce()
     {
+        cam1.SetActive(true);
+        cam2.SetActive(false);
         foreach (var edge in mstEdges)
         {
             string wallName = GetWallName(edge.from, edge.to);
