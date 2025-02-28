@@ -81,12 +81,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(14);
     }
 
-    public void LoadHowToPlay()
+    public void LoadEATDHNight()
     {
         SceneManager.LoadScene(15);
     }
 
-    public void LoadFail8()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(16);
     }
