@@ -76,12 +76,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(13);
     }
 
-    public void LoadHowToPlay()
+    public void LoadOurYouthfulBlossomingMomentsNight()
     {
         SceneManager.LoadScene(14);
     }
 
-    public void LoadSlide8()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(15);
     }
