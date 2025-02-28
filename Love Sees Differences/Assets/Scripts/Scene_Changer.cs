@@ -71,12 +71,12 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(12);
     }
 
-    public void LoadHowToPlay()
+    public void LoadYellowClockNight()
     {
         SceneManager.LoadScene(13);
     }
 
-    public void LoadFail7()
+    public void LoadHowToPlay()
     {
         SceneManager.LoadScene(14);
     }
