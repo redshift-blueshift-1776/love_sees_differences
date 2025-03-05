@@ -47,6 +47,7 @@ public class Person_Pathfinding : MonoBehaviour
 
     void Start()
     {
+        despawning = false;
         player = GameObject.Find("Truck_Thing");
         playerMovement = player.GetComponent<Player_Movement>();
         game = GameObject.Find("Game");
@@ -120,7 +121,7 @@ public class Person_Pathfinding : MonoBehaviour
             {
                 Debug.Log("Pedestrian is stuck, forcing movement!");
                 Vector3 goABit = new Vector3(5, 5, 5);
-                transform.Translate(goABit * Time.deltaTime);
+                transform.Translate(goABit * Time.deltaTime * Random.Range(-2, 2));
                 stuckTime = 0;
             }
         }

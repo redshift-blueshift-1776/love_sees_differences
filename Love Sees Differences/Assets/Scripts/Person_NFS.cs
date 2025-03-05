@@ -25,8 +25,14 @@ public class Person_NFS : MonoBehaviour
     private Vector3 lastPosition;
     private float stuckTime = 0f;
 
+    public string levelName;  // Will hold the level name (e.g., "DayMode_Level1")
+    private string collisionKeyPrefix; // Used to differentiate between different levels
+
+    private bool despawning;
+
     void Start()
     {
+        despawning = false;
         player = GameObject.Find("Truck_Thing");
         playerMovement = player.GetComponent<Player_Movement>();
         game = GameObject.Find("Game");
@@ -49,7 +55,7 @@ public class Person_NFS : MonoBehaviour
             if (stuckTime > 1f)
             {
                 Debug.Log("Pedestrian is stuck, forcing movement!");
-                Vector3 goABit = new Vector3(5, 0, 5);
+                Vector3 goABit = new Vector3(5, 5, 5);
                 transform.Translate(goABit * Time.deltaTime * Random.Range(-2, 2));
                 stuckTime = 0;
             }
@@ -64,9 +70,8 @@ public class Person_NFS : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
-        //Debug.Log(c.name);
-        if (c.name == "Truck_Thing")
-        {
+        if (c.name == "Truck_Thing" && !despawning) {
+            despawning = true;
             sound.Play();
             Die();
             return;
@@ -80,10 +85,38 @@ public class Person_NFS : MonoBehaviour
 
     private IEnumerator DieCoroutine()
     {
+        // Get the collision time and position.
+        float collisionTime = gameScript.timer;
+        Vector3 collisionPosition = transform.position;
+
+        // Save collision data for this specific level.
+        SaveCollisionData(collisionTime, collisionPosition);
+        
+        // collision
         screenTint.TintAndFade();
         gameScript.addCollision();
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
         yield return null;
+    }
+
+    private void SaveCollisionData(float time, Vector3 position)
+    {
+        // Save the collision data to PlayerPrefs, storing all collisions
+        // Get the current count of saved collisions
+        int collisionCount = PlayerPrefs.GetInt(collisionKeyPrefix + "Count", 0);
+        Debug.Log(collisionCount);
+
+        // Save the collision time and position for each entry
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "Time_" + collisionCount, time);
+        Debug.Log("Hit at:");
+        Debug.Log(time);
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "PosX_" + collisionCount, position.x);
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "PosY_" + collisionCount, position.y);
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "PosZ_" + collisionCount, position.z);
+
+        // Increment and save the new collision count
+        PlayerPrefs.SetInt(collisionKeyPrefix + "Count", collisionCount + 1);
+        PlayerPrefs.Save();  // Save immediately to ensure persistence
     }
 }

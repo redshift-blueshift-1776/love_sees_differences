@@ -14,6 +14,7 @@ public class Person_Spawner_NFS : MonoBehaviour
     private Player_Movement playerMovement;
 
     [SerializeField] public GameObject game;
+    [SerializeField] public string levelName;
     //[SerializeField] public AudioSource sound;
 
     private Game gameScript;
@@ -58,6 +59,7 @@ public class Person_Spawner_NFS : MonoBehaviour
         newPerson.GetComponent<Person_NFS>().speed = speed;
         newPerson.GetComponent<Person_NFS>().despawnRadius = despawnRadius;
         newPerson.GetComponent<Person_NFS>().goalPoints = goalPoints;
+        newPerson.GetComponent<Person_NFS>().levelName = levelName;
         
     }
 
