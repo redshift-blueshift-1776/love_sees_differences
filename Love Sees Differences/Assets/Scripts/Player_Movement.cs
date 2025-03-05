@@ -40,6 +40,7 @@ public class Player_Movement : MonoBehaviour
 
     private void Start()
     {
+        gameScript = game.GetComponent<Game>();
         jumpVelocity = Mathf.Sqrt(-2 * gravityValue * jumpHeight);
         print(jumpVelocity);
         controller = gameObject.GetComponent<CharacterController>();
@@ -107,9 +108,6 @@ public class Player_Movement : MonoBehaviour
         {
             playerVelocity.y = 0f;
         }
-
-        controller.Move(move * Time.deltaTime);
-
         // If B pressed, jump
         if (Input.GetKeyDown(KeyCode.B) && groundedPlayer)
         {
@@ -117,7 +115,10 @@ public class Player_Movement : MonoBehaviour
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        if (gameScript.gameActive) {
+            controller.Move(move * Time.deltaTime);
+            controller.Move(playerVelocity * Time.deltaTime);
+        }
 
     }
 
