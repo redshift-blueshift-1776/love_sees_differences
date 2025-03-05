@@ -18,6 +18,7 @@ public class Person_Spawner : MonoBehaviour
     private Vector3 direction;
 
     [SerializeField] private GameObject person;
+    [SerializeField] public string levelName;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +40,7 @@ public class Person_Spawner : MonoBehaviour
         //newPerson.GetComponent<Person_Movement>().setSource(transform);
         newPerson.GetComponent<Person_Movement>().startingPos = walkDirection;
         newPerson.GetComponent<Person_Movement>().speed = speed;
+        newPerson.GetComponent<Person_Movement>().levelName = levelName;
     }
 
     private IEnumerator RegeneratePeople()

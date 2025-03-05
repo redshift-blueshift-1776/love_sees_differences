@@ -10,7 +10,7 @@ public class Game_2 : MonoBehaviour
     [SerializeField] public GameObject destination;
 
     public bool gameActive;
-    private float timer;
+    public float timer;
     [SerializeField] private int levelLengthInSeconds;
 
     [SerializeField] public GameObject GeneratorCanvas;
