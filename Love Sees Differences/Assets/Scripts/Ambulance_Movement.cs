@@ -81,7 +81,7 @@ public class Ambulance_Movement : MonoBehaviour
 
         // Apply movement and rotation using Rigidbody
         rb.velocity = transform.forward * currentSpeed;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Time.fixedDeltaTime, 0));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * speedFactor * Time.fixedDeltaTime, 0));
     }
 
     private IEnumerator Lights() {

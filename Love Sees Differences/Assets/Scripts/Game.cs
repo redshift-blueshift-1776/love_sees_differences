@@ -11,7 +11,7 @@ public class Game : MonoBehaviour
 
     public bool gameActive;
 
-    private float timer;
+    public float timer;
     [SerializeField] private int levelLengthInSeconds;
 
     [SerializeField] public GameObject BuildingW;

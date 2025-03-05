@@ -260,7 +260,7 @@ public class Person_Pathfinding : MonoBehaviour
     private IEnumerator DieCoroutine()
     {
         // Get the collision time and position.
-        float collisionTime = Time.time;
+        float collisionTime = gameScript.timer;
         Vector3 collisionPosition = transform.position;
 
         // Save collision data for this specific level.
