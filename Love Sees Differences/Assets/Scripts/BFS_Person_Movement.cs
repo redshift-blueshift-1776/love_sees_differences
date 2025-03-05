@@ -20,6 +20,11 @@ public class BFS_Person_Movement : MonoBehaviour
     private Vector3 nextPosition; // Next position from BFS pathfinding
     private int pathIndex; // Index in the path
 
+    public string levelName;  // Will hold the level name (e.g., "DayMode_Level1")
+    private string collisionKeyPrefix; // Used to differentiate between different levels
+
+    private bool despawning;
+
     private List<Vector3> path; // The path from BFS
 
     void Start()
@@ -57,8 +62,8 @@ public class BFS_Person_Movement : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
-        if (c.name == "Truck_Thing")
-        {
+        if (c.name == "Truck_Thing" && !despawning) {
+            despawning = true;
             sound.Play();
             Die();
             return;
@@ -72,11 +77,36 @@ public class BFS_Person_Movement : MonoBehaviour
 
     private IEnumerator DieCoroutine()
     {
+        // Get the collision time and position.
+        float collisionTime = Time.time;
+        Vector3 collisionPosition = transform.position;
+
+        // Save collision data for this specific level.
+        SaveCollisionData(collisionTime, collisionPosition);
+        
+        // collision
         screenTint.TintAndFade();
         gameScript.addCollision();
         yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
         yield return null;
+    }
+
+    private void SaveCollisionData(float time, Vector3 position)
+    {
+        // Save the collision data to PlayerPrefs, storing all collisions
+        // Get the current count of saved collisions
+        int collisionCount = PlayerPrefs.GetInt(collisionKeyPrefix + "Count", 0);
+
+        // Save the collision time and position for each entry
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "Time_" + collisionCount, time);
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "PosX_" + collisionCount, position.x);
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "PosY_" + collisionCount, position.y);
+        PlayerPrefs.SetFloat(collisionKeyPrefix + "PosZ_" + collisionCount, position.z);
+
+        // Increment and save the new collision count
+        PlayerPrefs.SetInt(collisionKeyPrefix + "Count", collisionCount + 1);
+        PlayerPrefs.Save();  // Save immediately to ensure persistence
     }
 
     // public void SetPath(List<Vector3> bfsPath, Transform endGoal)

@@ -61,6 +61,8 @@ public class Game : MonoBehaviour
 
     private Player_Movement playerMovement;
 
+    [SerializeField] public string levelName;
+
     private const int maxCarryCapacity = 10;
     private const float pickupRadius = 30.0f;
 
@@ -70,13 +72,14 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        ClearCollisionData();
         gameActive = false;
         timer = 0;
         
-        peopleAtW = 5;
-        peopleAtA = 5;
-        peopleAtS = 5;
-        peopleAtD = 5;
+        peopleAtW = Random.Range(1, 10);
+        peopleAtA = Random.Range(1, 10);
+        peopleAtS = Random.Range(1, 10);
+        peopleAtD = Random.Range(1, 10);
         
         peopleCarriedW = 0;
         peopleCarriedA = 0;
@@ -258,6 +261,25 @@ public class Game : MonoBehaviour
                 UpdateScore();
             }
         }
+    }
+
+    private void ClearCollisionData()
+    {
+        string collisionKeyPrefix = "Collision_" + levelName + "_";
+
+        // Clear specific collision data for the day mode level
+        PlayerPrefs.DeleteKey(collisionKeyPrefix + "Count"); // Deletes the collision count
+        // Optionally, clear all collision data related to the specific level
+        int collisionCount = PlayerPrefs.GetInt(collisionKeyPrefix + "Count", 0);
+        for (int i = 0; i < collisionCount; i++)
+        {
+            PlayerPrefs.DeleteKey(collisionKeyPrefix + "Time_" + i);
+            PlayerPrefs.DeleteKey(collisionKeyPrefix + "PosX_" + i);
+            PlayerPrefs.DeleteKey(collisionKeyPrefix + "PosY_" + i);
+            PlayerPrefs.DeleteKey(collisionKeyPrefix + "PosZ_" + i);
+        }
+        
+        PlayerPrefs.Save();  // Ensure that data is deleted immediately
     }
 
 }

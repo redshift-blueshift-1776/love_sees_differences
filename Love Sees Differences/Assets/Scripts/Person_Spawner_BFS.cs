@@ -14,6 +14,7 @@ public class Person_Spawner_BFS : MonoBehaviour
     private Player_Movement playerMovement;
 
     [SerializeField] public GameObject game;
+    [SerializeField] public string levelName;
     //[SerializeField] public AudioSource sound;
 
     private Game gameScript;
@@ -59,6 +60,7 @@ public class Person_Spawner_BFS : MonoBehaviour
 
         newPerson.transform.localScale = size;
         newPerson.GetComponent<Person_Pathfinding>().speed = speed;
+        newPerson.GetComponent<Person_Pathfinding>().levelName = levelName;
         
         // Assign pathfinding details
         var pathfinding = newPerson.GetComponent<Person_Pathfinding>();

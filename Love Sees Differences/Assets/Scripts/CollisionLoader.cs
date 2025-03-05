@@ -23,11 +23,14 @@ public class CollisionLoader : MonoBehaviour
 
         // Check if collision data exists for this level
         int collisionCount = PlayerPrefs.GetInt(collisionKeyPrefix + "Count", 0);
+        Debug.Log(collisionCount);
 
         // Loop through each stored collision and check if it should be spawned
         for (int i = 0; i < collisionCount; i++)
         {
             float collisionTime = PlayerPrefs.GetFloat(collisionKeyPrefix + "Time_" + i);
+            Debug.Log("Found at:");
+            Debug.Log(collisionTime);
             float x = PlayerPrefs.GetFloat(collisionKeyPrefix + "PosX_" + i);
             float y = PlayerPrefs.GetFloat(collisionKeyPrefix + "PosY_" + i);
             float z = PlayerPrefs.GetFloat(collisionKeyPrefix + "PosZ_" + i);
