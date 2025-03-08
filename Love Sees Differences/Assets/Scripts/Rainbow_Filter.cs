@@ -13,7 +13,7 @@ public class Rainbow_Filter : MonoBehaviour
     public float fadeDuration3 = 3.0f; // Duration for fade in and out
     public float fadeDuration4 = 5.0f; // Duration for fade in and out
 
-    //public bool isTintEnabled = true;
+    public bool isTintEnabled = true;
 
     [SerializeField] public GameObject game;
 
@@ -21,7 +21,7 @@ public class Rainbow_Filter : MonoBehaviour
 
     private void Start()
     {
-        //isTintEnabled = PlayerPrefs.GetInt("ScreenTintEnabled", 1) == 1;
+        isTintEnabled = PlayerPrefs.GetInt("ScreenTintEnabled", 1) == 1;
         if (rainbow1 != null && rainbow2 != null && rainbow3 != null && rainbow4 != null)
         {
             // Ensure the tints are initially invisible
@@ -38,10 +38,12 @@ public class Rainbow_Filter : MonoBehaviour
             color4.a = 0;
             rainbow4.color = color4;
         }
-        StartCoroutine(FadeTint1());
-        StartCoroutine(FadeTint2());
-        StartCoroutine(FadeTint3());
-        StartCoroutine(FadeTint4());
+        if (isTintEnabled) {
+            StartCoroutine(FadeTint1());
+            StartCoroutine(FadeTint2());
+            StartCoroutine(FadeTint3());
+            StartCoroutine(FadeTint4());
+        }
     }
 
     private IEnumerator FadeTint1()

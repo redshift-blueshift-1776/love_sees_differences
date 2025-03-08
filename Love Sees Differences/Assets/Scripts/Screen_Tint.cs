@@ -7,13 +7,13 @@ public class Screen_Tint : MonoBehaviour
     [SerializeField] public Image tintImage; // Drag the ScreenTint Image here in the Inspector
     public float fadeDuration = 0.5f; // Duration for fade in and out
 
-    //public bool isTintEnabled = true;
+    public bool isTintEnabled = true;
 
     private bool isFading = false;
 
     private void Start()
     {
-        //isTintEnabled = PlayerPrefs.GetInt("ScreenTintEnabled", 1) == 1;
+        isTintEnabled = PlayerPrefs.GetInt("ScreenTintEnabled", 1) == 1;
         if (tintImage != null)
         {
             // Ensure the tint is initially invisible
@@ -26,8 +26,8 @@ public class Screen_Tint : MonoBehaviour
     public void TintAndFade()
     {
         // Check if a fade is already in progress to prevent overlap
-        //if (!isFading && tintImage != null && isTintEnabled)
-        if (!isFading && tintImage != null)
+        if (!isFading && tintImage != null && isTintEnabled)
+        //if (!isFading && tintImage != null)
         {
             StartCoroutine(FadeTint());
         }
