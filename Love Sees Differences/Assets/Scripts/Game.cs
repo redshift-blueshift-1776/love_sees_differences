@@ -22,6 +22,7 @@ public class Game : MonoBehaviour
 
     [Header("Canvasses")]
     [SerializeField] public GameObject GeneratorCanvas;
+    [SerializeField] public GameObject ScreenTintCanvas;
     [SerializeField] public GameObject UICanvas;
     [SerializeField] public GameObject UICanvasNew;
     [SerializeField] public GameObject EndScreenCanvas;
@@ -110,12 +111,13 @@ public class Game : MonoBehaviour
     private const int regenerationAmount = 1;  // How many people regenerate each cycle
     private const float regenerationInterval = 3f; // Time in seconds between regenerations
 
-    [SerializeField] public bool OldUIEnabled = false;
+    //[SerializeField] public bool OldUIEnabled = false;
+    public bool OldUIEnabled;
     // Start is called before the first frame update
     void Start()
     {
         ClearCollisionData();
-        //OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
+        OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
         gameActive = false;
         timer = 0;
         
@@ -137,6 +139,7 @@ public class Game : MonoBehaviour
 
         // GeneratorCanvas should be enabled, and UI canvas should be disabled.
         GeneratorCanvas.SetActive(true);
+        ScreenTintCanvas.SetActive(false);
         UICanvas.SetActive(false);
         UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(false);
@@ -226,6 +229,7 @@ public class Game : MonoBehaviour
 
         // Also, hide the GeneratorCanvas and show the UI canvas.
         GeneratorCanvas.SetActive(false);
+        ScreenTintCanvas.SetActive(true);
         
 
         if (OldUIEnabled) {
@@ -388,6 +392,7 @@ public class Game : MonoBehaviour
         gameActive = false;
         FreezePlayer();
         Debug.Log("Game Over! Final Score: " + (deliveries - collisions));
+        ScreenTintCanvas.SetActive(false);
         UICanvas.SetActive(false);
         UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(true);

@@ -26,8 +26,8 @@ public class Screen_Tint : MonoBehaviour
     public void TintAndFade()
     {
         // Check if a fade is already in progress to prevent overlap
-        if (!isFading && tintImage != null && isTintEnabled)
         //if (!isFading && tintImage != null)
+        if (!isFading && tintImage != null && isTintEnabled)
         {
             StartCoroutine(FadeTint());
         }
