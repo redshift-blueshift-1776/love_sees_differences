@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class SettingsMenu : MonoBehaviour {
     //public Slider sensitivitySlider;
     public Toggle ScreenTintEnabledToggle;
+    public Toggle OldUIEnabledToggle;
 
     //public static float mouseSensitivity = 1;
     
@@ -13,6 +14,8 @@ public class SettingsMenu : MonoBehaviour {
         //sensitivitySlider.value = savedSensitivity;
         bool ScreenTintEnabled = PlayerPrefs.GetInt("ScreenTintEnabled", 1) == 1;
         ScreenTintEnabledToggle.isOn = ScreenTintEnabled;
+        bool OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
+        OldUIEnabledToggle.isOn = OldUIEnabled;
     }
     // public void SetMouseSensitivity(float sensitivity) {
     //     mouseSensitivity = sensitivity;
@@ -24,6 +27,16 @@ public class SettingsMenu : MonoBehaviour {
         }
         else {
             PlayerPrefs.SetInt("ScreenTintEnabled", 0); // Save to PlayerPrefs
+        }
+        
+    }
+
+    public void SetUseOldUI(bool b) {
+        if (b) {
+            PlayerPrefs.SetInt("UseOldUI", 1); // Save to PlayerPrefs
+        }
+        else {
+            PlayerPrefs.SetInt("UseOldUI", 0); // Save to PlayerPrefs
         }
         
     }

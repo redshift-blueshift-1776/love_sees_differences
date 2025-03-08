@@ -14,18 +14,24 @@ public class Game : MonoBehaviour
     public float timer;
     [SerializeField] private int levelLengthInSeconds;
 
+    [Header("Buildings")]
     [SerializeField] public GameObject BuildingW;
     [SerializeField] public GameObject BuildingA;
     [SerializeField] public GameObject BuildingS;
     [SerializeField] public GameObject BuildingD;
 
+    [Header("Canvasses")]
     [SerializeField] public GameObject GeneratorCanvas;
     [SerializeField] public GameObject UICanvas;
+    [SerializeField] public GameObject UICanvasNew;
     [SerializeField] public GameObject EndScreenCanvas;
 
+    [Header("Audio")]
     [SerializeField] public GameObject loadingAudio;
     [SerializeField] public GameObject gameAudio;
+    [SerializeField] private AudioSource deliverSound;
 
+    [Header("UI Canvas Old")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI peopleAtWText;
@@ -39,19 +45,50 @@ public class Game : MonoBehaviour
     [SerializeField] private Toggle polarDToggle;
     [SerializeField] private Toggle selfPolarToggle;
 
+    [Header("UI Canvas New")]
+    [SerializeField] private TextMeshProUGUI scoreTextNew;
+    [SerializeField] private TextMeshProUGUI timerTextNew;
+
+    [SerializeField] private TextMeshProUGUI peopleAtWTextNew;
+    [SerializeField] private Transform peopleAtWParent;
+    [SerializeField] private GameObject[] peopleAtWImages;
+
+    [SerializeField] private TextMeshProUGUI peopleAtATextNew;
+    [SerializeField] private Transform peopleAtAParent;
+    [SerializeField] private GameObject[] peopleAtAImages;
+
+    [SerializeField] private TextMeshProUGUI peopleAtSTextNew;
+    [SerializeField] private Transform peopleAtSParent;
+    [SerializeField] private GameObject[] peopleAtSImages;
+
+    [SerializeField] private TextMeshProUGUI peopleAtDTextNew;
+    [SerializeField] private Transform peopleAtDParent;
+    [SerializeField] private GameObject[] peopleAtDImages;
+
+    [SerializeField] private TextMeshProUGUI peopleCarriedTextNew;
+    [SerializeField] private Toggle polarWToggleNew;
+    [SerializeField] private Toggle polarAToggleNew;
+    [SerializeField] private Toggle polarSToggleNew;
+    [SerializeField] private Toggle polarDToggleNew;
+    [SerializeField] private Toggle selfPolarToggleNew;
+
+    [SerializeField] public Texture W_to_S;
+    [SerializeField] public Texture A_to_D;
+    [SerializeField] public Texture S_to_W;
+    [SerializeField] public Texture D_to_A;
+
+    [Header("End Screen Canvas")]
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI finalDeliveriesText;
     [SerializeField] private TextMeshProUGUI finalCollisionsText;
 
-    [SerializeField] private AudioSource deliverSound;
-
     private int deliveries;
     private int collisions;
 
-    private int peopleAtW;
-    private int peopleAtA;
-    private int peopleAtS;
-    private int peopleAtD;
+    [SerializeField] private int peopleAtW;
+    [SerializeField] private int peopleAtA;
+    [SerializeField] private int peopleAtS;
+    [SerializeField] private int peopleAtD;
 
     private int peopleCarried;
     private int peopleCarriedW;
@@ -69,26 +106,35 @@ public class Game : MonoBehaviour
     private const int maxPeopleAtBuilding = 10; // Maximum people a building can hold
     private const int regenerationAmount = 1;  // How many people regenerate each cycle
     private const float regenerationInterval = 3f; // Time in seconds between regenerations
+
+    [SerializeField] public bool OldUIEnabled = false;
     // Start is called before the first frame update
     void Start()
     {
         ClearCollisionData();
+        //OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
         gameActive = false;
         timer = 0;
         
-        peopleAtW = Random.Range(1, 10);
-        peopleAtA = Random.Range(1, 10);
-        peopleAtS = Random.Range(1, 10);
-        peopleAtD = Random.Range(1, 10);
+        peopleAtW = Random.Range(1, 5);
+        peopleAtA = Random.Range(1, 5);
+        peopleAtS = Random.Range(1, 5);
+        peopleAtD = Random.Range(1, 5);
         
         peopleCarriedW = 0;
         peopleCarriedA = 0;
         peopleCarriedS = 0;
         peopleCarriedD = 0;
 
+        peopleAtWImages = GetChildImages(peopleAtWParent);
+        peopleAtAImages = GetChildImages(peopleAtAParent);
+        peopleAtSImages = GetChildImages(peopleAtSParent);
+        peopleAtDImages = GetChildImages(peopleAtDParent);
+
         // GeneratorCanvas should be enabled, and UI canvas should be disabled.
         GeneratorCanvas.SetActive(true);
         UICanvas.SetActive(false);
+        UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(false);
 
         // Play loadingAudio
@@ -102,6 +148,27 @@ public class Game : MonoBehaviour
         // Start the people regeneration coroutine
         StartCoroutine(RegeneratePeople());
         
+    }
+
+    private GameObject[] GetChildImages(Transform parent)
+    {
+        if (parent == null)
+        {
+            Debug.LogError("Parent transform is not assigned!");
+            return new GameObject[0];
+        }
+
+        // Find all images under the specified parent
+        Image[] images = parent.GetComponentsInChildren<Image>();
+
+        // Convert Image components to GameObjects
+        GameObject[] imageObjects = new GameObject[images.Length];
+        for (int i = 0; i < images.Length; i++)
+        {
+            imageObjects[i] = images[i].gameObject;
+        }
+
+        return imageObjects;
     }
 
     // Update is called once per frame
@@ -134,7 +201,15 @@ public class Game : MonoBehaviour
 
         // Also, hide the GeneratorCanvas and show the UI canvas.
         GeneratorCanvas.SetActive(false);
-        UICanvas.SetActive(true);
+        
+
+        if (OldUIEnabled) {
+            UICanvas.SetActive(true);
+            UICanvasNew.SetActive(false);
+        } else {
+            UICanvas.SetActive(false);
+            UICanvasNew.SetActive(true);
+        }
 
         // Also, stop loadingAudio and play gameAudio.
         loadingAudio.SetActive(false);
@@ -196,24 +271,49 @@ public class Game : MonoBehaviour
 
     private void UpdateScore()
     {
-        // Score = deliveries - collisions. Display on the UI.
-        timerText.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
-        int score = deliveries - collisions;
-        scoreText.text = $"Score: {score}";
-        peopleAtWText.text = $"People at W: {peopleAtW}";
-        peopleAtAText.text = $"People at A: {peopleAtA}";
-        peopleAtSText.text = $"People at S: {peopleAtS}";
-        peopleAtDText.text = $"People at D: {peopleAtD}";
-        peopleCarriedText.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
+        if (OldUIEnabled) {
+            // Score = deliveries - collisions. Display on the UI.
+            timerText.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
+            int score = deliveries - collisions;
+            scoreText.text = $"Score: {score}";
+            peopleAtWText.text = $"People at W: {peopleAtW}";
+            peopleAtAText.text = $"People at A: {peopleAtA}";
+            peopleAtSText.text = $"People at S: {peopleAtS}";
+            peopleAtDText.text = $"People at D: {peopleAtD}";
+            peopleCarriedText.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
+        } else {
+            timerTextNew.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
+            int score = deliveries - collisions;
+            scoreTextNew.text = $"Score: {score}";
+
+            peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
+
+            for (int i = 0; i < maxPeopleAtBuilding; i++) {
+                peopleAtWImages[i].SetActive(i < peopleAtW);
+                peopleAtAImages[i].SetActive(i < peopleAtA);
+                peopleAtSImages[i].SetActive(i < peopleAtS);
+                peopleAtDImages[i].SetActive(i < peopleAtD);
+            }
+
+        }
     }
 
     private void SetupUIToggles()
     {
-        polarWToggle.onValueChanged.AddListener((value) => playerMovement.polarW = value);
-        polarAToggle.onValueChanged.AddListener((value) => playerMovement.polarA = value);
-        polarSToggle.onValueChanged.AddListener((value) => playerMovement.polarS = value);
-        polarDToggle.onValueChanged.AddListener((value) => playerMovement.polarD = value);
-        selfPolarToggle.onValueChanged.AddListener((value) => playerMovement.selfPolar = value);
+        if (OldUIEnabled) {
+            polarWToggle.onValueChanged.AddListener((value) => playerMovement.polarW = value);
+            polarAToggle.onValueChanged.AddListener((value) => playerMovement.polarA = value);
+            polarSToggle.onValueChanged.AddListener((value) => playerMovement.polarS = value);
+            polarDToggle.onValueChanged.AddListener((value) => playerMovement.polarD = value);
+            selfPolarToggle.onValueChanged.AddListener((value) => playerMovement.selfPolar = value);
+        } else {
+            polarWToggleNew.onValueChanged.AddListener((value) => playerMovement.polarW = value);
+            polarAToggleNew.onValueChanged.AddListener((value) => playerMovement.polarA = value);
+            polarSToggleNew.onValueChanged.AddListener((value) => playerMovement.polarS = value);
+            polarDToggleNew.onValueChanged.AddListener((value) => playerMovement.polarD = value);
+            selfPolarToggleNew.onValueChanged.AddListener((value) => playerMovement.selfPolar = value);
+        }
+        
     }
 
     private void UpdateUIToggles()
@@ -225,11 +325,19 @@ public class Game : MonoBehaviour
         // public bool polarD;
         // public bool selfPolar;
         // Adjust these if clicked.
-        polarWToggle.isOn = playerMovement.polarW;
-        polarAToggle.isOn = playerMovement.polarA;
-        polarSToggle.isOn = playerMovement.polarS;
-        polarDToggle.isOn = playerMovement.polarD;
-        selfPolarToggle.isOn = playerMovement.selfPolar;
+        if (OldUIEnabled) {
+            polarWToggle.isOn = playerMovement.polarW;
+            polarAToggle.isOn = playerMovement.polarA;
+            polarSToggle.isOn = playerMovement.polarS;
+            polarDToggle.isOn = playerMovement.polarD;
+            selfPolarToggle.isOn = playerMovement.selfPolar;
+        } else {
+            polarWToggleNew.isOn = playerMovement.polarW;
+            polarAToggleNew.isOn = playerMovement.polarA;
+            polarSToggleNew.isOn = playerMovement.polarS;
+            polarDToggleNew.isOn = playerMovement.polarD;
+            selfPolarToggleNew.isOn = playerMovement.selfPolar;
+        }
     }
 
     private void EndGame()
@@ -238,6 +346,7 @@ public class Game : MonoBehaviour
         FreezePlayer();
         Debug.Log("Game Over! Final Score: " + (deliveries - collisions));
         UICanvas.SetActive(false);
+        UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(true);
         int score = deliveries - collisions;
         finalScoreText.text = $"Score: {score}";
