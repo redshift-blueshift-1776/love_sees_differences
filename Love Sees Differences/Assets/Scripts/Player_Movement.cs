@@ -34,6 +34,8 @@ public class Player_Movement : MonoBehaviour
 
     public bool selfPolar;
 
+    public bool boosted;
+
     [SerializeField] public GameObject game;
 
     private Game gameScript;
@@ -54,6 +56,7 @@ public class Player_Movement : MonoBehaviour
         polarS = false;
         polarD = false;
         selfPolar = false;
+        boosted = false;
     }
 
     void Update()

@@ -328,13 +328,13 @@ public class Game : MonoBehaviour
                 if (i < peopleCarriedW) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = W_to_S;
-                } else if (i < peopleCarriedW + peopleCarriedA - 1) {
+                } else if (i < peopleCarriedW + peopleCarriedA) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = A_to_D;
-                } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS - 1) {
+                } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = S_to_W;
-                } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS + peopleCarriedD - 1) {
+                } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS + peopleCarriedD) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = D_to_A;
                 } else {
