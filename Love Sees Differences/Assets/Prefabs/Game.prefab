@@ -554,14 +554,24 @@ MonoBehaviour:
   peopleAtDImages:
   - {fileID: 0}
   peopleCarriedTextNew: {fileID: 9061310288715557979}
+  peopleCarriedParent: {fileID: 3516699250934029401}
+  peopleCarriedImages: []
   polarWToggleNew: {fileID: 3722103577241432669}
   polarAToggleNew: {fileID: 8013467927991492503}
   polarSToggleNew: {fileID: 2277613026508569403}
   polarDToggleNew: {fileID: 3836105996059314139}
   selfPolarToggleNew: {fileID: 3505916246468806877}
+  W_to_S: {fileID: 2800000, guid: d2b5fddab65794011bbc15ab39b6cd94, type: 3}
+  A_to_D: {fileID: 2800000, guid: de2844114a3174e8fa77882e4116a191, type: 3}
+  S_to_W: {fileID: 2800000, guid: 28fc3877ef0ed494793a5f44995878ba, type: 3}
+  D_to_A: {fileID: 2800000, guid: 0ba7ff2c8eeea4fac87e1da13ca99fd3, type: 3}
   finalScoreText: {fileID: 2756739184797904563}
   finalDeliveriesText: {fileID: 4911942313656283016}
   finalCollisionsText: {fileID: 250018550051447092}
+  peopleAtW: 0
+  peopleAtA: 0
+  peopleAtS: 0
+  peopleAtD: 0
   levelName: 
   OldUIEnabled: 0
 --- !u!114 &8012923564303768220
@@ -736,6 +746,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &3516699250934029401 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2707393079082336405, guid: bdd92027bb1db417aba2a556524a3da6, type: 3}
+  m_PrefabInstance: {fileID: 1540025460057169100}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3618765895353232774 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2839295916413825354, guid: bdd92027bb1db417aba2a556524a3da6, type: 3}

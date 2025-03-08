@@ -66,6 +66,9 @@ public class Game : MonoBehaviour
     [SerializeField] private GameObject[] peopleAtDImages;
 
     [SerializeField] private TextMeshProUGUI peopleCarriedTextNew;
+    [SerializeField] private Transform peopleCarriedParent;
+    [SerializeField] private GameObject[] peopleCarriedImages;
+
     [SerializeField] private Toggle polarWToggleNew;
     [SerializeField] private Toggle polarAToggleNew;
     [SerializeField] private Toggle polarSToggleNew;
@@ -90,11 +93,11 @@ public class Game : MonoBehaviour
     [SerializeField] private int peopleAtS;
     [SerializeField] private int peopleAtD;
 
-    private int peopleCarried;
-    private int peopleCarriedW;
-    private int peopleCarriedA;
-    private int peopleCarriedS;
-    private int peopleCarriedD;
+    [SerializeField] private int peopleCarried;
+    [SerializeField] private int peopleCarriedW;
+    [SerializeField] private int peopleCarriedA;
+    [SerializeField] private int peopleCarriedS;
+    [SerializeField] private int peopleCarriedD;
 
     private Player_Movement playerMovement;
 
@@ -130,6 +133,7 @@ public class Game : MonoBehaviour
         peopleAtAImages = GetChildImages(peopleAtAParent);
         peopleAtSImages = GetChildImages(peopleAtSParent);
         peopleAtDImages = GetChildImages(peopleAtDParent);
+        peopleCarriedImages = GetChildRawImages(peopleCarriedParent);
 
         // GeneratorCanvas should be enabled, and UI canvas should be disabled.
         GeneratorCanvas.SetActive(true);
@@ -160,6 +164,27 @@ public class Game : MonoBehaviour
 
         // Find all images under the specified parent
         Image[] images = parent.GetComponentsInChildren<Image>();
+
+        // Convert Image components to GameObjects
+        GameObject[] imageObjects = new GameObject[images.Length];
+        for (int i = 0; i < images.Length; i++)
+        {
+            imageObjects[i] = images[i].gameObject;
+        }
+
+        return imageObjects;
+    }
+
+    private GameObject[] GetChildRawImages(Transform parent)
+    {
+        if (parent == null)
+        {
+            Debug.LogError("Parent transform is not assigned!");
+            return new GameObject[0];
+        }
+
+        // Find all images under the specified parent
+        RawImage[] images = parent.GetComponentsInChildren<RawImage>();
 
         // Convert Image components to GameObjects
         GameObject[] imageObjects = new GameObject[images.Length];
@@ -286,13 +311,31 @@ public class Game : MonoBehaviour
             int score = deliveries - collisions;
             scoreTextNew.text = $"Score: {score}";
 
-            peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
+            //peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
 
             for (int i = 0; i < maxPeopleAtBuilding; i++) {
                 peopleAtWImages[i].SetActive(i < peopleAtW);
                 peopleAtAImages[i].SetActive(i < peopleAtA);
                 peopleAtSImages[i].SetActive(i < peopleAtS);
                 peopleAtDImages[i].SetActive(i < peopleAtD);
+            }
+
+            for (int i = 0; i < maxCarryCapacity; i++) {
+                if (i < peopleCarriedW) {
+                    peopleCarriedImages[i].SetActive(true);
+                    peopleCarriedImages[i].GetComponent<RawImage>().texture = W_to_S;
+                } else if (i < peopleCarriedW + peopleCarriedA - 1) {
+                    peopleCarriedImages[i].SetActive(true);
+                    peopleCarriedImages[i].GetComponent<RawImage>().texture = A_to_D;
+                } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS - 1) {
+                    peopleCarriedImages[i].SetActive(true);
+                    peopleCarriedImages[i].GetComponent<RawImage>().texture = S_to_W;
+                } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS + peopleCarriedD - 1) {
+                    peopleCarriedImages[i].SetActive(true);
+                    peopleCarriedImages[i].GetComponent<RawImage>().texture = D_to_A;
+                } else {
+                    peopleCarriedImages[i].SetActive(false);
+                }
             }
 
         }
