@@ -75,6 +75,8 @@ public class Game : MonoBehaviour
     [SerializeField] private Toggle polarSToggleNew;
     [SerializeField] private Toggle polarDToggleNew;
     [SerializeField] private Toggle selfPolarToggleNew;
+    [SerializeField] private Button boostButton;
+    [SerializeField] private Button jumpButton;
 
     [SerializeField] public Texture W_to_S;
     [SerializeField] public Texture A_to_D;
@@ -116,6 +118,7 @@ public class Game : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //boostButton.onClick.RemoveAllListeners(); 
         ClearCollisionData();
         OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
         gameActive = false;
@@ -359,6 +362,7 @@ public class Game : MonoBehaviour
             polarSToggleNew.onValueChanged.AddListener((value) => playerMovement.polarS = value);
             polarDToggleNew.onValueChanged.AddListener((value) => playerMovement.polarD = value);
             selfPolarToggleNew.onValueChanged.AddListener((value) => playerMovement.selfPolar = value);
+            //boostButton.onClick.AddListener((value) => playerMovement.boosted = value);
         }
         
     }

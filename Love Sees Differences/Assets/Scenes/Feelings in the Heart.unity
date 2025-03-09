@@ -934,6 +934,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1426960596621236470, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 1644386411}
+    - target: {fileID: 2419717517770270668, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 1644386411}
     - target: {fileID: 3719589322219885200, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1979,6 +1987,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 648f78555a1f941938d39bdd685332da, type: 3}
+--- !u!114 &1644386411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3792119607926397551, guid: 648f78555a1f941938d39bdd685332da, type: 3}
+  m_PrefabInstance: {fileID: 1644386410}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 578296939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea4b75b6bf754ec2b78571f4b1b99dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1927710786
 GameObject:
   m_ObjectHideFlags: 0

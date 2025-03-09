@@ -36,6 +36,8 @@ public class Player_Movement : MonoBehaviour
 
     public bool boosted;
 
+    public bool jumping;
+
     [SerializeField] public GameObject game;
 
     private Game gameScript;
@@ -103,7 +105,7 @@ public class Player_Movement : MonoBehaviour
 
         move *= playerSpeed;
         // If left shift pressed, multiply the speed by speedUp.
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) || boosted)
             move *= speedUp;
         
         groundedPlayer = (transform.position.y < 6);
@@ -112,7 +114,7 @@ public class Player_Movement : MonoBehaviour
             playerVelocity.y = 0f;
         }
         // If B pressed, jump
-        if (Input.GetKeyDown(KeyCode.B) && groundedPlayer)
+        if ((Input.GetKeyDown(KeyCode.B) || jumping) && groundedPlayer)
         {
             playerVelocity.y = jumpVelocity;
         }
