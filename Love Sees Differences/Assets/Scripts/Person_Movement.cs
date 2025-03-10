@@ -6,6 +6,8 @@ public class Person_Movement : MonoBehaviour
 {
     [SerializeField] public float speed;
 
+    [SerializeField] public float despawnTime = 10f;
+
     [SerializeField] public GameObject player;
 
     private Player_Movement playerMovement;
@@ -34,17 +36,17 @@ public class Person_Movement : MonoBehaviour
         screenTint = game.GetComponent<Screen_Tint>();
         collisionKeyPrefix = "Collision_" + levelName + "_";
         despawning = false;
+        StartCoroutine(waitAndDespawn());
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.Translate(startingPos * Time.deltaTime * speed);
-        StartCoroutine(waitAndDespawn());
     }
 
     private IEnumerator waitAndDespawn() {
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
         yield return null;
     }

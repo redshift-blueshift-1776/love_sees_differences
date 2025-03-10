@@ -6,10 +6,14 @@ public class Person_Spawner_NFS : MonoBehaviour
 {
     // [SerializeField] private float xSpeed = 1.0f;
     // [SerializeField] private float zSpeed = 1.0f;
-
+    [Header("Pedestrian Settings")]
     [SerializeField] public float speed = 20f;
+    [SerializeField] public float despawnTime = 30f;
     [SerializeField] private float despawnRadius = 20f; // Distance at which pedestrian despawns
+    [SerializeField] public float spawnInterval = 5f;
+    [SerializeField] public float probabilityOfDefault = 0.5f;
 
+    [Header("Level info")]
     [SerializeField] public GameObject player;
     private Player_Movement playerMovement;
 
@@ -28,8 +32,6 @@ public class Person_Spawner_NFS : MonoBehaviour
     [SerializeField] private float topLeftZ = 100f;  // Distance between grid points in Unity world units
     [SerializeField] private float bottomRightX = -100f;  // Distance between grid points in Unity world units
     [SerializeField] private float bottomRightZ = 100f;  // Distance between grid points in Unity world units
-
-    [SerializeField] public float spawnInterval = 5f;
 
     private GameObject newPerson;
 
@@ -60,6 +62,8 @@ public class Person_Spawner_NFS : MonoBehaviour
         newPerson.GetComponent<Person_NFS>().despawnRadius = despawnRadius;
         newPerson.GetComponent<Person_NFS>().goalPoints = goalPoints;
         newPerson.GetComponent<Person_NFS>().levelName = levelName;
+        newPerson.GetComponent<Person_NFS>().despawnTime = despawnTime;
+        newPerson.GetComponent<Person_NFS>().probabilityOfDefault = probabilityOfDefault;
         
     }
 

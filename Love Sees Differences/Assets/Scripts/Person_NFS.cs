@@ -5,7 +5,16 @@ using UnityEngine;
 public class Person_NFS : MonoBehaviour
 {
     [SerializeField] public float speed = 20f;
+    [SerializeField] public float despawnTime = 30f;
     [SerializeField] public float despawnRadius = 20f; // Distance at which pedestrian despawns
+
+    [SerializeField] public GameObject defaultColor;
+    [SerializeField] public GameObject WColor;
+    [SerializeField] public GameObject AColor;
+    [SerializeField] public GameObject SColor;
+    [SerializeField] public GameObject DColor;
+
+    public int type; // 0 is default, 1 goes to W, 2 goes to A, 3 goes to S, 4 goes to D.
 
     [SerializeField] public GameObject player;
     private Player_Movement playerMovement;
@@ -25,6 +34,10 @@ public class Person_NFS : MonoBehaviour
     private Vector3 lastPosition;
     private float stuckTime = 0f;
 
+    public float probabilityOfDefault = 0.5f;
+
+    private const float pickupRadius = 20.0f;
+
     public string levelName;  // Will hold the level name (e.g., "DayMode_Level1")
     private string collisionKeyPrefix; // Used to differentiate between different levels
 
@@ -38,7 +51,55 @@ public class Person_NFS : MonoBehaviour
         game = GameObject.Find("Game");
         gameScript = game.GetComponent<Game>();
         screenTint = game.GetComponent<Screen_Tint>();
-        endGoal = goalPoints[Random.Range(0, goalPoints.Length)].position;
+        float distance0 = Vector3.Distance(transform.position, goalPoints[0].position);
+        float distance1 = Vector3.Distance(transform.position, goalPoints[1].position);
+        float distance2 = Vector3.Distance(transform.position, goalPoints[2].position);
+        float distance3 = Vector3.Distance(transform.position, goalPoints[3].position);
+        float minDistance = Mathf.Min(distance0, distance1, distance2, distance3);
+        int closest = -1;
+        if (distance0 == minDistance) {
+            closest = 0;
+        } else if (distance1 == minDistance) {
+            closest = 1;
+        } else if (distance2 == minDistance) {
+            closest = 2;
+        } else if (distance3 == minDistance) {
+            closest = 3;
+        } else {
+            closest = Random.Range(0, 3);
+        }
+        endGoal = goalPoints[closest].position;
+        bool isDefault = Random.Range(0f, 1f) < probabilityOfDefault;
+        if (isDefault) {
+            type = 0;
+        } else {
+            type = closest + 1;
+        }
+        StartCoroutine(waitAndDespawn());
+        defaultColor.SetActive(true);
+        WColor.SetActive(false);
+        AColor.SetActive(false);
+        SColor.SetActive(false);
+        DColor.SetActive(false);
+        if (type == 1) {
+            WColor.SetActive(true);
+            defaultColor.SetActive(false);
+        } else if (type == 2) {
+            AColor.SetActive(true);
+            defaultColor.SetActive(false);
+        } else if (type == 3) {
+            SColor.SetActive(true);
+            defaultColor.SetActive(false);
+        } else if (type == 4) {
+            DColor.SetActive(true);
+            defaultColor.SetActive(false);
+        }
+    }
+
+    private IEnumerator waitAndDespawn() {
+        yield return new WaitForSeconds(despawnTime);
+        Destroy(gameObject);
+        yield return null;
     }
 
     void Update()
@@ -63,6 +124,26 @@ public class Person_NFS : MonoBehaviour
         else
         {
             stuckTime = 0;
+        }
+
+        if (type != 0) {
+            if (gameScript.peopleCarried < gameScript.maxCarryCapacity) {
+                if (Vector3.Distance(transform.position, player.transform.position) < pickupRadius) {
+                    if (type == 1) {
+                        gameScript.peopleCarriedW++;
+                    }
+                    if (type == 2) {
+                        gameScript.peopleCarriedA++;
+                    }
+                    if (type == 3) {
+                        gameScript.peopleCarriedS++;
+                    }
+                    if (type == 4) {
+                        gameScript.peopleCarriedD++;
+                    }
+                    Destroy(gameObject);
+                }
+            }
         }
 
         lastPosition = transform.position;

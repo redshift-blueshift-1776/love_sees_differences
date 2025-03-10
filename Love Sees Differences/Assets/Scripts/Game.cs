@@ -96,17 +96,17 @@ public class Game : MonoBehaviour
     [SerializeField] private int peopleAtS;
     [SerializeField] private int peopleAtD;
 
-    [SerializeField] private int peopleCarried;
-    [SerializeField] private int peopleCarriedW;
-    [SerializeField] private int peopleCarriedA;
-    [SerializeField] private int peopleCarriedS;
-    [SerializeField] private int peopleCarriedD;
+    [SerializeField] public int peopleCarried;
+    [SerializeField] public int peopleCarriedW;
+    [SerializeField] public int peopleCarriedA;
+    [SerializeField] public int peopleCarriedS;
+    [SerializeField] public int peopleCarriedD;
 
     private Player_Movement playerMovement;
 
     [SerializeField] public string levelName;
 
-    private const int maxCarryCapacity = 10;
+    public int maxCarryCapacity = 10;
     private const float pickupRadius = 30.0f;
 
     private const int maxPeopleAtBuilding = 10; // Maximum people a building can hold
