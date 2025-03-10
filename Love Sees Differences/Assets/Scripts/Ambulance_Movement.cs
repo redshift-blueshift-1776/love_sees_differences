@@ -110,11 +110,11 @@ public class Ambulance_Movement : MonoBehaviour
 
         // Steering is based on speed (higher speed, harder to turn)
         if (currentSpeed != 0)
-            currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Abs(currentSpeed)));
+            currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Sqrt(Mathf.Abs(currentSpeed))));
 
         // Apply movement and rotation using Rigidbody
         rb.velocity = transform.forward * currentSpeed;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * speedFactor * Time.fixedDeltaTime, 0));
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.fixedDeltaTime, 0));
     }
 
     private IEnumerator Lights() {
