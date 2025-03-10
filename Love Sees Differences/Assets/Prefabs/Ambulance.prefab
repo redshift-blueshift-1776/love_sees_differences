@@ -921,8 +921,13 @@ MonoBehaviour:
   brakeForce: 20
   friction: 0.98
   speedMultiplier: 3
+  maxBoostFuel: 10
+  boostConsumptionRate: 1
+  boostRefillRate: 5
+  currentBoostFuel: 0
   lightSource: {fileID: 8394719267458610227}
   game: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!143 &3291589347347016295
 CharacterController:
   m_ObjectHideFlags: 0

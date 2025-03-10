@@ -14,9 +14,9 @@ public class Ambulance_Movement : MonoBehaviour
     [SerializeField] private float speedMultiplier = 2f; // Speed boost with Shift
 
     [Header("Boost")]
-    [SerializeField] public float maxBoostFuel = 5f; // Max fuel for boosting
+    [SerializeField] public float maxBoostFuel = 10f; // Max fuel for boosting
     [SerializeField] private float boostConsumptionRate = 1f; // Fuel usage per second
-    [SerializeField] private float boostRefillRate = 2f; // Fuel refill rate at hospital
+    [SerializeField] private float boostRefillRate = 5f; // Fuel refill rate at hospital
     public float currentBoostFuel;
 
     private const float dropoffRadius = 50.0f;
