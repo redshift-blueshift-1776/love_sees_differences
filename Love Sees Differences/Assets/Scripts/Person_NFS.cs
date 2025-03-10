@@ -51,6 +51,7 @@ public class Person_NFS : MonoBehaviour
         game = GameObject.Find("Game");
         gameScript = game.GetComponent<Game>();
         screenTint = game.GetComponent<Screen_Tint>();
+        collisionKeyPrefix = "Collision_" + levelName + "_";
         float distance0 = Vector3.Distance(transform.position, goalPoints[0].position);
         float distance1 = Vector3.Distance(transform.position, goalPoints[1].position);
         float distance2 = Vector3.Distance(transform.position, goalPoints[2].position);

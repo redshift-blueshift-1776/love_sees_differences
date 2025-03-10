@@ -64,6 +64,7 @@ public class Person_Spawner_NFS : MonoBehaviour
         newPerson.GetComponent<Person_NFS>().levelName = levelName;
         newPerson.GetComponent<Person_NFS>().despawnTime = despawnTime;
         newPerson.GetComponent<Person_NFS>().probabilityOfDefault = probabilityOfDefault;
+        newPerson.GetComponent<Person_NFS>().levelName = levelName;
         
     }
 

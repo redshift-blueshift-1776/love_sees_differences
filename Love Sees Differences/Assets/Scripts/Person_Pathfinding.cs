@@ -5,7 +5,14 @@ using UnityEngine;
 public class Person_Pathfinding : MonoBehaviour
 {
     [SerializeField] public float speed = 20f;
+    [SerializeField] public float despawnTime = 30f;
     [SerializeField] public float despawnRadius = 20f; // Distance at which pedestrian despawns
+
+    [SerializeField] public GameObject defaultColor;
+    [SerializeField] public GameObject WColor;
+    [SerializeField] public GameObject AColor;
+    [SerializeField] public GameObject SColor;
+    [SerializeField] public GameObject DColor;
 
     [SerializeField] public GameObject player;
     private Player_Movement playerMovement;
@@ -45,6 +52,10 @@ public class Person_Pathfinding : MonoBehaviour
 
     private bool despawning;
 
+    public int type; // 0 is default, 1 goes to W, 2 goes to A, 3 goes to S, 4 goes to D.
+    public float probabilityOfDefault = 0.5f;
+    private const float pickupRadius = 20.0f;
+
     void Start()
     {
         despawning = false;
@@ -53,6 +64,7 @@ public class Person_Pathfinding : MonoBehaviour
         game = GameObject.Find("Game");
         gameScript = game.GetComponent<Game>();
         screenTint = game.GetComponent<Screen_Tint>();
+        collisionKeyPrefix = "Collision_" + levelName + "_";
         // Ensure maze reference is assigned
         if (!mazeGenerator)
         {
@@ -74,9 +86,36 @@ public class Person_Pathfinding : MonoBehaviour
         //Debug.Log(startCell);
 
         // Choose a random goal
+        int goalNumber = Random.Range(0, goalPoints.Length);
+        bool isDefault = Random.Range(0f, 1f) < probabilityOfDefault;
+        if (isDefault) {
+            type = 0;
+        } else {
+            type = goalNumber+ 1;
+        }
+
+        StartCoroutine(waitAndDespawn());
+        defaultColor.SetActive(true);
+        WColor.SetActive(false);
+        AColor.SetActive(false);
+        SColor.SetActive(false);
+        DColor.SetActive(false);
+        if (type == 1) {
+            WColor.SetActive(true);
+            defaultColor.SetActive(false);
+        } else if (type == 2) {
+            AColor.SetActive(true);
+            defaultColor.SetActive(false);
+        } else if (type == 3) {
+            SColor.SetActive(true);
+            defaultColor.SetActive(false);
+        } else if (type == 4) {
+            DColor.SetActive(true);
+            defaultColor.SetActive(false);
+        }
         if (goalPoints.Length > 0)
         {
-            goalCell = WorldToGrid(goalPoints[Random.Range(0, goalPoints.Length)].position);
+            goalCell = WorldToGrid(goalPoints[goalNumber].position);
         }
         else
         {
@@ -96,6 +135,12 @@ public class Person_Pathfinding : MonoBehaviour
             }
             isMoving = true;
         }
+    }
+
+    private IEnumerator waitAndDespawn() {
+        yield return new WaitForSeconds(despawnTime);
+        Destroy(gameObject);
+        yield return null;
     }
 
     void Update()
@@ -128,6 +173,26 @@ public class Person_Pathfinding : MonoBehaviour
         else
         {
             stuckTime = 0;
+        }
+
+        if (type != 0) {
+            if (gameScript.peopleCarried < gameScript.maxCarryCapacity) {
+                if (Vector3.Distance(transform.position, player.transform.position) < pickupRadius) {
+                    if (type == 1) {
+                        gameScript.peopleCarriedW++;
+                    }
+                    if (type == 2) {
+                        gameScript.peopleCarriedA++;
+                    }
+                    if (type == 3) {
+                        gameScript.peopleCarriedS++;
+                    }
+                    if (type == 4) {
+                        gameScript.peopleCarriedD++;
+                    }
+                    Destroy(gameObject);
+                }
+            }
         }
 
         lastPosition = transform.position;

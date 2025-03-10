@@ -6,10 +6,14 @@ public class Person_Spawner_BFS : MonoBehaviour
 {
     // [SerializeField] private float xSpeed = 1.0f;
     // [SerializeField] private float zSpeed = 1.0f;
-
+    [Header("Pedestrian Settings")]
     [SerializeField] public float speed = 20f;
+    [SerializeField] public float despawnTime = 30f;
     [SerializeField] private float despawnRadius = 20f; // Distance at which pedestrian despawns
+    [SerializeField] public float spawnInterval = 5f;
+    [SerializeField] public float probabilityOfDefault = 0.5f;
 
+    [Header("Level info")]
     [SerializeField] public GameObject player;
     private Player_Movement playerMovement;
 
@@ -32,8 +36,6 @@ public class Person_Spawner_BFS : MonoBehaviour
 
     [Header("Goal Points")]
     [SerializeField] private Transform[] goalPoints;  // Assign in Unity Inspector
-
-    [SerializeField] public float spawnInterval = 5f;
 
     private GameObject newPerson;
 
