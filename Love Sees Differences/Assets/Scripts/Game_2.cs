@@ -6,20 +6,30 @@ using TMPro;
 
 public class Game_2 : MonoBehaviour
 {
+    [Header("Level")]
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject destination;
+    // Buildings and their assigned passengers
+    [SerializeField] private GameObject buildingW;
+    [SerializeField] private GameObject buildingA;
+    [SerializeField] private GameObject buildingS;
+    [SerializeField] private GameObject buildingD;
 
     public bool gameActive;
     public float timer;
     [SerializeField] private int levelLengthInSeconds;
 
+    [Header("Canvasses")]
     [SerializeField] public GameObject GeneratorCanvas;
     [SerializeField] public GameObject UICanvas;
     [SerializeField] public GameObject EndScreenCanvas;
 
+    [Header("Audio")]
     [SerializeField] public GameObject loadingAudio;
     [SerializeField] public GameObject gameAudio;
+    [SerializeField] private AudioSource deliverSound;
 
+    [Header("UI")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timerText;
     [SerializeField] private TextMeshProUGUI peopleAtWText;
@@ -29,8 +39,7 @@ public class Game_2 : MonoBehaviour
     [SerializeField] private TextMeshProUGUI peopleCarriedText;
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI finalDeliveriesText;
-
-    [SerializeField] private AudioSource deliverSound;
+    [SerializeField] private Image fuelBarFill;
 
     [SerializeField] private GameObject screenTint;
 
@@ -44,16 +53,12 @@ public class Game_2 : MonoBehaviour
     private const float dropoffRadius = 50.0f;
     private List<GameObject> passengers = new List<GameObject>();
 
-    // Buildings and their assigned passengers
-    [SerializeField] private GameObject buildingW;
-    [SerializeField] private GameObject buildingA;
-    [SerializeField] private GameObject buildingS;
-    [SerializeField] private GameObject buildingD;
-
     private int peopleAtW;
     private int peopleAtA;
     private int peopleAtS;
     private int peopleAtD;
+
+    private float originalFuelBarWidth = 500f;
 
     private const float regenerationInterval = 10f; // Time in seconds between regenerations
 
@@ -175,6 +180,12 @@ public class Game_2 : MonoBehaviour
         peopleAtSText.text = $"People at S: {peopleAtS}";
         peopleAtDText.text = $"People at D: {peopleAtD}";
         peopleCarriedText.text = $"Carried: {peopleCarried}";
+        Ambulance_Movement playerScript = player.GetComponent<Ambulance_Movement>();
+        //Debug.Log(playerScript.currentBoostFuel / playerScript.maxBoostFuel);
+        float fuelPercentage = playerScript.currentBoostFuel / playerScript.maxBoostFuel;
+        RectTransform rt = fuelBarFill.rectTransform;
+        rt.sizeDelta = new Vector2(fuelPercentage * originalFuelBarWidth, rt.sizeDelta.y);
+        //fuelBarFill.fillAmount = playerScript.currentBoostFuel / playerScript.maxBoostFuel;
     }
 
     private void EndGame()
