@@ -41,6 +41,11 @@ public class Game_2 : MonoBehaviour
     [SerializeField] private TextMeshProUGUI finalDeliveriesText;
     [SerializeField] private Image fuelBarFill;
 
+    [SerializeField] private RectTransform needleTransform;  // Assign in Inspector
+    [SerializeField] private float maxSpeedDisplayed = 151f;         // Maximum speed displayed
+    private float minAngle = -135f;  // Leftmost angle
+    private float maxAngle = 135f;   // Rightmost angle
+
     [SerializeField] private GameObject screenTint;
 
     private Screen_Tint screenTintScript;
@@ -186,6 +191,15 @@ public class Game_2 : MonoBehaviour
         RectTransform rt = fuelBarFill.rectTransform;
         rt.sizeDelta = new Vector2(fuelPercentage * originalFuelBarWidth, rt.sizeDelta.y);
         //fuelBarFill.fillAmount = playerScript.currentBoostFuel / playerScript.maxBoostFuel;
+
+        // Get absolute speed
+        float speed = Mathf.Abs(playerScript.currentSpeed);
+        
+        // Map speed to needle rotation
+        float needleRotation = Mathf.Lerp(minAngle, maxAngle, speed / maxSpeedDisplayed);
+        
+        // Rotate the needle
+        needleTransform.rotation = Quaternion.Euler(0, 0, -needleRotation);
     }
 
     private void EndGame()

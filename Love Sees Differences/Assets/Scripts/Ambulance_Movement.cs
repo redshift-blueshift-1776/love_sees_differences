@@ -21,7 +21,7 @@ public class Ambulance_Movement : MonoBehaviour
 
     private const float dropoffRadius = 50.0f;
 
-    private float currentSpeed = 0f;
+    public float currentSpeed = 0f;
     private float currentTurnSpeed = 0f;
     private Rigidbody rb;
 
