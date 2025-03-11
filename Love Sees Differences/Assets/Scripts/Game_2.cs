@@ -28,6 +28,7 @@ public class Game_2 : MonoBehaviour
     [SerializeField] public GameObject loadingAudio;
     [SerializeField] public GameObject gameAudio;
     [SerializeField] private AudioSource deliverSound;
+    [SerializeField] private AudioSource spawnSound;
 
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI scoreText;
@@ -65,7 +66,7 @@ public class Game_2 : MonoBehaviour
 
     private float originalFuelBarWidth = 500f;
 
-    private const float regenerationInterval = 10f; // Time in seconds between regenerations
+    private const float regenerationInterval = 5f; // Time in seconds between regenerations
 
     void Start()
     {
@@ -214,19 +215,59 @@ public class Game_2 : MonoBehaviour
 
     private IEnumerator RegeneratePeople()
     {
+        // while (true)
+        // {
+        //     yield return new WaitForSeconds(regenerationInterval);
+
+        //     if (gameActive)
+        //     {
+        //         peopleAtW += Random.Range(1, 2);
+        //         peopleAtA += Random.Range(1, 2);
+        //         peopleAtS += Random.Range(1, 2);
+        //         peopleAtD += Random.Range(1, 2);
+                
+        //         UpdateUI();
+        //     }
+        // }
         while (true)
         {
-            yield return new WaitForSeconds(regenerationInterval);
+            yield return new WaitForSeconds(regenerationInterval + Random.Range(-2f, 2f));
 
             if (gameActive)
             {
-                peopleAtW += Random.Range(1, 2);
-                peopleAtA += Random.Range(1, 2);
-                peopleAtS += Random.Range(1, 2);
-                peopleAtD += Random.Range(1, 2);
-                
+                List<string> availableBuildings = new List<string>();
+
+                if (peopleAtW < 5) availableBuildings.Add("W");
+                if (peopleAtA < 5) availableBuildings.Add("A");
+                if (peopleAtS < 5) availableBuildings.Add("S");
+                if (peopleAtD < 5) availableBuildings.Add("D");
+
+                if (availableBuildings.Count > 0)
+                {
+                    string chosenBuilding = availableBuildings[Random.Range(0, availableBuildings.Count)];
+                    int newPassengers = Random.Range(1, 6);
+
+                    switch (chosenBuilding)
+                    {
+                        case "W": peopleAtW = Mathf.Min(5, peopleAtW + newPassengers); StartCoroutine(FlashText(peopleAtWText)); break;
+                        case "A": peopleAtA = Mathf.Min(5, peopleAtA + newPassengers); StartCoroutine(FlashText(peopleAtAText)); break;
+                        case "S": peopleAtS = Mathf.Min(5, peopleAtS + newPassengers); StartCoroutine(FlashText(peopleAtSText)); break;
+                        case "D": peopleAtD = Mathf.Min(5, peopleAtD + newPassengers); StartCoroutine(FlashText(peopleAtDText)); break;
+                    }
+                    spawnSound.Play();
+                }
+
                 UpdateUI();
             }
         }
     }
+
+    private IEnumerator FlashText(TextMeshProUGUI text)
+    {
+        Color originalColor = text.color;
+        text.color = Color.red;
+        yield return new WaitForSeconds(0.5f);
+        text.color = originalColor;
+    }
+
 }
