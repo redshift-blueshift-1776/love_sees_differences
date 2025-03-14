@@ -10,7 +10,7 @@ public class Building_Mover : MonoBehaviour
     public Game gameScript; // Reference to the Game object to get the game timer
 
     [SerializeField] private float[] moveTimes = { 30f, 60f, 90f }; // Times for when the buildings should move (example)
-    private Vector3[] targetPositions = new Vector3[12]; // New positions for the buildings
+    public Vector3[] targetPositions = new Vector3[12]; // New positions for the buildings
 
     private void Start()
     {
@@ -47,13 +47,14 @@ public class Building_Mover : MonoBehaviour
     // Function to move buildings to the target positions at the given index
     private void MoveBuildings(int index)
     {
+        Debug.Log(index + " " + moveTimes.Length);
         // For simplicity, move all buildings (this can be modified to move specific buildings)
         for (int i = 0; i < moveTimes.Length; i++)
         {
             if (i == index) // Move the corresponding building to the target position
             {
                 Debug.Log("MoveBuildingToTarget" + i % buildings.Length + " " + index % buildings.Length);
-                StartCoroutine(MoveBuildingToTarget(buildings[i % buildings.Length], targetPositions[index % buildings.Length]));
+                StartCoroutine(MoveBuildingToTarget(buildings[i % buildings.Length], targetPositions[index]));
             }
         }
     }

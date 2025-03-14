@@ -8,6 +8,7 @@ public class Person_Spawner : MonoBehaviour
     [SerializeField] private float zSpeed = 1.0f;
 
     [SerializeField] public float spawnInterval = 5f;
+    [SerializeField] public float despawnTime = 10f;
 
     [SerializeField] public GameObject game;
 
@@ -41,6 +42,7 @@ public class Person_Spawner : MonoBehaviour
         newPerson.GetComponent<Person_Movement>().startingPos = walkDirection;
         newPerson.GetComponent<Person_Movement>().speed = speed;
         newPerson.GetComponent<Person_Movement>().levelName = levelName;
+        newPerson.GetComponent<Person_Movement>().despawnTime = despawnTime;
     }
 
     private IEnumerator RegeneratePeople()

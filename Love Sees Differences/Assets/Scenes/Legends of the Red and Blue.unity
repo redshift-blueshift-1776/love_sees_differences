@@ -962,6 +962,120 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &275243235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275243238}
+  - component: {fileID: 275243237}
+  - component: {fileID: 275243236}
+  m_Layer: 0
+  m_Name: Point Light (6)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &275243236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275243235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a114ab75c4a38479b9e2e07b2b9b133f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSpeed: 0
+  zSpeed: -30
+  spawnInterval: 1.6
+  despawnTime: 24
+  game: {fileID: 1105454952}
+  person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
+  levelName: Legends_of_the_Red_and_Blue
+--- !u!108 &275243237
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275243235}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &275243238
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275243235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -275, y: 0, z: 495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &277429721
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -980,11 +1094,11 @@ PrefabInstance:
       objectReference: {fileID: 578296939}
     - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: topLeftX
-      value: -200
+      value: -495
       objectReference: {fileID: 0}
     - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: topLeftZ
-      value: 200
+      value: 495
       objectReference: {fileID: 0}
     - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: levelName
@@ -992,11 +1106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: bottomRightX
-      value: -100
+      value: 495
       objectReference: {fileID: 0}
     - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: bottomRightZ
-      value: 100
+      value: -495
+      objectReference: {fileID: 0}
+    - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
+      propertyPath: spawnInterval
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1566127072664910865, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: goalPoints.Array.size
@@ -1024,7 +1142,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850072588907034252, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7850072588907034252, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1032,7 +1150,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7850072588907034252, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7850072588907034252, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1067,6 +1185,120 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bd2de20622a0498ab12f025434ecdce, type: 3}
+--- !u!1 &314018761
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 314018764}
+  - component: {fileID: 314018763}
+  - component: {fileID: 314018762}
+  m_Layer: 0
+  m_Name: Point Light (5)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &314018762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314018761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a114ab75c4a38479b9e2e07b2b9b133f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSpeed: 0
+  zSpeed: -30
+  spawnInterval: 1.5
+  despawnTime: 24
+  game: {fileID: 1105454952}
+  person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
+  levelName: Legends_of_the_Red_and_Blue
+--- !u!108 &314018763
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314018761}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &314018764
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314018761}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -245, y: 0, z: 495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &335326854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1493,6 +1725,7 @@ MonoBehaviour:
   xSpeed: 0
   zSpeed: -15
   spawnInterval: 2
+  despawnTime: 36
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: Legends_of_the_Red_and_Blue
@@ -2090,7 +2323,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &704816408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2114,9 +2347,9 @@ MonoBehaviour:
   - {fileID: 1350053278}
   - {fileID: 1408087736}
   - {fileID: 1783641209}
-  - {fileID: 1408087736}
-  - {fileID: 1408087736}
-  - {fileID: 1408087736}
+  - {fileID: 2068249289}
+  - {fileID: 1017880540}
+  - {fileID: 2145101188}
   game: {fileID: 1105454952}
   gameScript: {fileID: 0}
   moveTimes:
@@ -2124,10 +2357,23 @@ MonoBehaviour:
   - 97
   - 97
   - 97
-  - 287
-  - 287
-  - 287
-  - 287
+  - 267
+  - 267
+  - 267
+  - 267
+  targetPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!4 &704816409
 Transform:
   m_ObjectHideFlags: 0
@@ -2176,6 +2422,7 @@ MonoBehaviour:
   xSpeed: 0
   zSpeed: 12
   spawnInterval: 3
+  despawnTime: 42
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: Legends_of_the_Red_and_Blue
@@ -2389,9 +2636,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a114ab75c4a38479b9e2e07b2b9b133f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 0
+  xSpeed: 10
   zSpeed: 10
   spawnInterval: 2
+  despawnTime: 60
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: Legends_of_the_Red_and_Blue
@@ -2466,7 +2714,7 @@ Transform:
   m_GameObject: {fileID: 854533281}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: 0, z: -200}
+  m_LocalPosition: {x: -400, y: 0, z: -480}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2532,6 +2780,7 @@ MonoBehaviour:
   xSpeed: 5
   zSpeed: 5
   spawnInterval: 7
+  despawnTime: 10
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: Legends_of_the_Red_and_Blue
@@ -2972,7 +3221,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1237815788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3010,6 +3259,19 @@ MonoBehaviour:
   - 10
   - 10
   - 10
+  targetPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!4 &1237815789
 Transform:
   m_ObjectHideFlags: 0
@@ -3232,6 +3494,120 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -400, y: 0, z: 0}
   m_LocalScale: {x: 20, y: 1, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1332067192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1332067195}
+  - component: {fileID: 1332067194}
+  - component: {fileID: 1332067193}
+  m_Layer: 0
+  m_Name: Point Light (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1332067193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332067192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a114ab75c4a38479b9e2e07b2b9b133f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xSpeed: 0
+  zSpeed: 15
+  spawnInterval: 2.5
+  despawnTime: 30
+  game: {fileID: 1105454952}
+  person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
+  levelName: Legends_of_the_Red_and_Blue
+--- !u!108 &1332067194
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332067192}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 2
+  m_Shape: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 0
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1332067195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332067192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -200, y: 0, z: -495}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -4907,9 +5283,12 @@ SceneRoots:
   - {fileID: 2145101189}
   - {fileID: 17779848}
   - {fileID: 815988449}
+  - {fileID: 427214650}
+  - {fileID: 1332067195}
+  - {fileID: 314018764}
+  - {fileID: 275243238}
   - {fileID: 854533284}
   - {fileID: 967146235}
-  - {fileID: 427214650}
   - {fileID: 2083806}
   - {fileID: 174906697}
   - {fileID: 117220611}
