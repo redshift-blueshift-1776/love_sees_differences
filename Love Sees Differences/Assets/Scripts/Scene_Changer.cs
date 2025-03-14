@@ -96,7 +96,7 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(17);
     }
 
-    public void LoadFail9()
+    public void LoadLegendsOfTheRedAndBlue()
     {
         SceneManager.LoadScene(18);
     }
