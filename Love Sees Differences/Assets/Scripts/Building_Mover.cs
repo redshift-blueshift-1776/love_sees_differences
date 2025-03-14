@@ -10,7 +10,7 @@ public class Building_Mover : MonoBehaviour
     public Game gameScript; // Reference to the Game object to get the game timer
 
     [SerializeField] private float[] moveTimes = { 30f, 60f, 90f }; // Times for when the buildings should move (example)
-    private Vector3[] targetPositions = new Vector3[3]; // New positions for the buildings
+    private Vector3[] targetPositions = new Vector3[12]; // New positions for the buildings
 
     private void Start()
     {
