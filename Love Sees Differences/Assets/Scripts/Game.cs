@@ -111,7 +111,8 @@ public class Game : MonoBehaviour
 
     private const int maxPeopleAtBuilding = 10; // Maximum people a building can hold
     private const int regenerationAmount = 1;  // How many people regenerate each cycle
-    private const float regenerationInterval = 3f; // Time in seconds between regenerations
+    
+    [SerializeField] private float regenerationInterval = 3f; // Time in seconds between regenerations
 
     //[SerializeField] public bool OldUIEnabled = false;
     public bool OldUIEnabled;

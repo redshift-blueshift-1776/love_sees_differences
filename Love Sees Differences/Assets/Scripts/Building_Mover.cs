@@ -51,7 +51,7 @@ public class Building_Mover : MonoBehaviour
         {
             if (i == index) // Move the corresponding building to the target position
             {
-                StartCoroutine(MoveBuildingToTarget(buildings[i], targetPositions[index]));
+                StartCoroutine(MoveBuildingToTarget(buildings[i], targetPositions[index % targetPositions.Length]));
             }
         }
     }
