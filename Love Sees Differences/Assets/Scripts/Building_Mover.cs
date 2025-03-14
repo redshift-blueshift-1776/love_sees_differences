@@ -36,6 +36,7 @@ public class Building_Mover : MonoBehaviour
             // If current time matches one of the designated times, move the corresponding buildings
             if (Mathf.Ceil(currentTime) >= Mathf.Ceil(moveTimes[i]))
             {
+                Debug.Log("Moving a building" + i);
                 MoveBuildings(i);
                 // Optionally, set the move time to a very large value so it doesn't move again
                 moveTimes[i] = float.MaxValue;  // Ensures the building doesn't move multiple times
@@ -47,11 +48,12 @@ public class Building_Mover : MonoBehaviour
     private void MoveBuildings(int index)
     {
         // For simplicity, move all buildings (this can be modified to move specific buildings)
-        for (int i = 0; i < buildings.Length; i++)
+        for (int i = 0; i < moveTimes.Length; i++)
         {
             if (i == index) // Move the corresponding building to the target position
             {
-                StartCoroutine(MoveBuildingToTarget(buildings[i], targetPositions[index % targetPositions.Length]));
+                Debug.Log("MoveBuildingToTarget" + i % buildings.Length + " " + index % buildings.Length);
+                StartCoroutine(MoveBuildingToTarget(buildings[i % buildings.Length], targetPositions[index % buildings.Length]));
             }
         }
     }
