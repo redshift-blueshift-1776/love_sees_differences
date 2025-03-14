@@ -10,12 +10,12 @@ public class LyricsDisplay : MonoBehaviour
         public string text;
     }
 
-    [SerializeField] private string lyricsText;
+    [SerializeField] public string[] lyricsText;
     private List<LyricLine> lyrics;
 
     void ParseLyrics() {
         lyrics = new List<LyricLine>();
-        string[] lines = lyricsText.Split('\n');
+        string[] lines = lyricsText;
 
         foreach (string line in lines) {
             if (string.IsNullOrWhiteSpace(line)) continue;
@@ -43,17 +43,33 @@ public class LyricsDisplay : MonoBehaviour
         audioSource = gameAudio.GetComponent<AudioSource>();
         secondsPerBeat = 60f / beatsPerMinute;
         ParseLyrics();
-        nextLyricTime = AudioSettings.dspTime;
-        //audioSource.Play();
+        
+        // Don't start the lyrics until the audio actually starts playing
+        nextLyricTime = 0;
+        currentLine = 0;
+        lyricsDisplay.text = ""; // Start with an empty display
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        if (!audioSource.isPlaying) {
+            // If the audio isn't playing, reset and show nothing
+            currentLine = 0;
+            nextLyricTime = 0;
+            lyricsDisplay.text = "";
+            return;
+        }
+
+        if (nextLyricTime == 0) {
+            // Sync with the exact DSP time when the audio starts playing
+            nextLyricTime = AudioSettings.dspTime;
+        }
+
         if (currentLine < lyrics.Count && AudioSettings.dspTime >= nextLyricTime) {
             lyricsDisplay.text = lyrics[currentLine].text;
             nextLyricTime += lyrics[currentLine].duration * secondsPerBeat;
             currentLine++;
         }
     }
+
 }

@@ -786,10 +786,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31e6b8154ded34095bd4cec57a912cab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lyricsText: "11\tIs this a place that I call home?\t\\n 7\tTo find what I've become\t\\n
-    9\tWalk along the path unknown\t\\n 7\tWe live, we love, we lie\t\\n 8\tDeep
-    in the dark, I don't need the light\t\\n 8\tThere's a ghost inside me\t\\n 8\tIt
-    all belongs to the other side\t\\n 8\tWe live, we love, we lie\t"
+  lyricsText:
+  - '16:'
+  - 11:Is this a place that I call home?
+  - 7:To find what I've become
+  - 9:Walk along the path unknown
+  - 7:We live, we love, we lie
+  - 8:Deep in the dark, I don't need the light
+  - 8:There's a ghost inside me
+  - 8:It all belongs to the other side
+  - 8:We live, we love, we lie
   gameAudio: {fileID: 1400960100}
   lyricsDisplay: {fileID: 507647085}
   beatsPerMinute: 145
@@ -1445,8 +1451,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
