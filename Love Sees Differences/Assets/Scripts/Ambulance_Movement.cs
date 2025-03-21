@@ -7,7 +7,7 @@ public class Ambulance_Movement : MonoBehaviour
 {
     [Header("Speed Stats")]
     [SerializeField] private float acceleration = 10f; // Acceleration rate
-    [SerializeField] private float maxSpeed = 50f; // Maximum speed
+    [SerializeField] private float maxSpeed = 200f; // Maximum speed
     [SerializeField] private float turnSpeed = 100f; // Steering sensitivity
     [SerializeField] private float brakeForce = 20f; // Braking power
     [SerializeField] private float friction = 0.98f; // Simulated drag
@@ -35,29 +35,39 @@ public class Ambulance_Movement : MonoBehaviour
 
     private Game_2 gameScript;
 
+    private CharacterController controller;
+    private BoxCollider boxCollider;
+    public LayerMask obstacleMask; // Set this in the inspector to only include walls
+
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        //rb = GetComponent<Rigidbody>();
         gameScript = game.GetComponent<Game_2>();
         destination = gameScript.destination;
         currentBoostFuel = maxBoostFuel;
-        rb.freezeRotation = true; // Prevent the ambulance from tipping over
+        //rb.freezeRotation = true; // Prevent the ambulance from tipping over
         StartCoroutine(Lights());
+        controller = GetComponent<CharacterController>();
+        boxCollider = GetComponent<BoxCollider>();
     }
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.M)) {
             SceneManager.LoadScene(0);
         }
-    }
-
-    void FixedUpdate()
-    {
         if (gameScript.gameActive) {
             HandleMovement();
             RefillFuel();
         }
     }
+
+    // void FixedUpdate()
+    // {
+    //     if (gameScript.gameActive) {
+    //         HandleMovement();
+    //         RefillFuel();
+    //     }
+    // }
 
     private void RefillFuel()
     {
@@ -69,52 +79,114 @@ public class Ambulance_Movement : MonoBehaviour
     }
 
 
+    // void HandleMovement()
+    // {
+    //     float moveInput = 0f;
+    //     float turnInput = 0f;
+
+    //     // Forward and backward acceleration
+    //     if (Input.GetKey(KeyCode.W))
+    //         moveInput = 1f;
+    //     if (Input.GetKey(KeyCode.S))
+    //         moveInput = -1f;
+
+    //     // Steering left and right
+    //     if (Input.GetKey(KeyCode.A))
+    //         turnInput = -1f * moveInput;
+    //     if (Input.GetKey(KeyCode.D))
+    //         turnInput = 1f * moveInput;
+
+    //     // Speed boost
+    //     // float speedFactor = (Input.GetKey(KeyCode.LeftShift)) ? speedMultiplier : 1f;
+    //     bool isBoosting = Input.GetKey(KeyCode.LeftShift) && currentBoostFuel > 0;
+    //     float speedFactor = isBoosting ? speedMultiplier : 1f;
+
+    //     if (isBoosting)
+    //     {
+    //         currentBoostFuel -= boostConsumptionRate * Time.fixedDeltaTime;
+    //         currentBoostFuel = Mathf.Max(currentBoostFuel, 0);
+    //     }
+
+    //     // Accelerate/decelerate
+    //     currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
+    //     currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed) * speedFactor;
+
+    //     // Apply friction to slow down gradually
+    //     currentSpeed *= friction;
+
+    //     // Braking (reduce speed faster when pressing S)
+    //     if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
+    //         currentSpeed -= brakeForce * Time.fixedDeltaTime;
+
+    //     // Steering is based on speed (higher speed, harder to turn)
+    //     if (currentSpeed != 0)
+    //         currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Sqrt(Mathf.Abs(currentSpeed))));
+
+    //     // Apply movement and rotation using Rigidbody
+    //     rb.velocity = transform.forward * currentSpeed;
+    //     rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.fixedDeltaTime, 0));
+    // }
+
     void HandleMovement()
     {
         float moveInput = 0f;
         float turnInput = 0f;
 
-        // Forward and backward acceleration
+        // Forward and backward movement
         if (Input.GetKey(KeyCode.W))
             moveInput = 1f;
         if (Input.GetKey(KeyCode.S))
             moveInput = -1f;
 
-        // Steering left and right
+        // Steering logic
         if (Input.GetKey(KeyCode.A))
             turnInput = -1f * moveInput;
         if (Input.GetKey(KeyCode.D))
             turnInput = 1f * moveInput;
 
-        // Speed boost
-        // float speedFactor = (Input.GetKey(KeyCode.LeftShift)) ? speedMultiplier : 1f;
+        // Boost logic
         bool isBoosting = Input.GetKey(KeyCode.LeftShift) && currentBoostFuel > 0;
         float speedFactor = isBoosting ? speedMultiplier : 1f;
 
         if (isBoosting)
         {
-            currentBoostFuel -= boostConsumptionRate * Time.fixedDeltaTime;
+            currentBoostFuel -= boostConsumptionRate * Time.deltaTime;
             currentBoostFuel = Mathf.Max(currentBoostFuel, 0);
         }
 
-        // Accelerate/decelerate
-        currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
-        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed) * speedFactor;
+        // Accelerate and decelerate
+        currentSpeed += moveInput * acceleration * Time.deltaTime;
+        currentSpeed *= speedFactor;
+        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 
-        // Apply friction to slow down gradually
+        // Apply friction
         currentSpeed *= friction;
 
-        // Braking (reduce speed faster when pressing S)
-        if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
-            currentSpeed -= brakeForce * Time.fixedDeltaTime;
+        if (Mathf.Abs(currentSpeed) < 0.05f) currentSpeed = 0f;
 
-        // Steering is based on speed (higher speed, harder to turn)
+        // Braking
+        if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
+            currentSpeed -= brakeForce * Time.deltaTime;
+
+        // Steering based on speed (harder to turn at high speeds)
         if (currentSpeed != 0)
             currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Sqrt(Mathf.Abs(currentSpeed))));
 
-        // Apply movement and rotation using Rigidbody
-        rb.velocity = transform.forward * currentSpeed;
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.fixedDeltaTime, 0));
+        // Check if moving forward would collide with a wall
+        if (!IsColliding(Vector3.forward * currentSpeed * Time.deltaTime))
+        {
+            Vector3 moveDirection = transform.forward * currentSpeed;
+            controller.Move(moveDirection * Time.deltaTime);
+        }
+
+        // Apply rotation
+        transform.Rotate(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.deltaTime, 0);
+    }
+
+    // Collision check using BoxCollider
+    bool IsColliding(Vector3 movement)
+    {
+        return Physics.BoxCast(transform.position, boxCollider.size * 0.5f, movement.normalized, Quaternion.identity, movement.magnitude, obstacleMask);
     }
 
     private IEnumerator Lights() {
