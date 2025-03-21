@@ -222,8 +222,8 @@ Transform:
   m_GameObject: {fileID: 2083802}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -250, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 100, z: 250}
+  m_LocalPosition: {x: -250, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 200, z: 250}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -432,8 +432,8 @@ Transform:
   m_GameObject: {fileID: 117220607}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 250, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 100, z: 250}
+  m_LocalPosition: {x: 250, y: 100, z: 0}
+  m_LocalScale: {x: 1, y: 200, z: 250}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -561,7 +561,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &174906694
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1064,7 +1064,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 532591105809680800, guid: 21d3c374cccfe4ee2b0cc593158d3078, type: 3}
 --- !u!1 &353929264
@@ -1166,8 +1166,8 @@ Transform:
   m_GameObject: {fileID: 353929264}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -125}
-  m_LocalScale: {x: 500, y: 100, z: 1}
+  m_LocalPosition: {x: 0, y: 100, z: -125}
+  m_LocalScale: {x: 500, y: 200, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1260,7 +1260,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -2432090755550338912, guid: b4bf1d8ca49694b218e9b9ee9d463544, type: 3}
 --- !u!1 &401691780
@@ -1478,6 +1478,7 @@ MonoBehaviour:
   xSpeed: 0
   zSpeed: -10
   spawnInterval: 1.8
+  despawnTime: 10
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: For_the_Past
@@ -1866,6 +1867,7 @@ MonoBehaviour:
   xSpeed: 5
   zSpeed: -5
   spawnInterval: 5
+  despawnTime: 10
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: For_the_Past
@@ -1979,6 +1981,7 @@ MonoBehaviour:
   xSpeed: 0
   zSpeed: 10
   spawnInterval: 2
+  despawnTime: 10
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: For_the_Past
@@ -2289,6 +2292,7 @@ MonoBehaviour:
   xSpeed: 5
   zSpeed: 5
   spawnInterval: 7
+  despawnTime: 10
   game: {fileID: 1105454952}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: For_the_Past
@@ -2718,8 +2722,8 @@ Transform:
   m_GameObject: {fileID: 1250430524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 125}
-  m_LocalScale: {x: 500, y: 100, z: 1}
+  m_LocalPosition: {x: 0, y: 100, z: 125}
+  m_LocalScale: {x: 500, y: 200, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2894,6 +2898,19 @@ MonoBehaviour:
   moveTimes:
   - 100
   - 182
+  targetPositions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 0}
 --- !u!4 &1420026952
 Transform:
   m_ObjectHideFlags: 0
@@ -3549,8 +3566,8 @@ SceneRoots:
   - {fileID: 427214650}
   - {fileID: 2133854631}
   - {fileID: 333080684}
-  - {fileID: 2083806}
   - {fileID: 174906697}
+  - {fileID: 2083806}
   - {fileID: 117220611}
   - {fileID: 1250430528}
   - {fileID: 353929268}

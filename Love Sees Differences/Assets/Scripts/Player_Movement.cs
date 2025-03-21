@@ -11,8 +11,8 @@ public class Player_Movement : MonoBehaviour
     private Vector3 playerVelocity = new Vector3(0,0,0);
     private bool groundedPlayer;
     [SerializeField] private float playerSpeed = 5.0f;
-    private float jumpHeight = 10.0f;
-    private float gravityValue = -20f;
+    private float jumpHeight = 25.0f;
+    private float gravityValue = -64f;
 
     private float jumpVelocity;
 
@@ -108,11 +108,12 @@ public class Player_Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift) || boosted)
             move *= speedUp;
         
-        groundedPlayer = (transform.position.y < 6);
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
+        //groundedPlayer = (transform.position.y < 6);
+        groundedPlayer = controller.isGrounded;
+        // if (groundedPlayer && playerVelocity.y < 0)
+        // {
+        //     playerVelocity.y = 0f;
+        // }
         // If B pressed, jump
         if ((Input.GetKeyDown(KeyCode.B) || jumping) && groundedPlayer)
         {
