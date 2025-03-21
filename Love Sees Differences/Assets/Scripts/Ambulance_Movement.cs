@@ -39,6 +39,12 @@ public class Ambulance_Movement : MonoBehaviour
     private BoxCollider boxCollider;
     public LayerMask obstacleMask; // Set this in the inspector to only include walls
 
+    private Vector3 velocity;
+    public float gravity = 64f;
+    public float groundCheckDistance = 0.2f;
+    public LayerMask groundMask;
+    private bool isGrounded;
+
     void Start()
     {
         //rb = GetComponent<Rigidbody>();
@@ -49,6 +55,10 @@ public class Ambulance_Movement : MonoBehaviour
         StartCoroutine(Lights());
         controller = GetComponent<CharacterController>();
         boxCollider = GetComponent<BoxCollider>();
+        controller.height = 6.5f;
+        controller.center = new Vector3(0, 3.25f, 0);
+        controller.slopeLimit = 50f;
+
     }
 
     void Update() {
@@ -58,8 +68,51 @@ public class Ambulance_Movement : MonoBehaviour
         if (gameScript.gameActive) {
             HandleMovement();
             RefillFuel();
+            AlignWithGround();
+            // Gravity Handling
+            isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
+
+            if (isGrounded && velocity.y < 0)
+            {
+                velocity.y = -2f; // Small offset to keep grounded
+            }
+            else
+            {
+                velocity.y -= gravity * Time.deltaTime;
+            }
+
+            // Move the ambulance
+            //Vector3 move = transform.forward * currentSpeed * Time.deltaTime;
+            Vector3 move = new Vector3(0, 0, 0);
+            move.y = velocity.y * Time.deltaTime; // Apply gravity
+
+            controller.Move(move);
         }
     }
+
+    void AlignWithGround()
+    {
+        RaycastHit hit;
+        Vector3 rayOrigin = transform.position + Vector3.up * 0.5f; // Small offset to avoid clipping
+        if (Physics.Raycast(rayOrigin, Vector3.down, out hit, groundCheckDistance + 1f, groundMask))
+        {
+            // Get rotation aligning up to ground normal
+            Quaternion groundTilt = Quaternion.FromToRotation(transform.up, hit.normal);
+
+            // Target rotation while keeping forward direction
+            Quaternion targetRotation = groundTilt * transform.rotation;
+
+            // Smoothly transition to target rotation
+            float rotationSpeed = 5f; // Adjust for more or less smoothing
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
+        }
+        else
+        {
+            // Reset rotation when not on a ramp
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, transform.eulerAngles.y, 0), Time.deltaTime * 5f);
+        }
+    }
+
 
     // void FixedUpdate()
     // {
@@ -182,6 +235,8 @@ public class Ambulance_Movement : MonoBehaviour
         // Apply rotation
         transform.Rotate(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.deltaTime, 0);
     }
+
+    
 
     // Collision check using BoxCollider
     bool IsColliding(Vector3 movement)
