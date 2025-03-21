@@ -40,7 +40,7 @@ public class Ambulance_Movement : MonoBehaviour
     public LayerMask obstacleMask; // Set this in the inspector to only include walls
 
     private Vector3 velocity;
-    public float gravity = 64f;
+    public float gravity = 32f;
     public float groundCheckDistance = 0.2f;
     public LayerMask groundMask;
     private bool isGrounded;
@@ -69,6 +69,7 @@ public class Ambulance_Movement : MonoBehaviour
             HandleMovement();
             RefillFuel();
             AlignWithGround();
+            //velocity = controller.velocity;
             // Gravity Handling
             isGrounded = Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundMask);
 
@@ -78,7 +79,7 @@ public class Ambulance_Movement : MonoBehaviour
             }
             else
             {
-                velocity.y -= gravity * Time.deltaTime;
+                velocity.y -= 5 * gravity * Time.deltaTime;
             }
 
             // Move the ambulance
