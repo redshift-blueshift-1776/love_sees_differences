@@ -101,6 +101,11 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(18);
     }
 
+    public void LoadLegendsOfTheRedAndBlueNight()
+    {
+        SceneManager.LoadScene(19);
+    }
+
     
 
     public void restartLevel() {
