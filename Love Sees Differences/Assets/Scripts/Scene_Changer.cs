@@ -106,6 +106,11 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(19);
     }
 
+    public void LoadEclipse()
+    {
+        SceneManager.LoadScene(20);
+    }
+
     
 
     public void restartLevel() {
