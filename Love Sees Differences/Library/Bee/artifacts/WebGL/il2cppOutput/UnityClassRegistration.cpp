@@ -42,6 +42,9 @@ extern "C" void RegisterStaticallyLinkedModulesGranular()
 	void RegisterModule_UIElements();
 	RegisterModule_UIElements();
 
+	void RegisterModule_Vehicles();
+	RegisterModule_Vehicles();
+
 	void RegisterModule_WebGL();
 	RegisterModule_WebGL();
 
@@ -130,12 +133,13 @@ namespace TextRendering { class Font; } template <> void RegisterUnityClass<Text
 namespace UI { class Canvas; } template <> void RegisterUnityClass<UI::Canvas>(const char*);
 namespace UI { class CanvasGroup; } template <> void RegisterUnityClass<UI::CanvasGroup>(const char*);
 namespace UI { class CanvasRenderer; } template <> void RegisterUnityClass<UI::CanvasRenderer>(const char*);
+class WheelCollider; template <> void RegisterUnityClass<WheelCollider>(const char*);
 
 void RegisterAllClasses()
 {
 void RegisterBuiltinTypes();
 RegisterBuiltinTypes();
-	//Total: 75 non stripped classes
+	//Total: 76 non stripped classes
 	//0. Animator
 	RegisterUnityClass<Animator>("Animation");
 	//1. AnimatorController
@@ -286,5 +290,7 @@ RegisterBuiltinTypes();
 	RegisterUnityClass<UI::CanvasGroup>("UI");
 	//74. CanvasRenderer
 	RegisterUnityClass<UI::CanvasRenderer>("UI");
+	//75. WheelCollider
+	RegisterUnityClass<WheelCollider>("Vehicles");
 
 }
