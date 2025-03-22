@@ -1171,11 +1171,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa8198cfc4cc49b6bb5e6293c29ce52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 420
-  maxSpeed: 200
+  acceleration: 150
+  maxSpeed: 250
   turnSpeed: 50
   brakeForce: 50
-  friction: 0.98
+  friction: 0.95
   speedMultiplier: 3
   maxBoostFuel: 10
   boostConsumptionRate: 1
@@ -1188,6 +1188,11 @@ MonoBehaviour:
   obstacleMask:
     serializedVersion: 2
     m_Bits: 0
+  gravity: 9.81
+  groundCheckDistance: 0.2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 65
 --- !u!143 &3291589347347016295
 CharacterController:
   m_ObjectHideFlags: 0

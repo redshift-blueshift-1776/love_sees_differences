@@ -65,6 +65,9 @@ public class Ambulance_Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.M)) {
             SceneManager.LoadScene(0);
         }
+    }
+
+    void FixedUpdate() {
         if (gameScript.gameActive) {
             HandleMovement();
             RefillFuel();
@@ -85,7 +88,7 @@ public class Ambulance_Movement : MonoBehaviour
             // Move the ambulance
             //Vector3 move = transform.forward * currentSpeed * Time.deltaTime;
             Vector3 move = new Vector3(0, 0, 0);
-            move.y = velocity.y * Time.deltaTime; // Apply gravity
+            move.y = velocity.y * Time.fixedDeltaTime; // Apply gravity
 
             controller.Move(move);
         }
@@ -204,12 +207,12 @@ public class Ambulance_Movement : MonoBehaviour
 
         if (isBoosting)
         {
-            currentBoostFuel -= boostConsumptionRate * Time.deltaTime;
+            currentBoostFuel -= boostConsumptionRate * Time.fixedDeltaTime;
             currentBoostFuel = Mathf.Max(currentBoostFuel, 0);
         }
 
         // Accelerate and decelerate
-        currentSpeed += moveInput * acceleration * Time.deltaTime;
+        currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
         currentSpeed *= speedFactor;
         currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 
@@ -220,21 +223,21 @@ public class Ambulance_Movement : MonoBehaviour
 
         // Braking
         if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
-            currentSpeed -= brakeForce * Time.deltaTime;
+            currentSpeed -= brakeForce * Time.fixedDeltaTime;
 
         // Steering based on speed (harder to turn at high speeds)
         if (currentSpeed != 0)
             currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Sqrt(Mathf.Abs(currentSpeed))));
 
         // Check if moving forward would collide with a wall
-        if (!IsColliding(Vector3.forward * currentSpeed * Time.deltaTime))
+        if (!IsColliding(Vector3.forward * currentSpeed * Time.fixedDeltaTime))
         {
             Vector3 moveDirection = transform.forward * currentSpeed;
             controller.Move(moveDirection * Time.deltaTime);
         }
 
         // Apply rotation
-        transform.Rotate(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.deltaTime, 0);
+        transform.Rotate(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.fixedDeltaTime, 0);
     }
 
     
