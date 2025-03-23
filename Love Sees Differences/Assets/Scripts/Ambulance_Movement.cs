@@ -113,7 +113,7 @@ public class Ambulance_Movement : MonoBehaviour
         else
         {
             // Reset rotation when not on a ramp
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, transform.eulerAngles.y, 0), Time.deltaTime * 5f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, transform.eulerAngles.y, 0), Time.deltaTime * 1.5f);
         }
     }
 
