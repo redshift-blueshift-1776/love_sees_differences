@@ -33,6 +33,8 @@ public class Ambulance_Movement : MonoBehaviour
     [SerializeField] public GameObject game;
     public GameObject destination;
 
+    [SerializeField] public AudioSource collisionSound;
+
     private Game_2 gameScript;
 
     private CharacterController controller;
@@ -260,11 +262,13 @@ public class Ambulance_Movement : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision) {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.tag == "Passenger") {
+    private void OnTriggerEnter(Collider c) {
+        //Debug.Log(c.tag);
+        if (c.tag == "Passenger") {
             if (gameScript.peopleCarried >= gameScript.maxCarryCapacity) {
                 gameScript.addFailure();
+                Destroy(c.gameObject);
+                collisionSound.Play();
             }
         }
     }
