@@ -34,6 +34,8 @@ public class Game_2 : MonoBehaviour
     [SerializeField] private AudioSource deliverSound;
     [SerializeField] private AudioSource spawnSound;
 
+    [SerializeField] private AudioSource failSound;
+
     [Header("UI")]
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI timerText;
@@ -97,20 +99,20 @@ public class Game_2 : MonoBehaviour
     private const float pickupRadius = 20.0f;
     private const float buildingPickupRadius = 30.0f;
     private const float dropoffRadius = 50.0f;
-    private List<GameObject> passengers = new List<GameObject>();
+    private List<RawImage> fadingPassengers = new List<RawImage>();
 
     [Header("Game Numbers")]
     public int maxCarryCapacity = 30;
 
-    private int peopleAtW;
-    private int peopleAtA;
-    private int peopleAtS;
-    private int peopleAtD;
+    [SerializeField] private int peopleAtW;
+    [SerializeField] private int peopleAtA;
+    [SerializeField] private int peopleAtS;
+    [SerializeField] private int peopleAtD;
 
-    private int peopleAtWCritical;
-    private int peopleAtACritical;
-    private int peopleAtSCritical;
-    private int peopleAtDCritical;
+    [SerializeField] private int peopleAtWCritical;
+    [SerializeField] private int peopleAtACritical;
+    [SerializeField] private int peopleAtSCritical;
+    [SerializeField] private int peopleAtDCritical;
 
     private float originalFuelBarWidth = 500f;
 
@@ -298,8 +300,23 @@ public class Game_2 : MonoBehaviour
             peopleCarriedCritical += criticalPeopleToPickup;
             peopleAtBuilding -= peopleToPickup;
             criticalPeopleAtBuilding -= criticalPeopleToPickup;
+
+            // Make sure we're assigning fading correctly for each picked-up critical passenger
+            for (int i = 0; i < criticalPeopleToPickup; i++)
+            {
+                RawImage img = peopleCarriedImages[peopleCarriedCritical - criticalPeopleToPickup + i].GetComponent<RawImage>();
+
+                if (!fadingPassengers.Contains(img))
+                {
+                    fadingPassengers.Add(img);
+                    StartCoroutine(CriticalPassengerTimer(criticalTime, img, "Ambulance"));
+                }
+            }
+
+            UpdateUI();
         }
     }
+
 
     private void HandlePassengerPickup()
     {
@@ -387,14 +404,25 @@ public class Game_2 : MonoBehaviour
             for (int i = 0; i < maxCarryCapacity; i++) {
                 if (i < peopleCarriedCritical) {
                     peopleCarriedImages[i].SetActive(true);
-                    peopleCarriedImages[i].GetComponent<RawImage>().texture = criticalPassengerTexture;
-                } else if (i < peopleCarried) {
+                    RawImage img = peopleCarriedImages[i].GetComponent<RawImage>();
+                    img.texture = criticalPassengerTexture;
+
+                    // Prevent restarting fade timers unnecessarily
+                    if (!fadingPassengers.Contains(img))
+                    {
+                        fadingPassengers.Add(img);
+                        StartCoroutine(CriticalPassengerTimer(criticalTime, img, "Ambulance"));
+                    }
+                } 
+                else if (i < peopleCarriedCritical + peopleCarried) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = passengerTexture;
-                } else {
+                } 
+                else {
                     peopleCarriedImages[i].SetActive(false);
                 }
             }
+
 
             Ambulance_Movement playerScript = player.GetComponent<Ambulance_Movement>();
             //Debug.Log(playerScript.currentBoostFuel / playerScript.maxBoostFuel);
@@ -479,7 +507,7 @@ public class Game_2 : MonoBehaviour
                                 StartCoroutine(FlashText(peopleAtWTextNew));
                                 for (int i = 0; i < peopleAtWCritical; i++)
                                 {
-                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtWImages[i].GetComponent<RawImage>()));
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtWImages[i].GetComponent<RawImage>(), "W"));
                                 }
                                 break;
                             }
@@ -492,7 +520,7 @@ public class Game_2 : MonoBehaviour
                                 StartCoroutine(FlashText(peopleAtATextNew));
                                 for (int i = 0; i < peopleAtACritical; i++)
                                 {
-                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtAImages[i].GetComponent<RawImage>()));
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtAImages[i].GetComponent<RawImage>(), "A"));
                                 }
                                 break;
                             }
@@ -503,9 +531,9 @@ public class Game_2 : MonoBehaviour
                                 StartCoroutine(FlashText(peopleAtSText)); break;
                             } else {
                                 StartCoroutine(FlashText(peopleAtSTextNew));
-                                for (int i = 0; i < peopleAtWCritical; i++)
+                                for (int i = 0; i < peopleAtSCritical; i++)
                                 {
-                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtSImages[i].GetComponent<RawImage>()));
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtSImages[i].GetComponent<RawImage>(), "S"));
                                 }
                                 break;
                             }
@@ -518,7 +546,7 @@ public class Game_2 : MonoBehaviour
                                 StartCoroutine(FlashText(peopleAtDTextNew));
                                 for (int i = 0; i < peopleAtDCritical; i++)
                                 {
-                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtDImages[i].GetComponent<RawImage>()));
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtDImages[i].GetComponent<RawImage>(), "D"));
                                 }
                                 break;
                             }
@@ -539,7 +567,7 @@ public class Game_2 : MonoBehaviour
         text.color = originalColor;
     }
 
-    private IEnumerator CriticalPassengerTimer(float time, RawImage passengerImage)
+    private IEnumerator CriticalPassengerTimer(float time, RawImage passengerImage, string building)
     {
         Debug.Log("New Critical Passenger");
         float elapsed = 0;
@@ -548,14 +576,48 @@ public class Game_2 : MonoBehaviour
         while (elapsed < time)
         {
             elapsed += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0.2f, elapsed / time);
+            float alpha = Mathf.Lerp(1f, 0.1f, elapsed / time);
             passengerImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             yield return null;
         }
 
+        passengerImage.color = originalColor;
+
+        // Add failure and remove passenger from ambulance or building
         addFailure();
-        peopleCarriedCritical = Mathf.Max(0, peopleCarriedCritical - 1);
-        peopleCarried = Mathf.Max(0, peopleCarried - 1);
+        failSound.Play();
+
+        Debug.Log($"Passenger expired at {building}");
+
+        if (building == "Ambulance")
+        {
+            peopleCarriedCritical = Mathf.Max(0, peopleCarriedCritical - 1);
+            peopleCarried = Mathf.Max(0, peopleCarried - 1);
+            fadingPassengers.Remove(passengerImage);
+        }
+        else
+        {
+            switch (building)
+            {
+                case "W":
+                    peopleAtWCritical = Mathf.Max(0, peopleAtWCritical - 1);
+                    peopleAtW = Mathf.Max(0, peopleAtW - 1);
+                    break;
+                case "A":
+                    peopleAtACritical = Mathf.Max(0, peopleAtACritical - 1);
+                    peopleAtA = Mathf.Max(0, peopleAtA - 1);
+                    break;
+                case "S":
+                    peopleAtSCritical = Mathf.Max(0, peopleAtSCritical - 1);
+                    peopleAtS = Mathf.Max(0, peopleAtS - 1);
+                    break;
+                case "D":
+                    peopleAtDCritical = Mathf.Max(0, peopleAtDCritical - 1);
+                    peopleAtD = Mathf.Max(0, peopleAtD - 1);
+                    break;
+            }
+        }
+
         UpdateUI();
     }
 
