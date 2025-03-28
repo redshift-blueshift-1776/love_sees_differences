@@ -430,10 +430,34 @@ public class Game_2 : MonoBehaviour
 
                     switch (chosenBuilding)
                     {
-                        case "W": peopleAtW = Mathf.Min(5, peopleAtW + newPassengers); StartCoroutine(FlashText(peopleAtWText)); break;
-                        case "A": peopleAtA = Mathf.Min(5, peopleAtA + newPassengers); StartCoroutine(FlashText(peopleAtAText)); break;
-                        case "S": peopleAtS = Mathf.Min(5, peopleAtS + newPassengers); StartCoroutine(FlashText(peopleAtSText)); break;
-                        case "D": peopleAtD = Mathf.Min(5, peopleAtD + newPassengers); StartCoroutine(FlashText(peopleAtDText)); break;
+                        case "W":
+                            peopleAtW = Mathf.Min(5, peopleAtW + newPassengers);
+                            if (OldUIEnabled) {
+                                StartCoroutine(FlashText(peopleAtWText)); break;
+                            } else {
+                                StartCoroutine(FlashText(peopleAtWTextNew)); break;
+                            }
+                        case "A":
+                            peopleAtA = Mathf.Min(5, peopleAtA + newPassengers);
+                            if (OldUIEnabled) {
+                                StartCoroutine(FlashText(peopleAtAText)); break;
+                            } else {
+                                StartCoroutine(FlashText(peopleAtATextNew)); break;
+                            }
+                        case "S":
+                            peopleAtS = Mathf.Min(5, peopleAtS + newPassengers);
+                            if (OldUIEnabled) {
+                                StartCoroutine(FlashText(peopleAtSText)); break;
+                            } else {
+                                StartCoroutine(FlashText(peopleAtSTextNew)); break;
+                            }
+                        case "D":
+                            peopleAtD = Mathf.Min(5, peopleAtD + newPassengers);
+                            if (OldUIEnabled) {
+                                StartCoroutine(FlashText(peopleAtDText)); break;
+                            } else {
+                                StartCoroutine(FlashText(peopleAtDTextNew)); break;
+                            }
                     }
                     spawnSound.Play();
                 }
