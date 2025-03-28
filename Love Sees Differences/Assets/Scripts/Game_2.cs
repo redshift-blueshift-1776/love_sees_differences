@@ -301,21 +301,19 @@ public class Game_2 : MonoBehaviour
             peopleAtBuilding -= peopleToPickup;
             criticalPeopleAtBuilding -= criticalPeopleToPickup;
 
-            // Make sure we're assigning fading correctly for each picked-up critical passenger
-            for (int i = 0; i < criticalPeopleToPickup; i++)
-            {
-                RawImage img = peopleCarriedImages[peopleCarriedCritical - criticalPeopleToPickup + i].GetComponent<RawImage>();
-
-                if (!fadingPassengers.Contains(img))
+            if (!OldUIEnabled) {
+                // Remove from fading list when picked up
+                foreach (var img in fadingPassengers.ToArray())  // Use ToList() to safely modify during iteration
                 {
-                    fadingPassengers.Add(img);
-                    StartCoroutine(CriticalPassengerTimer(criticalTime, img, "Ambulance"));
+                    img.color = new Color(img.color.r, img.color.g, img.color.b, 1f); // Reset opacity
+                    fadingPassengers.Remove(img);
                 }
             }
 
             UpdateUI();
         }
     }
+
 
 
     private void HandlePassengerPickup()
@@ -390,29 +388,34 @@ public class Game_2 : MonoBehaviour
             //peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
 
             for (int i = 0; i < 5; i++) {
+                RawImage imgW = peopleAtWImages[i].GetComponent<RawImage>();
+                RawImage imgA = peopleAtAImages[i].GetComponent<RawImage>();
+                RawImage imgS = peopleAtSImages[i].GetComponent<RawImage>();
+                RawImage imgD = peopleAtDImages[i].GetComponent<RawImage>();
+
+                // Reset alpha to full before setting textures
+                imgW.color = new Color(imgW.color.r, imgW.color.g, imgW.color.b, 1f);
+                imgA.color = new Color(imgA.color.r, imgA.color.g, imgA.color.b, 1f);
+                imgS.color = new Color(imgS.color.r, imgS.color.g, imgS.color.b, 1f);
+                imgD.color = new Color(imgD.color.r, imgD.color.g, imgD.color.b, 1f);
+
+                // Assign textures
+                imgW.texture = (i < peopleAtWCritical) ? criticalPassengerTexture : passengerTexture;
+                imgA.texture = (i < peopleAtACritical) ? criticalPassengerTexture : passengerTexture;
+                imgS.texture = (i < peopleAtSCritical) ? criticalPassengerTexture : passengerTexture;
+                imgD.texture = (i < peopleAtDCritical) ? criticalPassengerTexture : passengerTexture;
+
+                // Activate UI elements
                 peopleAtWImages[i].SetActive(i < peopleAtW);
                 peopleAtAImages[i].SetActive(i < peopleAtA);
                 peopleAtSImages[i].SetActive(i < peopleAtS);
                 peopleAtDImages[i].SetActive(i < peopleAtD);
-
-                peopleAtWImages[i].GetComponent<RawImage>().texture = (i < peopleAtWCritical) ? criticalPassengerTexture : passengerTexture;
-                peopleAtAImages[i].GetComponent<RawImage>().texture = (i < peopleAtACritical) ? criticalPassengerTexture : passengerTexture;
-                peopleAtSImages[i].GetComponent<RawImage>().texture = (i < peopleAtSCritical) ? criticalPassengerTexture : passengerTexture;
-                peopleAtDImages[i].GetComponent<RawImage>().texture = (i < peopleAtDCritical) ? criticalPassengerTexture : passengerTexture;
             }
 
             for (int i = 0; i < maxCarryCapacity; i++) {
                 if (i < peopleCarriedCritical) {
                     peopleCarriedImages[i].SetActive(true);
-                    RawImage img = peopleCarriedImages[i].GetComponent<RawImage>();
-                    img.texture = criticalPassengerTexture;
-
-                    // Prevent restarting fade timers unnecessarily
-                    if (!fadingPassengers.Contains(img))
-                    {
-                        fadingPassengers.Add(img);
-                        StartCoroutine(CriticalPassengerTimer(criticalTime, img, "Ambulance"));
-                    }
+                    peopleCarriedImages[i].GetComponent<RawImage>().texture = criticalPassengerTexture;
                 } 
                 else if (i < peopleCarriedCritical + peopleCarried) {
                     peopleCarriedImages[i].SetActive(true);
@@ -492,7 +495,16 @@ public class Game_2 : MonoBehaviour
                     int newPassengers = Random.Range(1, 6);
                     int criticalPassengers = 0;
 
-                    if (Random.value < probabilityOfCritical) {
+                    int criticalPassengersAtBuilding = 10;
+
+                    switch (chosenBuilding) {
+                        case "W": criticalPassengersAtBuilding = peopleAtWCritical; break;
+                        case "A": criticalPassengersAtBuilding = peopleAtACritical; break;
+                        case "S": criticalPassengersAtBuilding = peopleAtSCritical; break;
+                        case "D": criticalPassengersAtBuilding = peopleAtDCritical; break;
+                    }
+
+                    if (Random.value < probabilityOfCritical && criticalPassengersAtBuilding == 0) {
                         criticalPassengers = Mathf.Min(newPassengers, Random.Range(1, 3));
                     }
 
@@ -569,56 +581,55 @@ public class Game_2 : MonoBehaviour
 
     private IEnumerator CriticalPassengerTimer(float time, RawImage passengerImage, string building)
     {
-        Debug.Log("New Critical Passenger");
+        //Debug.Log("New Critical Passenger at " + building);
         float elapsed = 0;
         Color originalColor = passengerImage.color;
 
+        fadingPassengers.Add(passengerImage);
+
         while (elapsed < time)
         {
+            if (!fadingPassengers.Contains(passengerImage)) 
+            {
+                Debug.Log("Passenger picked up. Stopping fade.");
+                passengerImage.color = originalColor; // Reset opacity
+                yield break; // Exit the coroutine
+            }
             elapsed += Time.deltaTime;
             float alpha = Mathf.Lerp(1f, 0.1f, elapsed / time);
             passengerImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
             yield return null;
         }
 
+        // Reset the color to avoid permanently faded images
         passengerImage.color = originalColor;
 
-        // Add failure and remove passenger from ambulance or building
+        // Add failure and remove passenger from the building
         addFailure();
         failSound.Play();
 
-        Debug.Log($"Passenger expired at {building}");
-
-        if (building == "Ambulance")
+        switch (building)
         {
-            peopleCarriedCritical = Mathf.Max(0, peopleCarriedCritical - 1);
-            peopleCarried = Mathf.Max(0, peopleCarried - 1);
-            fadingPassengers.Remove(passengerImage);
-        }
-        else
-        {
-            switch (building)
-            {
-                case "W":
-                    peopleAtWCritical = Mathf.Max(0, peopleAtWCritical - 1);
-                    peopleAtW = Mathf.Max(0, peopleAtW - 1);
-                    break;
-                case "A":
-                    peopleAtACritical = Mathf.Max(0, peopleAtACritical - 1);
-                    peopleAtA = Mathf.Max(0, peopleAtA - 1);
-                    break;
-                case "S":
-                    peopleAtSCritical = Mathf.Max(0, peopleAtSCritical - 1);
-                    peopleAtS = Mathf.Max(0, peopleAtS - 1);
-                    break;
-                case "D":
-                    peopleAtDCritical = Mathf.Max(0, peopleAtDCritical - 1);
-                    peopleAtD = Mathf.Max(0, peopleAtD - 1);
-                    break;
-            }
+            case "W":
+                peopleAtWCritical = Mathf.Max(0, peopleAtWCritical - 1);
+                peopleAtW = Mathf.Max(0, peopleAtW - 1);
+                break;
+            case "A":
+                peopleAtACritical = Mathf.Max(0, peopleAtACritical - 1);
+                peopleAtA = Mathf.Max(0, peopleAtA - 1);
+                break;
+            case "S":
+                peopleAtSCritical = Mathf.Max(0, peopleAtSCritical - 1);
+                peopleAtS = Mathf.Max(0, peopleAtS - 1);
+                break;
+            case "D":
+                peopleAtDCritical = Mathf.Max(0, peopleAtDCritical - 1);
+                peopleAtD = Mathf.Max(0, peopleAtD - 1);
+                break;
         }
 
         UpdateUI();
     }
+
 
 }
