@@ -99,7 +99,7 @@ public class Game_2 : MonoBehaviour
     private const float pickupRadius = 20.0f;
     private const float buildingPickupRadius = 30.0f;
     private const float dropoffRadius = 50.0f;
-    private List<RawImage> fadingPassengers = new List<RawImage>();
+    private Dictionary<RawImage, string> fadingPassengers = new Dictionary<RawImage, string>();
 
     [Header("Game Numbers")]
     public int maxCarryCapacity = 30;
@@ -282,13 +282,13 @@ public class Game_2 : MonoBehaviour
     // }
     private void HandleBuildingPickup()
     {
-        HandleSingleBuildingPickup(ref peopleAtW, ref peopleAtWCritical, buildingW);
-        HandleSingleBuildingPickup(ref peopleAtA, ref peopleAtACritical, buildingA);
-        HandleSingleBuildingPickup(ref peopleAtS, ref peopleAtSCritical, buildingS);
-        HandleSingleBuildingPickup(ref peopleAtD, ref peopleAtDCritical, buildingD);
+        HandleSingleBuildingPickup(ref peopleAtW, ref peopleAtWCritical, buildingW, "W");
+        HandleSingleBuildingPickup(ref peopleAtA, ref peopleAtACritical, buildingA, "A");
+        HandleSingleBuildingPickup(ref peopleAtS, ref peopleAtSCritical, buildingS, "S");
+        HandleSingleBuildingPickup(ref peopleAtD, ref peopleAtDCritical, buildingD, "D");
     }
 
-    private void HandleSingleBuildingPickup(ref int peopleAtBuilding, ref int criticalPeopleAtBuilding, GameObject building)
+    private void HandleSingleBuildingPickup(ref int peopleAtBuilding, ref int criticalPeopleAtBuilding, GameObject building, string buildingName)
     {
         if (Vector3.Distance(player.transform.position, building.transform.position) < buildingPickupRadius && peopleAtBuilding > 0)
         {
@@ -303,10 +303,12 @@ public class Game_2 : MonoBehaviour
 
             if (!OldUIEnabled) {
                 // Remove from fading list when picked up
-                foreach (var img in fadingPassengers.ToArray())  // Use ToList() to safely modify during iteration
+                foreach (var img in fadingPassengers.Keys)
                 {
-                    img.color = new Color(img.color.r, img.color.g, img.color.b, 1f); // Reset opacity
-                    fadingPassengers.Remove(img);
+                    if (fadingPassengers[img] == buildingName) {
+                        img.color = new Color(img.color.r, img.color.g, img.color.b, 1f); // Reset opacity
+                        fadingPassengers.Remove(img);
+                    }
                 }
             }
 
@@ -496,16 +498,19 @@ public class Game_2 : MonoBehaviour
                     int criticalPassengers = 0;
 
                     int criticalPassengersAtBuilding = 10;
+                    int passengersAtBuilding = 10;
 
                     switch (chosenBuilding) {
-                        case "W": criticalPassengersAtBuilding = peopleAtWCritical; break;
-                        case "A": criticalPassengersAtBuilding = peopleAtACritical; break;
-                        case "S": criticalPassengersAtBuilding = peopleAtSCritical; break;
-                        case "D": criticalPassengersAtBuilding = peopleAtDCritical; break;
+                        case "W": criticalPassengersAtBuilding = peopleAtWCritical; passengersAtBuilding = peopleAtW; break;
+                        case "A": criticalPassengersAtBuilding = peopleAtACritical; passengersAtBuilding = peopleAtA; break;
+                        case "S": criticalPassengersAtBuilding = peopleAtSCritical; passengersAtBuilding = peopleAtS; break;
+                        case "D": criticalPassengersAtBuilding = peopleAtDCritical; passengersAtBuilding = peopleAtD; break;
                     }
 
-                    if (Random.value < probabilityOfCritical && criticalPassengersAtBuilding == 0) {
-                        criticalPassengers = Mathf.Min(newPassengers, Random.Range(1, 3));
+                    if (Random.value < probabilityOfCritical
+                        && criticalPassengersAtBuilding == 0
+                        && passengersAtBuilding + newPassengers >= 5) {
+                        criticalPassengers = Random.Range(1, newPassengers + 1);
                     }
 
                     switch (chosenBuilding)
@@ -585,11 +590,11 @@ public class Game_2 : MonoBehaviour
         float elapsed = 0;
         Color originalColor = passengerImage.color;
 
-        fadingPassengers.Add(passengerImage);
+        fadingPassengers.TryAdd(passengerImage, building);
 
         while (elapsed < time)
         {
-            if (!fadingPassengers.Contains(passengerImage)) 
+            if (!fadingPassengers.ContainsKey(passengerImage)) 
             {
                 Debug.Log("Passenger picked up. Stopping fade.");
                 passengerImage.color = originalColor; // Reset opacity
