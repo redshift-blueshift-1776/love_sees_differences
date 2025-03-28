@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -99,7 +100,7 @@ public class Game_2 : MonoBehaviour
     private const float pickupRadius = 20.0f;
     private const float buildingPickupRadius = 30.0f;
     private const float dropoffRadius = 50.0f;
-    private Dictionary<RawImage, string> fadingPassengers = new Dictionary<RawImage, string>();
+    private ConcurrentDictionary<RawImage, string> fadingPassengers = new ConcurrentDictionary<RawImage, string>();
 
     [Header("Game Numbers")]
     public int maxCarryCapacity = 30;
@@ -307,7 +308,7 @@ public class Game_2 : MonoBehaviour
                 {
                     if (fadingPassengers[img] == buildingName) {
                         img.color = new Color(img.color.r, img.color.g, img.color.b, 1f); // Reset opacity
-                        fadingPassengers.Remove(img);
+                        fadingPassengers.TryRemove(img, out buildingName);
                     }
                 }
             }
