@@ -44,6 +44,8 @@ public class Game_2 : MonoBehaviour
     [SerializeField] private TextMeshProUGUI peopleCarriedText;
     [SerializeField] private TextMeshProUGUI finalScoreText;
     [SerializeField] private TextMeshProUGUI finalDeliveriesText;
+
+    [SerializeField] private TextMeshProUGUI finalFailuresText;
     [SerializeField] private Image fuelBarFill;
 
     [SerializeField] private RectTransform needleTransform;  // Assign in Inspector
@@ -87,7 +89,7 @@ public class Game_2 : MonoBehaviour
 
     private int deliveries;
     private int failures;
-    private int peopleCarried;
+    public int peopleCarried;
 
     private const float pickupRadius = 20.0f;
     private const float buildingPickupRadius = 30.0f;
@@ -321,7 +323,8 @@ public class Game_2 : MonoBehaviour
     {
         if (OldUIEnabled) {
             timerText.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
-            scoreText.text = $"Score: {deliveries}";
+            int score = deliveries - failures;
+            scoreText.text = $"Score: {score}";
             peopleAtWText.text = $"People at W: {peopleAtW}";
             peopleAtAText.text = $"People at A: {peopleAtA}";
             peopleAtSText.text = $"People at S: {peopleAtS}";
@@ -344,7 +347,8 @@ public class Game_2 : MonoBehaviour
             needleTransform.rotation = Quaternion.Euler(0, 0, -needleRotation);
         } else {
             timerTextNew.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
-            scoreTextNew.text = $"Score: {deliveries}";
+            int score = deliveries - failures;
+            scoreTextNew.text = $"Score: {score}";
 
             //peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
 
@@ -390,8 +394,11 @@ public class Game_2 : MonoBehaviour
         UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(true);
 
-        finalScoreText.text = $"Score: {deliveries}";
+        int score = deliveries - failures;
+
+        finalScoreText.text = $"Score: {score}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";
+        finalFailuresText.text = $"Failures: {failures}";
     }
 
     private IEnumerator RegeneratePeople()

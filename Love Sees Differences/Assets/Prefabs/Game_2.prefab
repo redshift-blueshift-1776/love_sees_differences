@@ -157,6 +157,7 @@ MonoBehaviour:
   peopleCarriedText: {fileID: 4379417697749092996}
   finalScoreText: {fileID: 2690197557772746678}
   finalDeliveriesText: {fileID: 4382766073284841474}
+  finalFailuresText: {fileID: 5840377325498059694}
   fuelBarFill: {fileID: 6462161450712686047}
   needleTransform: {fileID: 1736259041106411519}
   maxSpeedDisplayed: 151
@@ -181,6 +182,7 @@ MonoBehaviour:
   needleTransformNew: {fileID: 291174106715384246}
   passengerTexture: {fileID: 2800000, guid: 306ec0bc27112471a86cbd972c16dd44, type: 3}
   screenTint: {fileID: 8785050174985253551}
+  peopleCarried: 0
   maxCarryCapacity: 30
   regenerationInterval: 5
   OldUIEnabled: 0
@@ -2688,7 +2690,7 @@ GameObject:
   - component: {fileID: 522989376261402950}
   - component: {fileID: 5840377325498059694}
   m_Layer: 5
-  m_Name: Collisions
+  m_Name: Failures
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2741,7 +2743,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Collisions: 0'
+  m_text: 'Failures: 0'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
