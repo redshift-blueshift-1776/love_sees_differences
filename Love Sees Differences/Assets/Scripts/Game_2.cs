@@ -82,6 +82,7 @@ public class Game_2 : MonoBehaviour
     [SerializeField] private RectTransform needleTransformNew;  // Assign in Inspector
 
     [SerializeField] public Texture passengerTexture;
+    [SerializeField] public Texture criticalPassengerTexture;
 
     [SerializeField] private GameObject screenTint;
 
@@ -90,6 +91,8 @@ public class Game_2 : MonoBehaviour
     private int deliveries;
     private int failures;
     public int peopleCarried;
+
+    public int peopleCarriedCritical;
 
     private const float pickupRadius = 20.0f;
     private const float buildingPickupRadius = 30.0f;
@@ -104,9 +107,18 @@ public class Game_2 : MonoBehaviour
     private int peopleAtS;
     private int peopleAtD;
 
+    private int peopleAtWCritical;
+    private int peopleAtACritical;
+    private int peopleAtSCritical;
+    private int peopleAtDCritical;
+
     private float originalFuelBarWidth = 500f;
 
     [SerializeField] private float regenerationInterval = 5f; // Time in seconds between regenerations
+
+    [SerializeField] private float criticalTime = 60f;
+
+    [SerializeField] private float probabilityOfCritical = 0.2f;
 
     public bool OldUIEnabled;
 
@@ -118,10 +130,10 @@ public class Game_2 : MonoBehaviour
         deliveries = 0;
         peopleCarried = 0;
 
-        peopleAtWImages = GetChildImages(peopleAtWParent);
-        peopleAtAImages = GetChildImages(peopleAtAParent);
-        peopleAtSImages = GetChildImages(peopleAtSParent);
-        peopleAtDImages = GetChildImages(peopleAtDParent);
+        peopleAtWImages = GetChildRawImages(peopleAtWParent);
+        peopleAtAImages = GetChildRawImages(peopleAtAParent);
+        peopleAtSImages = GetChildRawImages(peopleAtSParent);
+        peopleAtDImages = GetChildRawImages(peopleAtDParent);
         peopleCarriedImages = GetChildRawImages(peopleCarriedParent);
 
         GeneratorCanvas.SetActive(true);
@@ -140,6 +152,10 @@ public class Game_2 : MonoBehaviour
         peopleAtA = Random.Range(1, 3);
         peopleAtS = Random.Range(1, 3);
         peopleAtD = Random.Range(1, 3);
+        peopleAtWCritical = 0;
+        peopleAtACritical = 0;
+        peopleAtSCritical = 0;
+        peopleAtDCritical = 0;
         StartCoroutine(RegeneratePeople());
     }
 
@@ -162,26 +178,26 @@ public class Game_2 : MonoBehaviour
         UpdateUI();
     }
 
-    private GameObject[] GetChildImages(Transform parent)
-    {
-        if (parent == null)
-        {
-            Debug.LogError("Parent transform is not assigned!");
-            return new GameObject[0];
-        }
+    // private GameObject[] GetChildImages(Transform parent)
+    // {
+    //     if (parent == null)
+    //     {
+    //         Debug.LogError("Parent transform is not assigned!");
+    //         return new GameObject[0];
+    //     }
 
-        // Find all images under the specified parent
-        Image[] images = parent.GetComponentsInChildren<Image>();
+    //     // Find all images under the specified parent
+    //     Image[] images = parent.GetComponentsInChildren<Image>();
 
-        // Convert Image components to GameObjects
-        GameObject[] imageObjects = new GameObject[images.Length];
-        for (int i = 0; i < images.Length; i++)
-        {
-            imageObjects[i] = images[i].gameObject;
-        }
+    //     // Convert Image components to GameObjects
+    //     GameObject[] imageObjects = new GameObject[images.Length];
+    //     for (int i = 0; i < images.Length; i++)
+    //     {
+    //         imageObjects[i] = images[i].gameObject;
+    //     }
 
-        return imageObjects;
-    }
+    //     return imageObjects;
+    // }
 
     private GameObject[] GetChildRawImages(Transform parent)
     {
@@ -264,21 +280,24 @@ public class Game_2 : MonoBehaviour
     // }
     private void HandleBuildingPickup()
     {
-        HandleSingleBuildingPickup(ref peopleAtW, buildingW);
-        HandleSingleBuildingPickup(ref peopleAtA, buildingA);
-        HandleSingleBuildingPickup(ref peopleAtS, buildingS);
-        HandleSingleBuildingPickup(ref peopleAtD, buildingD);
+        HandleSingleBuildingPickup(ref peopleAtW, ref peopleAtWCritical, buildingW);
+        HandleSingleBuildingPickup(ref peopleAtA, ref peopleAtACritical, buildingA);
+        HandleSingleBuildingPickup(ref peopleAtS, ref peopleAtSCritical, buildingS);
+        HandleSingleBuildingPickup(ref peopleAtD, ref peopleAtDCritical, buildingD);
     }
 
-    private void HandleSingleBuildingPickup(ref int peopleAtBuilding, GameObject building)
+    private void HandleSingleBuildingPickup(ref int peopleAtBuilding, ref int criticalPeopleAtBuilding, GameObject building)
     {
         if (Vector3.Distance(player.transform.position, building.transform.position) < buildingPickupRadius && peopleAtBuilding > 0)
         {
             int spaceAvailable = maxCarryCapacity - peopleCarried;
             int peopleToPickup = Mathf.Min(peopleAtBuilding, spaceAvailable);
+            int criticalPeopleToPickup = Mathf.Min(criticalPeopleAtBuilding, spaceAvailable);
 
             peopleCarried += peopleToPickup;
+            peopleCarriedCritical += criticalPeopleToPickup;
             peopleAtBuilding -= peopleToPickup;
+            criticalPeopleAtBuilding -= criticalPeopleToPickup;
         }
     }
 
@@ -309,6 +328,7 @@ public class Game_2 : MonoBehaviour
                 screenTintScript.TintAndFade();
                 deliveries += peopleCarried;
                 peopleCarried = 0;
+                peopleCarriedCritical = 0;
                 //passengers.Clear();
             }
         }
@@ -325,10 +345,10 @@ public class Game_2 : MonoBehaviour
             timerText.text = $"Time: {Mathf.Max(0, levelLengthInSeconds - (int)timer)}";
             int score = deliveries - failures;
             scoreText.text = $"Score: {score}";
-            peopleAtWText.text = $"People at W: {peopleAtW}";
-            peopleAtAText.text = $"People at A: {peopleAtA}";
-            peopleAtSText.text = $"People at S: {peopleAtS}";
-            peopleAtDText.text = $"People at D: {peopleAtD}";
+            peopleAtWText.text = $"People at W: {peopleAtW} ({peopleAtWCritical})";
+            peopleAtAText.text = $"People at A: {peopleAtA} ({peopleAtACritical})";
+            peopleAtSText.text = $"People at S: {peopleAtS} ({peopleAtSCritical})";
+            peopleAtDText.text = $"People at D: {peopleAtD} ({peopleAtDCritical})";
             peopleCarriedText.text = $"Carried: {peopleCarried}";
             Ambulance_Movement playerScript = player.GetComponent<Ambulance_Movement>();
             //Debug.Log(playerScript.currentBoostFuel / playerScript.maxBoostFuel);
@@ -357,10 +377,18 @@ public class Game_2 : MonoBehaviour
                 peopleAtAImages[i].SetActive(i < peopleAtA);
                 peopleAtSImages[i].SetActive(i < peopleAtS);
                 peopleAtDImages[i].SetActive(i < peopleAtD);
+
+                peopleAtWImages[i].GetComponent<RawImage>().texture = (i < peopleAtWCritical) ? criticalPassengerTexture : passengerTexture;
+                peopleAtAImages[i].GetComponent<RawImage>().texture = (i < peopleAtACritical) ? criticalPassengerTexture : passengerTexture;
+                peopleAtSImages[i].GetComponent<RawImage>().texture = (i < peopleAtSCritical) ? criticalPassengerTexture : passengerTexture;
+                peopleAtDImages[i].GetComponent<RawImage>().texture = (i < peopleAtDCritical) ? criticalPassengerTexture : passengerTexture;
             }
 
             for (int i = 0; i < maxCarryCapacity; i++) {
-                if (i < peopleCarried) {
+                if (i < peopleCarriedCritical) {
+                    peopleCarriedImages[i].SetActive(true);
+                    peopleCarriedImages[i].GetComponent<RawImage>().texture = criticalPassengerTexture;
+                } else if (i < peopleCarried) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = passengerTexture;
                 } else {
@@ -434,36 +462,65 @@ public class Game_2 : MonoBehaviour
                 {
                     string chosenBuilding = availableBuildings[Random.Range(0, availableBuildings.Count)];
                     int newPassengers = Random.Range(1, 6);
+                    int criticalPassengers = 0;
+
+                    if (Random.value < probabilityOfCritical) {
+                        criticalPassengers = Mathf.Min(newPassengers, Random.Range(1, 3));
+                    }
 
                     switch (chosenBuilding)
                     {
                         case "W":
                             peopleAtW = Mathf.Min(5, peopleAtW + newPassengers);
+                            peopleAtWCritical = Mathf.Min(peopleAtW, peopleAtWCritical + criticalPassengers);
                             if (OldUIEnabled) {
                                 StartCoroutine(FlashText(peopleAtWText)); break;
                             } else {
-                                StartCoroutine(FlashText(peopleAtWTextNew)); break;
+                                StartCoroutine(FlashText(peopleAtWTextNew));
+                                for (int i = 0; i < peopleAtWCritical; i++)
+                                {
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtWImages[i].GetComponent<RawImage>()));
+                                }
+                                break;
                             }
                         case "A":
                             peopleAtA = Mathf.Min(5, peopleAtA + newPassengers);
+                            peopleAtACritical = Mathf.Min(peopleAtA, peopleAtACritical + criticalPassengers);
                             if (OldUIEnabled) {
                                 StartCoroutine(FlashText(peopleAtAText)); break;
                             } else {
-                                StartCoroutine(FlashText(peopleAtATextNew)); break;
+                                StartCoroutine(FlashText(peopleAtATextNew));
+                                for (int i = 0; i < peopleAtACritical; i++)
+                                {
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtAImages[i].GetComponent<RawImage>()));
+                                }
+                                break;
                             }
                         case "S":
                             peopleAtS = Mathf.Min(5, peopleAtS + newPassengers);
+                            peopleAtSCritical = Mathf.Min(peopleAtS, peopleAtSCritical + criticalPassengers);
                             if (OldUIEnabled) {
                                 StartCoroutine(FlashText(peopleAtSText)); break;
                             } else {
-                                StartCoroutine(FlashText(peopleAtSTextNew)); break;
+                                StartCoroutine(FlashText(peopleAtSTextNew));
+                                for (int i = 0; i < peopleAtWCritical; i++)
+                                {
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtSImages[i].GetComponent<RawImage>()));
+                                }
+                                break;
                             }
                         case "D":
                             peopleAtD = Mathf.Min(5, peopleAtD + newPassengers);
+                            peopleAtDCritical = Mathf.Min(peopleAtD, peopleAtDCritical + criticalPassengers);
                             if (OldUIEnabled) {
                                 StartCoroutine(FlashText(peopleAtDText)); break;
                             } else {
-                                StartCoroutine(FlashText(peopleAtDTextNew)); break;
+                                StartCoroutine(FlashText(peopleAtDTextNew));
+                                for (int i = 0; i < peopleAtDCritical; i++)
+                                {
+                                    StartCoroutine(CriticalPassengerTimer(criticalTime, peopleAtDImages[i].GetComponent<RawImage>()));
+                                }
+                                break;
                             }
                     }
                     spawnSound.Play();
@@ -480,6 +537,26 @@ public class Game_2 : MonoBehaviour
         text.color = Color.red;
         yield return new WaitForSeconds(0.5f);
         text.color = originalColor;
+    }
+
+    private IEnumerator CriticalPassengerTimer(float time, RawImage passengerImage)
+    {
+        Debug.Log("New Critical Passenger");
+        float elapsed = 0;
+        Color originalColor = passengerImage.color;
+
+        while (elapsed < time)
+        {
+            elapsed += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0.2f, elapsed / time);
+            passengerImage.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+            yield return null;
+        }
+
+        addFailure();
+        peopleCarriedCritical = Mathf.Max(0, peopleCarriedCritical - 1);
+        peopleCarried = Mathf.Max(0, peopleCarried - 1);
+        UpdateUI();
     }
 
 }

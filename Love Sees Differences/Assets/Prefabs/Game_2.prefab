@@ -181,10 +181,14 @@ MonoBehaviour:
   fuelBarFillNew: {fileID: 4505042176256617776}
   needleTransformNew: {fileID: 291174106715384246}
   passengerTexture: {fileID: 2800000, guid: 306ec0bc27112471a86cbd972c16dd44, type: 3}
+  criticalPassengerTexture: {fileID: 2800000, guid: a4993512a3f374eb0b74a97894009659, type: 3}
   screenTint: {fileID: 8785050174985253551}
   peopleCarried: 0
+  peopleCarriedCritical: 0
   maxCarryCapacity: 30
   regenerationInterval: 5
+  criticalTime: 60
+  probabilityOfCritical: 0.2
   OldUIEnabled: 0
 --- !u!1 &1173861900445320349
 GameObject:
