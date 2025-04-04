@@ -65,7 +65,7 @@ public class Ambulance_Movement : MonoBehaviour
 
     void Update() {
         if (Input.GetKeyDown(KeyCode.M)) {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(21);
         }
     }
 
