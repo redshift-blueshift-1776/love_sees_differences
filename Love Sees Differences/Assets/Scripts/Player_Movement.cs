@@ -42,6 +42,17 @@ public class Player_Movement : MonoBehaviour
 
     private Game gameScript;
 
+    private int peopleCarriedW;
+    private int peopleCarriedA;
+    private int peopleCarriedS;
+    private int peopleCarriedD;
+    private int peopleCarried;
+
+    [SerializeField] public GameObject mainCamera;
+    [SerializeField] public GameObject alternateCamera;
+
+    [SerializeField] private GameObject[] passengers;
+
     private void Start()
     {
         gameScript = game.GetComponent<Game>();
@@ -59,12 +70,20 @@ public class Player_Movement : MonoBehaviour
         polarD = false;
         selfPolar = false;
         boosted = false;
+
+        mainCamera.SetActive(true);
+        alternateCamera.SetActive(false);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.M)) {
             SceneManager.LoadScene(0);
+        }
+
+        if (gameScript.gameActive && Input.GetKeyDown(KeyCode.C)) {
+            mainCamera.SetActive(!mainCamera.activeSelf);
+            alternateCamera.SetActive(!alternateCamera.activeSelf);
         }
         // Controls here
         // If W, A, S, or D pressed, swap the value of the bool for polar of that letter
@@ -124,6 +143,25 @@ public class Player_Movement : MonoBehaviour
         if (gameScript.gameActive) {
             controller.Move(move * Time.deltaTime);
             controller.Move(playerVelocity * Time.deltaTime);
+        }
+
+        peopleCarriedW = gameScript.peopleCarriedW;
+        peopleCarriedA = gameScript.peopleCarriedA;
+        peopleCarriedS = gameScript.peopleCarriedS;
+        peopleCarriedD = gameScript.peopleCarriedD;
+
+        for (int i = 0; i < passengers.Length; i++) {
+            if (i < peopleCarriedW) {
+                passengers[i].SetActive(true);
+            } else if (i < peopleCarriedW + peopleCarriedA) {
+                passengers[i].SetActive(true);
+            } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS) {
+                passengers[i].SetActive(true);
+            } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS + peopleCarriedD) {
+                passengers[i].SetActive(true);
+            } else {
+                passengers[i].SetActive(false);
+            }
         }
 
     }
