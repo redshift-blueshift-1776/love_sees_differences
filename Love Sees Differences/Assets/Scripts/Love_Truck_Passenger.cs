@@ -77,6 +77,9 @@ public class Love_Truck_Passenger : MonoBehaviour
 
     private double nextChangeTime;
 
+    private Coroutine currentPoseCoroutine;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -129,45 +132,52 @@ public class Love_Truck_Passenger : MonoBehaviour
             Quaternion defaultRotation = Quaternion.Euler(0, 0, 0);
             Quaternion z90 = Quaternion.Euler(0, 0, 90);
             Quaternion z180 = Quaternion.Euler(0, 0, 180);
+            Quaternion zn90 = Quaternion.Euler(0, 0, 90);
             if (pose == Pose.Default) {
-                leftLegJoint.transform.rotation = Quaternion.Slerp(leftLegJoint.transform.rotation, defaultRotation, Time.deltaTime * 5f);
+                leftLegJoint.transform.rotation = Quaternion.Slerp(leftLegJoint.transform.rotation, defaultRotation, poseChangeTime / secondsPerBeat * 2f);
                 currentPose = Pose.Default;
             }
             if (pose == Pose.WeightsDance1) {
                 Debug.Log("WeightsDance1");
-                leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmJoint.transform.rotation, z180, Time.deltaTime * 5f);
-                leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerJoint.transform.rotation, defaultRotation, Time.deltaTime * 5f);
-                rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmJoint.transform.rotation, z90, Time.deltaTime * 5f);
-                rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, z90, Time.deltaTime * 5f);
+                leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmJoint.transform.rotation, z180, poseChangeTime / secondsPerBeat * 2f);
+                leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerJoint.transform.rotation, defaultRotation, poseChangeTime / secondsPerBeat * 2f);
+                rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmJoint.transform.rotation, zn90, poseChangeTime / secondsPerBeat * 2f);
+                rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, zn90, poseChangeTime / secondsPerBeat * 2f);
                 currentPose = Pose.WeightsDance1;
             }
             if (pose == Pose.WeightsDance2) {
                 Debug.Log("WeightsDance2");
-                leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmJoint.transform.rotation, z90, Time.deltaTime * 5f);
-                leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerJoint.transform.rotation, z90, Time.deltaTime * 5f);
-                rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmJoint.transform.rotation, z180, Time.deltaTime * 5f);
-                rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, defaultRotation, Time.deltaTime * 5f);
+                leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmJoint.transform.rotation, z90, poseChangeTime / secondsPerBeat * 2f);
+                leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerJoint.transform.rotation, z90, poseChangeTime / secondsPerBeat * 2f);
+                rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmJoint.transform.rotation, z180, poseChangeTime / secondsPerBeat * 2f);
+                rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, defaultRotation, poseChangeTime / secondsPerBeat * 2f);
                 currentPose = Pose.WeightsDance2;
             } else {
                 yield return null;
             }
+            poseChangeTime += Time.deltaTime;
         }
         yield return null;
     }
 
     void NextPose() {
+        if (currentPoseCoroutine != null) {
+            StopCoroutine(currentPoseCoroutine);
+        }
+
         if (dance == Dance.Default) {
             Debug.Log("Default");
-            StartCoroutine(ChangePose(Pose.Default));
+            currentPoseCoroutine = StartCoroutine(ChangePose(Pose.Default));
         } else if (dance == Dance.KirKan) {
-            StartCoroutine(ChangePose(Pose.KirKan));
+            currentPoseCoroutine = StartCoroutine(ChangePose(Pose.KirKan));
         } else if (dance == Dance.Weights) {
             Debug.Log("Weights");
             if (currentPose == Pose.WeightsDance1) {
-                StartCoroutine(ChangePose(Pose.WeightsDance2));
+                currentPoseCoroutine = StartCoroutine(ChangePose(Pose.WeightsDance2));
             } else {
-                StartCoroutine(ChangePose(Pose.WeightsDance1));
+                currentPoseCoroutine = StartCoroutine(ChangePose(Pose.WeightsDance1));
             }
         }
     }
+
 }
