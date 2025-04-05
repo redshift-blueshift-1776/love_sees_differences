@@ -420,7 +420,7 @@ public class Game_2 : MonoBehaviour
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = criticalPassengerTexture;
                 } 
-                else if (i < peopleCarriedCritical + peopleCarried) {
+                else if (i < peopleCarried) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = passengerTexture;
                 } 
@@ -465,20 +465,6 @@ public class Game_2 : MonoBehaviour
 
     private IEnumerator RegeneratePeople()
     {
-        // while (true)
-        // {
-        //     yield return new WaitForSeconds(regenerationInterval);
-
-        //     if (gameActive)
-        //     {
-        //         peopleAtW += Random.Range(1, 2);
-        //         peopleAtA += Random.Range(1, 2);
-        //         peopleAtS += Random.Range(1, 2);
-        //         peopleAtD += Random.Range(1, 2);
-                
-        //         UpdateUI();
-        //     }
-        // }
         while (true)
         {
             yield return new WaitForSeconds(regenerationInterval + Random.Range(-2f, 2f));
@@ -487,10 +473,10 @@ public class Game_2 : MonoBehaviour
             {
                 List<string> availableBuildings = new List<string>();
 
-                if (peopleAtW < 5) availableBuildings.Add("W");
-                if (peopleAtA < 5) availableBuildings.Add("A");
-                if (peopleAtS < 5) availableBuildings.Add("S");
-                if (peopleAtD < 5) availableBuildings.Add("D");
+                if (peopleAtW < 5 && peopleAtWCritical == 0) availableBuildings.Add("W");
+                if (peopleAtA < 5 && peopleAtACritical == 0) availableBuildings.Add("A");
+                if (peopleAtS < 5 && peopleAtSCritical == 0) availableBuildings.Add("S");
+                if (peopleAtD < 5 && peopleAtDCritical == 0) availableBuildings.Add("D");
 
                 if (availableBuildings.Count > 0)
                 {

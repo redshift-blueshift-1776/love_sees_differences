@@ -193,10 +193,20 @@ public class Love_Truck_Passenger : MonoBehaviour
         Quaternion rightLegTarget = rightLegStart;
         Quaternion rightLegLowerTarget = rightLegLowerStart;
 
+        Quaternion z45 = Quaternion.Euler(0, 0, 45);
+        Quaternion zn15 = Quaternion.Euler(0, 0, -15);
+
         switch (pose)
         {
             case Pose.Default:
                 leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
+                leftArmTarget = defaultRotation;
+                leftArmLowerTarget = defaultRotation;
+                rightArmTarget = defaultRotation;
+                rightArmLowerTarget = defaultRotation;
                 currentPose = Pose.Default;
                 break;
 
@@ -218,6 +228,14 @@ public class Love_Truck_Passenger : MonoBehaviour
 
             case Pose.KirKan:
                 // Add KirKan targets here if needed
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = zn15;
+                rightLegLowerTarget = defaultRotation;
+                leftArmTarget = z45;
+                leftArmLowerTarget = zn90;
+                rightArmTarget = defaultRotation;
+                rightArmLowerTarget = defaultRotation;
                 currentPose = Pose.KirKan;
                 break;
 
