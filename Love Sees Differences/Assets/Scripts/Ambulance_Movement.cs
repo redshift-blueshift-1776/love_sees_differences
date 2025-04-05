@@ -218,12 +218,13 @@ public class Ambulance_Movement : MonoBehaviour
             currentSpeed *= speedFactor;
             currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
 
-            // Apply friction
+             // Apply friction
             currentSpeed *= friction;
-            // Braking
-            if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
-                currentSpeed -= brakeForce * Time.fixedDeltaTime;
         }
+
+        // Braking
+        if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
+            currentSpeed -= brakeForce * Time.fixedDeltaTime;
 
         if (Mathf.Abs(currentSpeed) < 0.05f) currentSpeed = 0f;
 
@@ -232,21 +233,32 @@ public class Ambulance_Movement : MonoBehaviour
             currentTurnSpeed = turnInput * turnSpeed * (Mathf.Clamp01(10f / Mathf.Sqrt(Mathf.Abs(currentSpeed))));
 
         // Check if moving forward would collide with a wall
-        if (!IsColliding(Vector3.forward * currentSpeed * Time.fixedDeltaTime))
-        {
-            Vector3 moveDirection = transform.forward * currentSpeed;
-            controller.Move(moveDirection * Time.deltaTime);
-        }
-        else if (currentSpeed > 0)
-        {
-            // Hit a wall! Damp speed sharply to simulate impact/friction
-            currentSpeed *= -0.5f; // You can tweak this — lower means stronger wall slowdown
+        Vector3 moveDirection = transform.forward * currentSpeed;
+        Vector3 movement = moveDirection * Time.deltaTime;
 
-            // Bounceback
-            Vector3 bounceDirection = -transform.forward;
-            float bounceAmount = 0.9f; // tweak as needed
-            controller.Move(bounceDirection * bounceAmount);
-        }
+        controller.Move(movement);
+
+        // if (!IsColliding(movement))
+        // {
+        //     controller.Move(movement);
+        // }
+        // else if (Mathf.Abs(currentSpeed) > 500f)
+        // {
+        //     // Hit a wall while moving fast
+        //     currentSpeed *= -0.2f;
+
+        //     Vector3 bounceDirection = -moveDirection.normalized;
+        //     float bounceAmount = 0.9f;
+        //     controller.Move(bounceDirection * bounceAmount);
+
+        //     TriggerScreenShake(); // Add shake here
+        // }
+        // else
+        // {
+        //     // Stuck but barely moving — allow a nudge to help escape corners
+        //     controller.Move(movement); // Don’t move
+        // }
+
 
         // Apply rotation
         transform.Rotate(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.fixedDeltaTime, 0);
@@ -257,8 +269,19 @@ public class Ambulance_Movement : MonoBehaviour
     // Collision check using BoxCollider
     bool IsColliding(Vector3 movement)
     {
-        return Physics.BoxCast(transform.position, boxCollider.size * 0.25f, movement.normalized, Quaternion.identity, movement.magnitude, obstacleMask);
+        if (movement == Vector3.zero) return false;
+
+        Vector3 boxHalfExtents = boxCollider.bounds.extents;
+        Vector3 origin = transform.position + movement.normalized * 0.1f;
+        return Physics.BoxCast(origin, boxHalfExtents, movement.normalized, Quaternion.identity, movement.magnitude, obstacleMask);
     }
+
+    void TriggerScreenShake()
+    {
+        CameraShake.Instance.Shake(0.15f, 6.9f); // Duration, magnitude
+    }
+
+
 
     private IEnumerator Lights() {
         while (true)
@@ -276,6 +299,7 @@ public class Ambulance_Movement : MonoBehaviour
         //Debug.Log(c.tag);
         if (c.tag == "Passenger") {
             if (gameScript.peopleCarried >= gameScript.maxCarryCapacity) {
+                TriggerScreenShake();
                 gameScript.addFailure();
                 Destroy(c.gameObject);
                 collisionSound.Play();

@@ -599,6 +599,7 @@ public class Game_2 : MonoBehaviour
 
         // Add failure and remove passenger from the building
         addFailure();
+        TriggerScreenShake();
         failSound.Play();
 
         switch (building)
@@ -622,6 +623,11 @@ public class Game_2 : MonoBehaviour
         }
 
         UpdateUI();
+    }
+
+    void TriggerScreenShake()
+    {
+        CameraShake.Instance.Shake(0.15f, 6.9f); // Duration, magnitude
     }
 
 
