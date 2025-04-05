@@ -149,10 +149,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, defaultRotation, Time.deltaTime * 5f);
                 currentPose = Pose.WeightsDance2;
             } else {
-                return null;
+                yield return null;
             }
         }
-        return null;
+        yield return null;
     }
 
     void NextPose() {
@@ -160,13 +160,13 @@ public class Love_Truck_Passenger : MonoBehaviour
             Debug.Log("Default");
             StartCoroutine(ChangePose(Pose.Default));
         } else if (dance == Dance.KirKan) {
-            ChangePose(Pose.KirKan);
+            StartCoroutine(ChangePose(Pose.KirKan));
         } else if (dance == Dance.Weights) {
             Debug.Log("Weights");
             if (currentPose == Pose.WeightsDance1) {
-                ChangePose(Pose.WeightsDance2);
+                StartCoroutine(ChangePose(Pose.WeightsDance2));
             } else {
-                ChangePose(Pose.WeightsDance1);
+                StartCoroutine(ChangePose(Pose.WeightsDance1));
             }
         }
     }
