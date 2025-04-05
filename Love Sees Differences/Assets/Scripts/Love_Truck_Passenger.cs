@@ -80,7 +80,6 @@ public class Love_Truck_Passenger : MonoBehaviour
     private Coroutine currentPoseCoroutine;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         game = GameObject.Find("Game");
@@ -93,44 +92,67 @@ public class Love_Truck_Passenger : MonoBehaviour
         nextChangeTime = BeatManager.Instance.GetNextBeatTime();
         currentPose = Pose.Default;
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!BeatManager.Instance.audioSource.isPlaying) {
-            return;
-        }
-
-        if (AudioSettings.dspTime >= nextChangeTime) {
-            nextChangeTime += BeatManager.Instance.secondsPerBeat;
+        // Immediately start dancing if active
+        if (dance != Dance.Default && BeatManager.Instance.audioSource.isPlaying)
+        {
             NextPose();
         }
-        if (type == 'W') {
-            head.GetComponent<MeshRenderer>().material = wColor;
-            torso.GetComponent<MeshRenderer>().material = wColor;
-        } else if (type == 'A') {
-            head.GetComponent<MeshRenderer>().material = aColor;
-            torso.GetComponent<MeshRenderer>().material = aColor;
-        } else if (type == 'S') {
-            head.GetComponent<MeshRenderer>().material = sColor;
-            torso.GetComponent<MeshRenderer>().material = sColor;
-        } else if (type == 'D') {
-            head.GetComponent<MeshRenderer>().material = dColor;
-            torso.GetComponent<MeshRenderer>().material = dColor;
+    }
+    private int lastPoseBeat = -1;
+
+    void Update()
+    {
+        if (!BeatManager.Instance.audioSource.isPlaying) return;
+
+        int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
+
+        if (currentBeat != lastPoseBeat)
+        {
+            lastPoseBeat = currentBeat;
+            NextPose();
+        }
+
+        UpdateColor();
+    }
+
+
+    void LateUpdate() {
+        Debug.Log($"{gameObject.name} rotation in LateUpdate: {transform.rotation.eulerAngles}");
+    }
+
+    private void UpdateColor()
+    {
+        Material color = null;
+
+        switch (type)
+        {
+            case 'W': color = wColor; break;
+            case 'A': color = aColor; break;
+            case 'S': color = sColor; break;
+            case 'D': color = dColor; break;
+        }
+
+        if (color != null)
+        {
+            head.GetComponent<MeshRenderer>().material = color;
+            torso.GetComponent<MeshRenderer>().material = color;
         }
     }
 
+
     private IEnumerator ChangePose(Pose pose) {
+        if (currentPose == pose)
+            yield break;
+
         float duration = secondsPerBeat / 2f;
         float elapsed = 0f;
 
         // Store initial rotations
-        Quaternion leftArmStart = leftArmJoint.transform.rotation;
-        Quaternion leftArmLowerStart = leftArmLowerJoint.transform.rotation;
-        Quaternion rightArmStart = rightArmJoint.transform.rotation;
-        Quaternion rightArmLowerStart = rightArmLowerJoint.transform.rotation;
-        Quaternion leftLegStart = leftLegJoint.transform.rotation;
+        Quaternion leftArmStart = leftArmJoint.transform.localRotation;
+        Quaternion leftArmLowerStart = leftArmLowerJoint.transform.localRotation;
+        Quaternion rightArmStart = rightArmJoint.transform.localRotation;
+        Quaternion rightArmLowerStart = rightArmLowerJoint.transform.localRotation;
+        Quaternion leftLegStart = leftLegJoint.transform.localRotation;
 
         // Target rotations based on pose
         Quaternion defaultRotation = Quaternion.Euler(0, 0, 0);
@@ -150,55 +172,61 @@ public class Love_Truck_Passenger : MonoBehaviour
             currentPose = Pose.Default;
         } else if (pose == Pose.WeightsDance1) {
             leftArmTarget = z180;
-            leftArmLowerTarget = z180;
+            leftArmLowerTarget = defaultRotation;
             rightArmTarget = zn90;
-            rightArmLowerTarget = z180;
+            rightArmLowerTarget = zn90;
             currentPose = Pose.WeightsDance1;
         } else if (pose == Pose.WeightsDance2) {
             leftArmTarget = z90;
-            leftArmLowerTarget = z180;
+            leftArmLowerTarget = z90;
             rightArmTarget = z180;
-            rightArmLowerTarget = z180;
+            rightArmLowerTarget = defaultRotation;
             currentPose = Pose.WeightsDance2;
         } else if (pose == Pose.KirKan) {
             // Add KirKan targets here if needed
         }
+        //Debug.Log($"Left arm: start = {leftArmStart.eulerAngles}, target = {leftArmTarget.eulerAngles}");
 
         // Animate over time
         while (elapsed < duration) {
             float t = elapsed / duration;
 
-            leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmStart, leftArmTarget, t);
-            leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerStart, leftArmLowerTarget, t);
-            rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmStart, rightArmTarget, t);
-            rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerStart, rightArmLowerTarget, t);
-            leftLegJoint.transform.rotation = Quaternion.Slerp(leftLegStart, leftLegTarget, t);
+            //Debug.Log(t);
+
+            leftArmJoint.transform.localRotation = Quaternion.Slerp(leftArmStart, leftArmTarget, t);
+            leftArmLowerJoint.transform.localRotation = Quaternion.Slerp(leftArmLowerStart, leftArmLowerTarget, t);
+            rightArmJoint.transform.localRotation = Quaternion.Slerp(rightArmStart, rightArmTarget, t);
+            rightArmLowerJoint.transform.localRotation = Quaternion.Slerp(rightArmLowerStart, rightArmLowerTarget, t);
+            leftLegJoint.transform.localRotation = Quaternion.Slerp(leftLegStart, leftLegTarget, t);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         // Ensure final rotations are exactly set
-        leftArmJoint.transform.rotation = leftArmTarget;
-        leftArmLowerJoint.transform.rotation = leftArmLowerTarget;
-        rightArmJoint.transform.rotation = rightArmTarget;
-        rightArmLowerJoint.transform.rotation = rightArmLowerTarget;
-        leftLegJoint.transform.rotation = leftLegTarget;
+        leftArmJoint.transform.localRotation = leftArmTarget;
+        leftArmLowerJoint.transform.localRotation = leftArmLowerTarget;
+        rightArmJoint.transform.localRotation = rightArmTarget;
+        rightArmLowerJoint.transform.localRotation = rightArmLowerTarget;
+        leftLegJoint.transform.localRotation = leftLegTarget;
+
+        yield return null;
     }
 
 
     void NextPose() {
+        //Debug.Log($"Starting new pose coroutine at dspTime: {AudioSettings.dspTime}");
         if (currentPoseCoroutine != null) {
             StopCoroutine(currentPoseCoroutine);
         }
 
         if (dance == Dance.Default) {
-            Debug.Log("Default");
+            //Debug.Log("Default");
             currentPoseCoroutine = StartCoroutine(ChangePose(Pose.Default));
         } else if (dance == Dance.KirKan) {
             currentPoseCoroutine = StartCoroutine(ChangePose(Pose.KirKan));
         } else if (dance == Dance.Weights) {
-            Debug.Log("Weights");
+            //Debug.Log("Weights");
             if (currentPose == Pose.WeightsDance1) {
                 currentPoseCoroutine = StartCoroutine(ChangePose(Pose.WeightsDance2));
             } else {
