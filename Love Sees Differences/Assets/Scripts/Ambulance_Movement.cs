@@ -207,25 +207,25 @@ public class Ambulance_Movement : MonoBehaviour
         bool isBoosting = Input.GetKey(KeyCode.LeftShift) && currentBoostFuel > 0;
         float speedFactor = isBoosting ? speedMultiplier : 1f;
 
-        if (isBoosting)
-        {
-            currentBoostFuel -= boostConsumptionRate * Time.fixedDeltaTime;
-            currentBoostFuel = Mathf.Max(currentBoostFuel, 0);
+        if (controller.isGrounded) {
+            if (isBoosting)
+            {
+                currentBoostFuel -= boostConsumptionRate * Time.fixedDeltaTime;
+                currentBoostFuel = Mathf.Max(currentBoostFuel, 0);
+            }
+            // Accelerate and decelerate
+            currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
+            currentSpeed *= speedFactor;
+            currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
+
+            // Apply friction
+            currentSpeed *= friction;
+            // Braking
+            if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
+                currentSpeed -= brakeForce * Time.fixedDeltaTime;
         }
 
-        // Accelerate and decelerate
-        currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
-        currentSpeed *= speedFactor;
-        currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed, maxSpeed);
-
-        // Apply friction
-        currentSpeed *= friction;
-
         if (Mathf.Abs(currentSpeed) < 0.05f) currentSpeed = 0f;
-
-        // Braking
-        if (Input.GetKey(KeyCode.S) && currentSpeed > 0)
-            currentSpeed -= brakeForce * Time.fixedDeltaTime;
 
         // Steering based on speed (harder to turn at high speeds)
         if (currentSpeed != 0)
@@ -237,6 +237,16 @@ public class Ambulance_Movement : MonoBehaviour
             Vector3 moveDirection = transform.forward * currentSpeed;
             controller.Move(moveDirection * Time.deltaTime);
         }
+        else if (currentSpeed > 0)
+        {
+            // Hit a wall! Damp speed sharply to simulate impact/friction
+            currentSpeed *= -0.5f; // You can tweak this — lower means stronger wall slowdown
+
+            // Bounceback
+            Vector3 bounceDirection = -transform.forward;
+            float bounceAmount = 0.9f; // tweak as needed
+            controller.Move(bounceDirection * bounceAmount);
+        }
 
         // Apply rotation
         transform.Rotate(0, currentTurnSpeed * Mathf.Sqrt(speedFactor) * Time.fixedDeltaTime, 0);
@@ -247,7 +257,7 @@ public class Ambulance_Movement : MonoBehaviour
     // Collision check using BoxCollider
     bool IsColliding(Vector3 movement)
     {
-        return Physics.BoxCast(transform.position, boxCollider.size * 0.5f, movement.normalized, Quaternion.identity, movement.magnitude, obstacleMask);
+        return Physics.BoxCast(transform.position, boxCollider.size * 0.25f, movement.normalized, Quaternion.identity, movement.magnitude, obstacleMask);
     }
 
     private IEnumerator Lights() {

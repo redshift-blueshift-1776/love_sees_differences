@@ -127,7 +127,8 @@ public class Game_2 : MonoBehaviour
 
     void Start()
     {
-        OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
+        //OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
+        OldUIEnabled = false;
         gameActive = false;
         timer = 0;
         deliveries = 0;
