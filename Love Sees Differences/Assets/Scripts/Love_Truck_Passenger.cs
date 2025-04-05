@@ -90,7 +90,7 @@ public class Love_Truck_Passenger : MonoBehaviour
         tempo = gameScript.tempo;
         secondsPerBeat = 60f / tempo;
 
-        nextChangeTime = 0f;
+        nextChangeTime = BeatManager.Instance.GetNextBeatTime();
         currentPose = Pose.Default;
 
     }
@@ -98,17 +98,12 @@ public class Love_Truck_Passenger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!audioSource.isPlaying) {
-            // If the audio isn't playing, reset
-            nextChangeTime = 0;
+        if (!BeatManager.Instance.audioSource.isPlaying) {
             return;
         }
-        if (nextChangeTime == 0) {
-            // Sync with the exact DSP time when the audio starts playing
-            nextChangeTime = AudioSettings.dspTime;
-        }
+
         if (AudioSettings.dspTime >= nextChangeTime) {
-            nextChangeTime += secondsPerBeat;
+            nextChangeTime += BeatManager.Instance.secondsPerBeat;
             NextPose();
         }
         if (type == 'W') {
@@ -127,38 +122,70 @@ public class Love_Truck_Passenger : MonoBehaviour
     }
 
     private IEnumerator ChangePose(Pose pose) {
-        float poseChangeTime = 0;
-        while (poseChangeTime < secondsPerBeat / 2f) {
-            Quaternion defaultRotation = Quaternion.Euler(0, 0, 0);
-            Quaternion z90 = Quaternion.Euler(0, 0, 90);
-            Quaternion z180 = Quaternion.Euler(0, 0, 180);
-            Quaternion zn90 = Quaternion.Euler(0, 0, 90);
-            if (pose == Pose.Default) {
-                leftLegJoint.transform.rotation = Quaternion.Slerp(leftLegJoint.transform.rotation, defaultRotation, poseChangeTime / secondsPerBeat * 2f);
-                currentPose = Pose.Default;
-            }
-            if (pose == Pose.WeightsDance1) {
-                Debug.Log("WeightsDance1");
-                leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmJoint.transform.rotation, z180, poseChangeTime / secondsPerBeat * 2f);
-                leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerJoint.transform.rotation, defaultRotation, poseChangeTime / secondsPerBeat * 2f);
-                rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmJoint.transform.rotation, zn90, poseChangeTime / secondsPerBeat * 2f);
-                rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, zn90, poseChangeTime / secondsPerBeat * 2f);
-                currentPose = Pose.WeightsDance1;
-            }
-            if (pose == Pose.WeightsDance2) {
-                Debug.Log("WeightsDance2");
-                leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmJoint.transform.rotation, z90, poseChangeTime / secondsPerBeat * 2f);
-                leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerJoint.transform.rotation, z90, poseChangeTime / secondsPerBeat * 2f);
-                rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmJoint.transform.rotation, z180, poseChangeTime / secondsPerBeat * 2f);
-                rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerJoint.transform.rotation, defaultRotation, poseChangeTime / secondsPerBeat * 2f);
-                currentPose = Pose.WeightsDance2;
-            } else {
-                yield return null;
-            }
-            poseChangeTime += Time.deltaTime;
+        float duration = secondsPerBeat / 2f;
+        float elapsed = 0f;
+
+        // Store initial rotations
+        Quaternion leftArmStart = leftArmJoint.transform.rotation;
+        Quaternion leftArmLowerStart = leftArmLowerJoint.transform.rotation;
+        Quaternion rightArmStart = rightArmJoint.transform.rotation;
+        Quaternion rightArmLowerStart = rightArmLowerJoint.transform.rotation;
+        Quaternion leftLegStart = leftLegJoint.transform.rotation;
+
+        // Target rotations based on pose
+        Quaternion defaultRotation = Quaternion.Euler(0, 0, 0);
+        Quaternion z90 = Quaternion.Euler(0, 0, 90);
+        Quaternion z180 = Quaternion.Euler(0, 0, 180);
+        Quaternion zn90 = Quaternion.Euler(0, 0, -90);
+
+        Quaternion leftArmTarget = leftArmStart;
+        Quaternion leftArmLowerTarget = leftArmLowerStart;
+        Quaternion rightArmTarget = rightArmStart;
+        Quaternion rightArmLowerTarget = rightArmLowerStart;
+        Quaternion leftLegTarget = leftLegStart;
+
+        // Set target rotations
+        if (pose == Pose.Default) {
+            leftLegTarget = defaultRotation;
+            currentPose = Pose.Default;
+        } else if (pose == Pose.WeightsDance1) {
+            leftArmTarget = z180;
+            leftArmLowerTarget = z180;
+            rightArmTarget = zn90;
+            rightArmLowerTarget = z180;
+            currentPose = Pose.WeightsDance1;
+        } else if (pose == Pose.WeightsDance2) {
+            leftArmTarget = z90;
+            leftArmLowerTarget = z180;
+            rightArmTarget = z180;
+            rightArmLowerTarget = z180;
+            currentPose = Pose.WeightsDance2;
+        } else if (pose == Pose.KirKan) {
+            // Add KirKan targets here if needed
         }
-        yield return null;
+
+        // Animate over time
+        while (elapsed < duration) {
+            float t = elapsed / duration;
+
+            leftArmJoint.transform.rotation = Quaternion.Slerp(leftArmStart, leftArmTarget, t);
+            leftArmLowerJoint.transform.rotation = Quaternion.Slerp(leftArmLowerStart, leftArmLowerTarget, t);
+            rightArmJoint.transform.rotation = Quaternion.Slerp(rightArmStart, rightArmTarget, t);
+            rightArmLowerJoint.transform.rotation = Quaternion.Slerp(rightArmLowerStart, rightArmLowerTarget, t);
+            leftLegJoint.transform.rotation = Quaternion.Slerp(leftLegStart, leftLegTarget, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure final rotations are exactly set
+        leftArmJoint.transform.rotation = leftArmTarget;
+        leftArmLowerJoint.transform.rotation = leftArmLowerTarget;
+        rightArmJoint.transform.rotation = rightArmTarget;
+        rightArmLowerJoint.transform.rotation = rightArmLowerTarget;
+        leftLegJoint.transform.rotation = leftLegTarget;
     }
+
 
     void NextPose() {
         if (currentPoseCoroutine != null) {
