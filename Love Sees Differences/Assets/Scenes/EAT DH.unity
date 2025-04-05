@@ -5575,6 +5575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1400960102}
   - component: {fileID: 1400960101}
+  - component: {fileID: 1400960103}
   m_Layer: 0
   m_Name: Audio Source
   m_TagString: Untagged
@@ -5693,6 +5694,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400960103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400960100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2214190a6e29c40529d04f1b79a4399d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 1400960101}
+  secondsPerBeat: 0
+  tempo: 120
 --- !u!1 &1421320083
 GameObject:
   m_ObjectHideFlags: 0
@@ -8534,6 +8550,22 @@ PrefabInstance:
     - target: {fileID: 3719589322219885200, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873065332179084371, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: danceA
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873065332179084371, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: danceD
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873065332179084371, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: danceS
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3873065332179084371, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: danceW
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3873065332179084371, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: player
