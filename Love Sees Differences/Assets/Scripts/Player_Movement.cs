@@ -16,7 +16,7 @@ public class Player_Movement : MonoBehaviour
 
     private float jumpVelocity;
 
-    private float playerMass = 120;
+    //private float playerMass = 120;
 
     private float mouseSensitivity = 1;
 
@@ -153,12 +153,24 @@ public class Player_Movement : MonoBehaviour
         for (int i = 0; i < passengers.Length; i++) {
             if (i < peopleCarriedW) {
                 passengers[i].SetActive(true);
+                var individualPassenger = passengers[i].GetComponent<Love_Truck_Passenger>();
+                individualPassenger.type = 'W';
+                individualPassenger.dance = gameScript.danceW;
             } else if (i < peopleCarriedW + peopleCarriedA) {
                 passengers[i].SetActive(true);
+                var individualPassenger = passengers[i].GetComponent<Love_Truck_Passenger>();
+                individualPassenger.type = 'A';
+                individualPassenger.dance = gameScript.danceA;
             } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS) {
                 passengers[i].SetActive(true);
+                var individualPassenger = passengers[i].GetComponent<Love_Truck_Passenger>();
+                individualPassenger.type = 'S';
+                individualPassenger.dance = gameScript.danceS;
             } else if (i < peopleCarriedW + peopleCarriedA + peopleCarriedS + peopleCarriedD) {
                 passengers[i].SetActive(true);
+                var individualPassenger = passengers[i].GetComponent<Love_Truck_Passenger>();
+                individualPassenger.type = 'D';
+                individualPassenger.dance = gameScript.danceD;
             } else {
                 passengers[i].SetActive(false);
             }
@@ -173,41 +185,7 @@ public class Player_Movement : MonoBehaviour
     void OnControllerColliderHit(ControllerColliderHit hit) {
         if (hit.rigidbody != null) {
             Vector3 horizontalDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-            hit.rigidbody.AddForce(horizontalDir * 100);
-        }
-
-        if (hit.gameObject.name == "Death Zone") {
-            int sceneID = SceneManager.GetActiveScene().buildIndex;
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-            if (sceneID == 1) {
-                SceneManager.LoadScene(2);
-            }
-            if (sceneID == 3) {
-                SceneManager.LoadScene(4);
-            }
-            if (sceneID == 5) {
-                SceneManager.LoadScene(6);
-            }
-            if (sceneID == 7) {
-                SceneManager.LoadScene(8);
-            }
-            if (sceneID == 9) {
-                SceneManager.LoadScene(10);
-            }
-            if (sceneID == 11) {
-                SceneManager.LoadScene(12);
-            }
-            if (sceneID == 13) {
-                SceneManager.LoadScene(14);
-            }
-            if (sceneID == 15) {
-                SceneManager.LoadScene(16);
-            }
-            if (sceneID == 17) {
-                SceneManager.LoadScene(18);
-            }
-            
+            hit.rigidbody.AddForce(horizontalDir * 1000);
         }
     }
 }

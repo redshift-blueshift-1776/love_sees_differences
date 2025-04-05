@@ -114,6 +114,15 @@ public class Game : MonoBehaviour
     
     [SerializeField] private float regenerationInterval = 3f; // Time in seconds between regenerations
 
+    [SerializeField] public float tempo = 120f; // Tempo of the song used
+
+    [SerializeField] public Love_Truck_Passenger.Dance danceW;
+    [SerializeField] public Love_Truck_Passenger.Dance danceA;
+    [SerializeField] public Love_Truck_Passenger.Dance danceS;
+    [SerializeField] public Love_Truck_Passenger.Dance danceD;
+
+    private float secondsPerBeat;
+
     //[SerializeField] public bool OldUIEnabled = false;
     public bool OldUIEnabled;
     // Start is called before the first frame update
@@ -124,6 +133,7 @@ public class Game : MonoBehaviour
         OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
         gameActive = false;
         timer = 0;
+        secondsPerBeat = 60f / tempo;
         
         peopleAtW = Random.Range(1, 5);
         peopleAtA = Random.Range(1, 5);
