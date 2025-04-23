@@ -116,6 +116,11 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(21);
     }
 
+    public void NightEndless()
+    {
+        SceneManager.LoadScene(22);
+    }
+
     
 
     public void restartLevel() {
