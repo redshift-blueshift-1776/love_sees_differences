@@ -4702,11 +4702,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2f383f59fbdb447e48b8a46e81bafb1f, type: 3}
+  m_audioClip: {fileID: 8300000, guid: c088e6a858fd6481fad77747b5dd7153, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -5351,15 +5351,30 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575580126}
-  - component: {fileID: 1575580125}
+  - component: {fileID: 1575580127}
   m_Layer: 0
   m_Name: Building_Mover (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1575580125
+  m_IsActive: 1
+--- !u!4 &1575580126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1575580124}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1575580127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5368,7 +5383,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1575580124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77274001bd8049da93b6386bd9c8d4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e829907e119848179061a58c1c4d114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   buildings:
@@ -5385,17 +5400,13 @@ MonoBehaviour:
   - {fileID: 2068249289}
   - {fileID: 1017880540}
   - {fileID: 2145101188}
+  - {fileID: 1783641209}
+  - {fileID: 689021268}
+  - {fileID: 1350053278}
+  - {fileID: 2145101188}
   game: {fileID: 1684759451}
   gameScript: {fileID: 0}
-  moveTimes:
-  - 97
-  - 97
-  - 97
-  - 97
-  - 267
-  - 267
-  - 267
-  - 267
+  moveInterval: 60
   targetPositions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
@@ -5409,21 +5420,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 0}
---- !u!4 &1575580126
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1575580124}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  rotation: 1
 --- !u!1 &1593712408
 GameObject:
   m_ObjectHideFlags: 0
