@@ -174,7 +174,7 @@ public class Game_2_Endless : MonoBehaviour
         HandlePassengerDropoff();
         UpdateUI();
 
-        probabilityOfCritical = Mathf.Min(3, 0.5f + timer / 300f);
+        //probabilityOfCritical = Mathf.Min(3, 0.5f + timer / 300f);
     }
 
     // private GameObject[] GetChildImages(Transform parent)
@@ -472,6 +472,8 @@ public class Game_2_Endless : MonoBehaviour
 
                     if (probabilityOfCritical >= 2) {
                         criticalPassengers = newPassengers;
+                    } else if (probabilityOfCritical <= 0) {
+                        criticalPassengers = 0;
                     }
 
                     switch (chosenBuilding)
