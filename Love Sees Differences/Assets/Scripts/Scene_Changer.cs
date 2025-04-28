@@ -121,6 +121,11 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(22);
     }
 
+    public void LoadHowToPlayNight()
+    {
+        SceneManager.LoadScene(23);
+    }
+
     
 
     public void restartLevel() {
