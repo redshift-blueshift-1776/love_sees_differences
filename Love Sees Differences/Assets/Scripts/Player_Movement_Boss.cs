@@ -55,6 +55,8 @@ public class Player_Movement_Boss : MonoBehaviour
 
     [SerializeField] public GameObject arrow;
 
+    public bool isInvincible;
+
     private void Start()
     {
         gameScript = game.GetComponent<Game_Boss>();
