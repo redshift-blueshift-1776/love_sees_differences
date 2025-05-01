@@ -65,7 +65,7 @@ public class Boss_Introduction : MonoBehaviour
         for (int i = 0; i < 5; i++) {
             duration = 0.5f;
             elapsed = 0f;
-            targetPosition = new Vector3(boss.transform.position.x + 7, boss.transform.position.y + 10, boss.transform.position.z - 7);
+            targetPosition = new Vector3(boss.transform.position.x + 7, boss.transform.position.y + 8, boss.transform.position.z - 7);
             oldPosition = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
             targetRotation = yn45;
             oldRotation = mainCamera.transform.rotation;
@@ -140,7 +140,7 @@ public class Boss_Introduction : MonoBehaviour
 
         duration = 2f;
         elapsed = 0f;
-        targetPosition = originalCameraPosition.position;
+        targetPosition = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 50, mainCamera.transform.position.z - 50);
         targetRotation = originalCameraPosition.rotation;
         oldPosition = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
         oldRotation = mainCamera.transform.rotation;
