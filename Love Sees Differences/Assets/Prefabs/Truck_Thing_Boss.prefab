@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 3792119607926397551}
   - component: {fileID: 3499851625697555639}
   - component: {fileID: 5487297494621523706}
+  - component: {fileID: 4280471235788588153}
   m_Layer: 0
   m_Name: Truck_Thing_Boss
   m_TagString: Untagged
@@ -673,6 +674,45 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 2, z: 10}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &4280471235788588153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7844583227466237896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cebd26481886b4538a74ba91652bf320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeed: 5
+  speedUp: 5
+  BuildingW: {fileID: 0}
+  BuildingA: {fileID: 0}
+  BuildingS: {fileID: 0}
+  BuildingD: {fileID: 0}
+  polarW: 0
+  polarA: 0
+  polarS: 0
+  polarD: 0
+  selfPolar: 0
+  boosted: 0
+  jumping: 0
+  game: {fileID: 0}
+  mainCamera: {fileID: 8124204665136130670}
+  alternateCamera: {fileID: 1169050389588349614}
+  passengers:
+  - {fileID: 2427066124964933358}
+  - {fileID: 7955684089045101541}
+  - {fileID: 2039802916149036507}
+  - {fileID: 3373350046345310897}
+  - {fileID: 8149809491207964677}
+  - {fileID: 2888717851264500707}
+  - {fileID: 3747931118343822950}
+  - {fileID: 8759342588006031211}
+  - {fileID: 1014045043711235329}
+  - {fileID: 6557187841966421305}
 --- !u!1 &8124204665136130670
 GameObject:
   m_ObjectHideFlags: 0

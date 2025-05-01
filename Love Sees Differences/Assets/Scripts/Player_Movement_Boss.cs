@@ -53,6 +53,8 @@ public class Player_Movement_Boss : MonoBehaviour
 
     [SerializeField] private GameObject[] passengers;
 
+    [SerializeField] public GameObject arrow;
+
     private void Start()
     {
         gameScript = game.GetComponent<Game_Boss>();
@@ -79,6 +81,16 @@ public class Player_Movement_Boss : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.M)) {
             SceneManager.LoadScene(0);
+        }
+
+        if (gameScript.gameActive && Input.GetKeyDown(KeyCode.G)) {
+            if (gameScript.fireArrow()) {
+                var projectile = Instantiate(arrow, transform);
+                projectile.SetActive(true);
+                var projectileScript = projectile.GetComponent<Arrow>();
+                projectileScript.targetPosition = gameScript.boss.transform.position;
+                projectileScript.startPosition = transform.position;
+            }
         }
 
         if (gameScript.gameActive && Input.GetKeyDown(KeyCode.C)) {

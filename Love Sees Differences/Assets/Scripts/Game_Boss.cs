@@ -302,6 +302,7 @@ public class Game_Boss : MonoBehaviour
         // as they can, with the maximum they can carry at a time being 10.
         if (peopleToDrop > 0) {
             deliverSound.Play();
+            arrows += peopleToDrop;
         }
         deliveries += peopleToDrop;
         peopleToDrop = 0;
@@ -317,6 +318,14 @@ public class Game_Boss : MonoBehaviour
     {
         collisions++;
         arrows = Mathf.Max(0, arrows - 1);
+    }
+
+    public bool fireArrow() {
+        bool ret = (arrows > 0);
+        if (arrows > 0) {
+            arrows--;
+        }
+        return ret;
     }
 
     private void UpdateScore()
