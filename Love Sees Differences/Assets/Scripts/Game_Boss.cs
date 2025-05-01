@@ -105,7 +105,7 @@ public class Game_Boss : MonoBehaviour
     [SerializeField] public int peopleCarriedS;
     [SerializeField] public int peopleCarriedD;
 
-    private Player_Movement playerMovement;
+    private Player_Movement_Boss playerMovement;
 
     [SerializeField] public string levelName;
 
@@ -167,7 +167,7 @@ public class Game_Boss : MonoBehaviour
         loadingAudio.SetActive(true);
         gameAudio.SetActive(false);
 
-        playerMovement = player.GetComponent<Player_Movement>();
+        playerMovement = player.GetComponent<Player_Movement_Boss>();
 
         SetupUIToggles();
 
