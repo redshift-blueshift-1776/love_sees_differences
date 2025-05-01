@@ -10,6 +10,8 @@ public class Game_Boss : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject boss;
 
+    public BossEnemy bossScript;
+
     public bool gameActive;
 
     public float timer;
@@ -168,6 +170,7 @@ public class Game_Boss : MonoBehaviour
         gameAudio.SetActive(false);
 
         playerMovement = player.GetComponent<Player_Movement_Boss>();
+        bossScript = boss.GetComponent<BossEnemy>();
 
         SetupUIToggles();
 
@@ -229,6 +232,7 @@ public class Game_Boss : MonoBehaviour
 
         // When gameActive is true, start the timer and let it go for levelLengthInSeconds seconds.
         timer += Time.deltaTime;
+        BossHealth = bossScript.HP;
         if (BossHealth <= 0)
         {
             EndGame();
