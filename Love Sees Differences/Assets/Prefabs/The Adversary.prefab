@@ -353,7 +353,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1321490701995495775}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f2e016c75da914d519bb52c98f05e481, type: 3}
   m_Name: 
@@ -501,6 +501,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2825549914070483640}
   - component: {fileID: 1897181374090997843}
+  - component: {fileID: 9213201291808049723}
   m_Layer: 0
   m_Name: The Adversary
   m_TagString: Untagged
@@ -544,12 +545,42 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 10, y: 10, z: 10}
+  m_Size: {x: 11, y: 10, z: 11}
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &9213201291808049723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013517327376911372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4abf1eb14cad241d1a46f9a93a614dd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currState: 0
+  range: 0
+  HP: 0
+  maxHP: 0
+  player: {fileID: 0}
+  phase: 0
+  Game: {fileID: 0}
+  gameScript: {fileID: 0}
+  xBound: 0
+  isInvincible: 0
+  orangePassenger: {fileID: 3358428418659382169, guid: 27e368e3f92ce44a48fd073431c0058a, type: 3}
+  speed: 5
+  mazeGenerator: {fileID: 0}
+  mazeWidth: 5
+  mazeHeight: 5
+  cellSize: 50
+  topLeftX: -100
+  topLeftZ: 100
 --- !u!1 &2034806611722477120
 GameObject:
   m_ObjectHideFlags: 0

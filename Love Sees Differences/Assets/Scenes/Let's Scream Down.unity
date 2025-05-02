@@ -7846,10 +7846,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 690168861988227866, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2013517327376911372, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
       propertyPath: m_Name
       value: The Adversary
@@ -7894,16 +7890,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9213201291808049723, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
+      propertyPath: Game
+      value: 
+      objectReference: {fileID: 696916127}
+    - target: {fileID: 9213201291808049723, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
+      propertyPath: speed
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 9213201291808049723, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 939203560}
+    - target: {fileID: 9213201291808049723, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
+      propertyPath: mazeGenerator
+      value: 
+      objectReference: {fileID: 432265182}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2013517327376911372, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1775855275}
   m_SourcePrefab: {fileID: 100100000, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
 --- !u!1 &1775855271 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2013517327376911372, guid: cbde73f4f6e5e49e5bd10d3eea6140fb, type: 3}
   m_PrefabInstance: {fileID: 1775855270}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &1775855275
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775855271}
+  serializedVersion: 4
+  m_Mass: 10000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1851650841
 GameObject:
   m_ObjectHideFlags: 0

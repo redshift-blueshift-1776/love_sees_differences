@@ -16,14 +16,9 @@ public enum EnemyState
 
 public class BossEnemy : MonoBehaviour
 {
-    [SerializeField] GameObject weapon;
-    [SerializeField] int enemyType;
-    // 0: pepperoni
-    // 1: mushroom
 
     public EnemyState currState;
     public float range;
-    public float moveSpeed;
 
     Rigidbody myRigidbody;
 
@@ -32,7 +27,7 @@ public class BossEnemy : MonoBehaviour
     Color og;
     Color transparent;
 
-    public Transform player;
+    [SerializeField] public GameObject player;
 
     private bool gotHit = false;
     GameObject newBullet;
@@ -42,8 +37,6 @@ public class BossEnemy : MonoBehaviour
     [SerializeField] public GameObject Game;
 
     public Game_Boss gameScript;
-
-    private Game_Boss game;
 
     public int xBound;
     bool direction;
@@ -55,8 +48,26 @@ public class BossEnemy : MonoBehaviour
     bool startedPhase4 = false;
 
     [SerializeField] GameObject orangePassenger;
+    [SerializeField] float speed;
 
-    [SerializeField] GameObject sceneSwitcher;
+    [Header("Maze Configuration")]
+    [SerializeField] public Maze_Generator mazeGenerator;  // Reference to the maze
+    [SerializeField] public int mazeWidth = 5;  // X-axis size
+    [SerializeField] public int mazeHeight = 5; // Y-axis size
+
+    [Header("Grid Settings")]
+    [SerializeField] public float cellSize = 50f;  // Distance between grid points in Unity world units
+    [SerializeField] public float topLeftX = -100f;  // Distance between grid points in Unity world units
+    [SerializeField] public float topLeftZ = 100f;  // Distance between grid points in Unity world units
+
+    private Queue<Vector3> pathQueue = new Queue<Vector3>();
+    private bool isMoving = false;
+
+    private Vector2Int startCell;
+    private Vector2Int goalCell;
+    private Dictionary<int, List<int>> adjacencyList;
+
+    private Vector3 lastPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -65,18 +76,61 @@ public class BossEnemy : MonoBehaviour
         //maxHP = 4000;
         //HP = 4000;
         //moveSpeed = 5;
-        //currState = EnemyState.Attack1;
+        currState = EnemyState.Attack1;
         HP = 100;
         maxHP = 100;
-        og = GetComponent<Renderer>().material.color;
-        player = GameObject.Find("Player").transform;
         myRigidbody = GetComponent<Rigidbody>();
+        gameScript = Game.GetComponent<Game_Boss>();
         transparent = new Color(og.r, og.g, og.b, 0.5f);
+        if (!mazeGenerator)
+        {
+            mazeGenerator = FindObjectOfType<Maze_Generator>();
+        }
+
+        if (mazeGenerator == null)
+        {
+            Debug.LogError("Maze_Generator not found! Assign it in the inspector.");
+            return;
+        }
+
+        // mazeWidth = mazeGenerator.size;  // Assuming square for now, could be mazeGenerator.width and height
+        // mazeHeight = mazeGenerator.size;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (gameScript.gameActive) {
+            adjacencyList = BuildAdjacencyList(mazeGenerator);
+            startCell = WorldToGrid(transform.position);
+            if (goalCell != WorldToGrid(player.transform.position)) {
+                goalCell = WorldToGrid(player.transform.position);
+                pathQueue = new Queue<Vector3>();
+            }
+
+            if (startCell != goalCell) {
+                List<Vector3> path = FindPathBFS(startCell, goalCell);
+                if (path.Count > 0)
+                {
+                    foreach (var pos in path)
+                    {
+                        pathQueue.Enqueue(pos);
+                        //Debug.Log(pos);
+                    }
+                }
+                if (pathQueue.Count > 0)
+                {
+                    Vector3 nextPos = pathQueue.Peek();
+                    Debug.Log(nextPos);
+                    transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+
+                    if (Vector3.Distance(transform.position, nextPos) < 15f)
+                    {
+                        pathQueue.Dequeue();
+                    }
+                }
+            }
+        }
         switch (currState)
         {
             case (EnemyState.Attack1):
@@ -125,7 +179,7 @@ public class BossEnemy : MonoBehaviour
     private void OnTriggerEnter(Collider c)
     {
         if (c.name.Contains("Arrow") && currState != EnemyState.Die && !isInvincible) {
-            StartCoroutine(Hit());
+            Destroy(c.gameObject);
             HP -= 1;
         } else if (c.name == "Truck_Thing_Boss") {
             if (!player.GetComponent<Player_Movement_Boss>().isInvincible) {
@@ -134,15 +188,6 @@ public class BossEnemy : MonoBehaviour
         }
     }
 
-    IEnumerator Hit()
-    { 
-        gotHit = true;
-        GetComponent<Renderer>().material.color = Color.red;
-        yield return new WaitForSeconds(.1f);
-        GetComponent<Renderer>().material.color = og;
-        gotHit = false;
-        yield return null;
-    }
 
     void changePhase(int i) {
         phase = i;
@@ -228,17 +273,120 @@ public class BossEnemy : MonoBehaviour
     {
         Debug.Log("test");
         player.GetComponent<Player_Movement_Boss>().isInvincible = true;
-        for (int i = 0; i < 5; i++) {
-            GetComponent<Renderer>().material.color = transparent;
-            yield return new WaitForSeconds(0.1f);
-            GetComponent<Renderer>().material.color = og;
-            yield return new WaitForSeconds(0.1f);
-        }
-        GetComponent<Renderer>().material.color = Color.red;
         yield return new WaitForSeconds(3f);
         //SceneManager.LoadScene(2); //Replace with actual scene when we make it
         Destroy(gameObject);
         yield return null;
+    }
+
+    private Dictionary<int, List<int>> BuildAdjacencyList(Maze_Generator maze)
+    {
+        Dictionary<int, List<int>> adjList = new Dictionary<int, List<int>>();
+
+        if (maze.mstEdges == null)
+        {
+            Debug.LogError("Maze MST edges not generated yet!");
+            return adjList;
+        }
+
+        foreach (var edge in maze.mstEdges)
+        {
+            if (!adjList.ContainsKey(edge.from))
+                adjList[edge.from] = new List<int>();
+
+            if (!adjList.ContainsKey(edge.to))
+                adjList[edge.to] = new List<int>();
+
+            adjList[edge.from].Add(edge.to);
+            adjList[edge.to].Add(edge.from);
+        }
+
+        return adjList;
+    }
+
+    private List<Vector3> FindPathBFS(Vector2Int start, Vector2Int goal)
+    {
+        Queue<Vector2Int> queue = new Queue<Vector2Int>();
+        Dictionary<Vector2Int, Vector2Int?> cameFrom = new Dictionary<Vector2Int, Vector2Int?>();
+        queue.Enqueue(start);
+        cameFrom[start] = null;
+
+        while (queue.Count > 0)
+        {
+            Vector2Int current = queue.Dequeue();
+
+            if (current == goal)
+                break;
+            //Debug.Log(current);
+            int currentIndex = GridToIndex(current);
+            if (!adjacencyList.ContainsKey(currentIndex))
+            {
+                Debug.LogWarning($"Skipping out-of-bounds index {currentIndex} for cell {current}");
+                continue;
+            }
+
+            foreach (int neighborIndex in adjacencyList[currentIndex])
+            {
+                Vector2Int neighbor = IndexToGrid(neighborIndex);
+
+                if (!cameFrom.ContainsKey(neighbor) && IsValidCell(neighbor))
+                {
+                    queue.Enqueue(neighbor);
+                    cameFrom[neighbor] = current;
+                }
+            }
+        }
+
+        List<Vector3> path = new List<Vector3>();
+        Vector2Int? step = goal;
+
+        while (step != null && cameFrom.ContainsKey(step.Value))
+        {
+            path.Add(GridToWorld(step.Value));
+            step = cameFrom[step.Value];
+        }
+
+        path.Reverse();
+        return path;
+    }
+
+    private int GridToIndex(Vector2Int cell)
+    {
+        if (!IsValidCell(cell))
+        {
+            Debug.LogError($"Invalid cell coordinates: {cell}");
+            return -1; // Return invalid index
+        }
+        return cell.y * mazeWidth + cell.x;
+    }
+
+    private Vector2Int IndexToGrid(int index)
+    {
+        if (index < 0 || index >= mazeWidth * mazeHeight)
+        {
+            Debug.LogError($"Invalid index: {index}");
+            return new Vector2Int(-1, -1); // Return invalid coordinates
+        }
+        return new Vector2Int(index % mazeWidth, index / mazeWidth);
+    }
+
+    private Vector2Int WorldToGrid(Vector3 worldPos)
+    {
+        int gridX = Mathf.RoundToInt((worldPos.x - topLeftX) / cellSize);
+        int gridY = Mathf.RoundToInt((topLeftZ - worldPos.z) / cellSize);
+        return new Vector2Int(gridX, gridY);
+    }
+
+    private Vector3 GridToWorld(Vector2Int gridPos)
+    {
+        float worldX = gridPos.x * cellSize + topLeftX;
+        float worldZ = topLeftZ - gridPos.y * cellSize;
+        return new Vector3(worldX, 0, worldZ);
+    }
+
+    private bool IsValidCell(Vector2Int cell)
+    {
+        return cell.x >= 0 && cell.x < mazeWidth && cell.y >= 0 && cell.y < mazeHeight;
     }
 
 
