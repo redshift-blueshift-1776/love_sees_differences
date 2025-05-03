@@ -14,7 +14,7 @@ public class SettingsMenu : MonoBehaviour {
         //sensitivitySlider.value = savedSensitivity;
         bool ScreenTintEnabled = PlayerPrefs.GetInt("ScreenTintEnabled", 1) == 1;
         ScreenTintEnabledToggle.isOn = ScreenTintEnabled;
-        bool OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
+        bool OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 0) == 1;
         OldUIEnabledToggle.isOn = OldUIEnabled;
     }
     // public void SetMouseSensitivity(float sensitivity) {

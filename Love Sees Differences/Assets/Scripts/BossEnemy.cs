@@ -47,7 +47,7 @@ public class BossEnemy : MonoBehaviour
     bool startedPhase3 = false;
     bool startedPhase4 = false;
 
-    [SerializeField] GameObject orangePassenger;
+    [SerializeField] GameObject orangePedestrian;
     [SerializeField] float speed;
 
     [Header("Maze Configuration")]
@@ -240,7 +240,7 @@ public class BossEnemy : MonoBehaviour
         }    
     }
 
-    void spawnOrangePassenger(Vector3 size, Vector3 passengerDirection, float speed) {
+    void spawnOrangePedestrian(Vector3 size, Vector3 pedestrianDirection, float speed) {
         
     }
 

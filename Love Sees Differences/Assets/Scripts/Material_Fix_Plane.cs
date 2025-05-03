@@ -12,7 +12,7 @@ public class Material_Fix_Plane : MonoBehaviour
 
         renderer.material = new Material(renderer.material);
 
-        float tileSize = 1f; // world units per tile
+        float tileSize = 0.2f; // world units per tile
         //float xRescale = (scale.x > scale.z) ? scale.x / tileSize : scale.z / tileSize;
         renderer.material.mainTextureScale = new Vector2(scale.x / tileSize, scale.z / tileSize);
     }

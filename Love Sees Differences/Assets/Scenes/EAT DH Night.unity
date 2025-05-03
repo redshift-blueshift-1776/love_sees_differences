@@ -2418,6 +2418,7 @@ MonoBehaviour:
   xSpeed: -5
   zSpeed: -5
   spawnInterval: 3
+  despawnTime: 10
   game: {fileID: 0}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: 
@@ -3288,6 +3289,7 @@ GameObject:
   - component: {fileID: 723161802}
   - component: {fileID: 723161801}
   - component: {fileID: 723161800}
+  - component: {fileID: 723161804}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -3382,6 +3384,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &723161804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 723161799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 830a58ff2152748e590cae6cb8116779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &735964001
 GameObject:
   m_ObjectHideFlags: 0
@@ -3595,6 +3609,7 @@ MonoBehaviour:
   xSpeed: 5
   zSpeed: -5
   spawnInterval: 5
+  despawnTime: 10
   game: {fileID: 0}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: 
@@ -3813,6 +3828,7 @@ MonoBehaviour:
   xSpeed: -1
   zSpeed: 5
   spawnInterval: 11
+  despawnTime: 10
   game: {fileID: 0}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: 
@@ -4351,6 +4367,7 @@ MonoBehaviour:
   xSpeed: 5
   zSpeed: 5
   spawnInterval: 7
+  despawnTime: 10
   game: {fileID: 0}
   person: {fileID: 3358428418659382169, guid: de3a2db4f0b7b4651a057a772cc2419d, type: 3}
   levelName: 
