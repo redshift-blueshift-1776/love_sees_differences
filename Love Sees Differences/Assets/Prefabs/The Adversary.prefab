@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 5086457449220032442}
   - component: {fileID: 1957509621895842290}
   m_Layer: 0
-  m_Name: Wall (2)
+  m_Name: Shield (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -502,6 +502,7 @@ GameObject:
   - component: {fileID: 2825549914070483640}
   - component: {fileID: 1897181374090997843}
   - component: {fileID: 9213201291808049723}
+  - component: {fileID: 4670142173268389234}
   m_Layer: 0
   m_Name: The Adversary
   m_TagString: Untagged
@@ -563,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abf1eb14cad241d1a46f9a93a614dd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currState: 0
+  currState: 3
   range: 0
   HP: 0
   maxHP: 0
@@ -573,14 +574,41 @@ MonoBehaviour:
   gameScript: {fileID: 0}
   xBound: 0
   isInvincible: 0
-  orangePassenger: {fileID: 3358428418659382169, guid: 27e368e3f92ce44a48fd073431c0058a, type: 3}
-  speed: 5
+  orangePedestrian: {fileID: 3358428418659382169, guid: 27e368e3f92ce44a48fd073431c0058a, type: 3}
+  speed: 25
   mazeGenerator: {fileID: 0}
   mazeWidth: 5
   mazeHeight: 5
   cellSize: 50
   topLeftX: -100
   topLeftZ: 100
+--- !u!54 &4670142173268389234
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013517327376911372}
+  serializedVersion: 4
+  m_Mass: 10000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &2034806611722477120
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +622,7 @@ GameObject:
   - component: {fileID: 6061338052533185531}
   - component: {fileID: 1810084053376899003}
   m_Layer: 0
-  m_Name: Wall (3)
+  m_Name: Shield (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -837,7 +865,7 @@ GameObject:
   - component: {fileID: 7468824640216443558}
   - component: {fileID: 3143356149291904927}
   m_Layer: 0
-  m_Name: Wall
+  m_Name: Shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1636,7 +1664,7 @@ GameObject:
   - component: {fileID: 7575333761612855859}
   - component: {fileID: 6893480206120953072}
   m_Layer: 0
-  m_Name: Wall (1)
+  m_Name: Shield (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -69,10 +69,12 @@ public class BossEnemy : MonoBehaviour
 
     private Vector3 lastPosition;
 
+    private int lastProcessedBeat = -1;
+
     // Start is called before the first frame update
     void Start()
     {
-        //phase = 1;
+        phase = 1;
         //maxHP = 4000;
         //HP = 4000;
         //moveSpeed = 5;
@@ -121,7 +123,7 @@ public class BossEnemy : MonoBehaviour
                 if (pathQueue.Count > 0)
                 {
                     Vector3 nextPos = pathQueue.Peek();
-                    Debug.Log(nextPos);
+                    //Debug.Log(nextPos);
                     transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
 
                     if (Vector3.Distance(transform.position, nextPos) < 15f)
@@ -130,51 +132,97 @@ public class BossEnemy : MonoBehaviour
                     }
                 }
             }
-        }
-        switch (currState)
-        {
-            case (EnemyState.Attack1):
-                Attack1();
-                break;
-            case (EnemyState.Attack2):
-                Attack2();
-                break;
-            case (EnemyState.Die):
-                Die();
-                break;
-        }    
+            if (HP <= 0) {
+                currState = EnemyState.Die;
+            }
 
-        if (HP <= 0) {
-            currState = EnemyState.Die;
-        }
+            float healthRatio = (float)HP / (float)maxHP;
+            if (healthRatio <= 0.75f && !startedPhase2) {
+                phase = 2;
+                Debug.Log("phase 2 entered");
+                StartCoroutine(changeAttackPhase());
+                startedPhase2 = true;
+            }
+            if (healthRatio <= 0.50f && !startedPhase3) {
+                phase = 3;
+                Debug.Log("phase 3 entered");
+                startedPhase3 = true;
+            }
+            if (healthRatio <= 0.25f && !startedPhase4) {
+                phase = 4;
+                Debug.Log("phase 4 entered");
+                startedPhase4 = true;
+            }
 
-        if ((float)HP / (float)maxHP <= 0.75f && !startedPhase2) {
-            phase = 2;
-            Debug.Log("phase 2 entered");
-            StartCoroutine(changeAttackPhase());
-            startedPhase2 = true;
-        }
+            // Beat-based attack logic
+            int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
+            //Debug.Log("Beat: " + currentBeat);
+            if (currentBeat > lastProcessedBeat) {
+                lastProcessedBeat = currentBeat;
+                //Debug.Log("Attack");
 
-        if ((float)HP / (float)maxHP <= 0.50f && !startedPhase3) {
-            phase = 3;
-            Debug.Log("phase 3 entered");
-            startedPhase3 = true;
-        }
+                // Only trigger attacks on the beat
+                if (ShouldAttackThisBeat(currentBeat)) {
+                    HandleAttackOnBeat();
+                }
+            }
 
-        if ((float)HP / (float)maxHP <= 0.25f && !startedPhase4) {
-            phase = 4;
-            Debug.Log("phase 4 entered");
-            startedPhase4 = true;
-        }
-
-        if (phase == 2) {
-            
-        }
-
-        if (gotHit) {
-            
+            // Any non-beat logic
+            if (gotHit) {
+                // respond to getting hit
+            }
         }
     }
+
+    private void HandleAttackOnBeat() {
+        switch (currState) {
+            case EnemyState.Attack1:
+                Attack1();
+                break;
+            case EnemyState.Attack2:
+                Attack2();
+                break;
+            case EnemyState.Die:
+                Die();
+                break;
+            default:
+                ChooseNextAttack(); // e.g., cycle or randomize attacks
+                break;
+        }
+    }
+
+    private void ChooseNextAttack() {
+        switch (phase) {
+            case 1:
+                currState = EnemyState.Attack1;
+                break;
+            case 2:
+                currState = (Random.value < 0.5f) ? EnemyState.Attack1 : EnemyState.Attack2;
+                break;
+            case 3:
+                currState = EnemyState.Attack2;
+                break;
+            case 4:
+                currState = (Random.value < 0.5f) ? EnemyState.Attack1 : EnemyState.Attack2;
+                break;
+        }
+    }
+
+    bool ShouldAttackThisBeat(int beat) {
+        switch (phase) {
+            case 1:
+                return beat % 8 == 0; // Slower
+            case 2:
+                return beat % 4 == 0; // Medium
+            case 3:
+                return beat % 4 == 0 || beat % 8 == 2; // More aggressive
+            case 4:
+                return beat % 2 == 0; // Fast
+            default:
+                return false;
+        }
+    }
+
 
     private void OnTriggerEnter(Collider c)
     {
@@ -209,12 +257,27 @@ public class BossEnemy : MonoBehaviour
 
     void Attack1()
     {
+        Vector3 size = new Vector3(1,1,1);
         if (phase == 1) {
-            
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 20);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 20);
         } 
 
         if (phase == 2) {
-            
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 20);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 20);
+            spawnOrangePedestrian(size, new Vector3(0.6f, 0, 0.8f), 20);
+            spawnOrangePedestrian(size, new Vector3(0.8f, 0, 0.6f), 20);
+            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, 0.8f), 20);
+            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, 0.6f), 20);
+            spawnOrangePedestrian(size, new Vector3(0.6f, 0, -0.8f), 20);
+            spawnOrangePedestrian(size, new Vector3(0.8f, 0, -0.6f), 20);
+            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, -0.8f), 20);
+            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, -0.6f), 20);
         }
 
         if (phase == 3) {
@@ -241,13 +304,20 @@ public class BossEnemy : MonoBehaviour
     }
 
     void spawnOrangePedestrian(Vector3 size, Vector3 pedestrianDirection, float speed) {
-        
+        GameObject newPerson = Instantiate(orangePedestrian, transform.position, transform.rotation);
+        newPerson.transform.localScale = size;
+        newPerson.GetComponent<Orange_Pedestrian>().startingPos = pedestrianDirection;
+        newPerson.GetComponent<Orange_Pedestrian>().speed = speed;
     }
 
     void Attack2()
     {
         if (phase == 1) {
-            
+            Vector3 size = new Vector3(1,1,1);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
         }
 
         if (phase == 2) {

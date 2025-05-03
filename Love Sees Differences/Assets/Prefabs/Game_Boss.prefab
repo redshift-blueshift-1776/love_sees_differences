@@ -383,9 +383,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8322409856256257792}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Maze_Generator, Assembly-CSharp
-        m_MethodName: 
+        m_MethodName: VisualizeMapGeneration
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -405,7 +405,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3719589322219885200}
   - component: {fileID: 1092276740122837026}
-  - component: {fileID: 3873065332179084371}
   - component: {fileID: 8012923564303768220}
   - component: {fileID: 1349637307085012407}
   m_Layer: 0
@@ -498,99 +497,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &3873065332179084371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8322409856256257792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 597e4a848294f400f81caa8338c0a60d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  gameActive: 0
-  timer: 0
-  levelLengthInSeconds: 101
-  BuildingW: {fileID: 0}
-  BuildingA: {fileID: 0}
-  BuildingS: {fileID: 0}
-  BuildingD: {fileID: 0}
-  GeneratorCanvas: {fileID: 880796500621333240}
-  ScreenTintCanvas: {fileID: 1630994754639330670}
-  UICanvas: {fileID: 6952604149722283078}
-  UICanvasNew: {fileID: 4588307448237618232}
-  EndScreenCanvas: {fileID: 5703489614459907537}
-  loadingAudio: {fileID: 0}
-  gameAudio: {fileID: 0}
-  deliverSound: {fileID: 6805691589702573656}
-  scoreText: {fileID: 9027554173912847199}
-  timerText: {fileID: 8745630383871846250}
-  peopleAtWText: {fileID: 8836193456588098773}
-  peopleAtAText: {fileID: 3493407089010922620}
-  peopleAtSText: {fileID: 3622479481596664044}
-  peopleAtDText: {fileID: 4191244166334884516}
-  peopleCarriedText: {fileID: 2454550040947631141}
-  polarWToggle: {fileID: 7815993341900667427}
-  polarAToggle: {fileID: 3523472339277322217}
-  polarSToggle: {fileID: 4633035277591999301}
-  polarDToggle: {fileID: 7704810032545501093}
-  selfPolarToggle: {fileID: 8032145417450438819}
-  scoreTextNew: {fileID: 2492809755392383777}
-  timerTextNew: {fileID: 2778392818948402964}
-  peopleAtWTextNew: {fileID: 3618765895353232774}
-  peopleAtWParent: {fileID: 8898305814805368610}
-  peopleAtWImages:
-  - {fileID: 0}
-  peopleAtATextNew: {fileID: 197113225774942737}
-  peopleAtAParent: {fileID: 6881859758715409590}
-  peopleAtAImages:
-  - {fileID: 0}
-  peopleAtSTextNew: {fileID: 8391856973983472548}
-  peopleAtSParent: {fileID: 4607821633855868053}
-  peopleAtSImages:
-  - {fileID: 0}
-  peopleAtDTextNew: {fileID: 5593855814971726890}
-  peopleAtDParent: {fileID: 2327372477274616552}
-  peopleAtDImages:
-  - {fileID: 0}
-  peopleCarriedTextNew: {fileID: 9061310288715557979}
-  peopleCarriedParent: {fileID: 3516699250934029401}
-  peopleCarriedImages: []
-  polarWToggleNew: {fileID: 3722103577241432669}
-  polarAToggleNew: {fileID: 5180754125184883592}
-  polarSToggleNew: {fileID: 1164086172432846520}
-  polarDToggleNew: {fileID: 6556828350475424540}
-  selfPolarToggleNew: {fileID: 6851544501032497298}
-  boostButton: {fileID: 6310165322683748258}
-  jumpButton: {fileID: 8974599392423367347}
-  W_to_S: {fileID: 2800000, guid: d2b5fddab65794011bbc15ab39b6cd94, type: 3}
-  A_to_D: {fileID: 2800000, guid: de2844114a3174e8fa77882e4116a191, type: 3}
-  S_to_W: {fileID: 2800000, guid: 28fc3877ef0ed494793a5f44995878ba, type: 3}
-  D_to_A: {fileID: 2800000, guid: 0ba7ff2c8eeea4fac87e1da13ca99fd3, type: 3}
-  finalScoreText: {fileID: 2756739184797904563}
-  finalDeliveriesText: {fileID: 4911942313656283016}
-  finalCollisionsText: {fileID: 250018550051447092}
-  peopleAtW: 0
-  peopleAtA: 0
-  peopleAtS: 0
-  peopleAtD: 0
-  peopleCarried: 0
-  peopleCarriedW: 0
-  peopleCarriedA: 0
-  peopleCarriedS: 0
-  peopleCarriedD: 0
-  levelName: 
-  maxCarryCapacity: 10
-  regenerationInterval: 3
-  tempo: 120
-  danceW: 0
-  danceA: 0
-  danceS: 0
-  danceD: 0
-  OldUIEnabled: 0
 --- !u!114 &8012923564303768220
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -620,6 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   boss: {fileID: 0}
+  bossScript: {fileID: 0}
   gameActive: 0
   timer: 0
   BossHealth: 0
@@ -791,6 +698,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6377393010885182083, guid: bdd92027bb1db417aba2a556524a3da6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8249844828123942470, guid: bdd92027bb1db417aba2a556524a3da6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8946240609432431014, guid: bdd92027bb1db417aba2a556524a3da6, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

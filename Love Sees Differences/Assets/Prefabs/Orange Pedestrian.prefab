@@ -114,9 +114,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6629494300646896327}
-  - component: {fileID: 4494488854954601954}
   - component: {fileID: 432512421808668891}
   - component: {fileID: 4797806674246854564}
+  - component: {fileID: 4033734532444846342}
   m_Layer: 0
   m_Name: Orange Pedestrian
   m_TagString: Person
@@ -143,25 +143,6 @@ Transform:
   - {fileID: 1869873498014348903}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4494488854954601954
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3358428418659382169}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e1a1b4503adf4dd1947fde789727fe4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 2
-  despawnTime: 10
-  player: {fileID: 7844583227466237896, guid: 648f78555a1f941938d39bdd685332da, type: 3}
-  game: {fileID: 8322409856256257792, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
-  sound: {fileID: 154832955552008379}
-  startingPos: {x: 0, y: 0, z: 0}
-  levelName: 
 --- !u!65 &432512421808668891
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -210,6 +191,25 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &4033734532444846342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3358428418659382169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bb63d34211347dc8545e2fb6913a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  despawnTime: 10
+  player: {fileID: 0}
+  game: {fileID: 0}
+  sound: {fileID: 154832955552008379}
+  startingPos: {x: 0, y: 0, z: 0}
+  levelName: 
 --- !u!1 &3859052816874093223
 GameObject:
   m_ObjectHideFlags: 0
