@@ -92,7 +92,7 @@ public class Orange_Pedestrian : MonoBehaviour
         // Save the collision data to PlayerPrefs, storing all collisions
         // Get the current count of saved collisions
         int collisionCount = PlayerPrefs.GetInt(collisionKeyPrefix + "Count", 0);
-        Debug.Log(collisionCount);
+        //Debug.Log(collisionCount);
 
         // Save the collision time and position for each entry
         PlayerPrefs.SetFloat(collisionKeyPrefix + "Time_" + collisionCount, time);

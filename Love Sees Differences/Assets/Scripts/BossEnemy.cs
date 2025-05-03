@@ -48,6 +48,7 @@ public class BossEnemy : MonoBehaviour
     bool startedPhase4 = false;
 
     [SerializeField] GameObject orangePedestrian;
+    [SerializeField] GameObject graphQuestionAttackTower;
     [SerializeField] float speed;
 
     [Header("Maze Configuration")]
@@ -262,6 +263,7 @@ public class BossEnemy : MonoBehaviour
 
     void Attack1()
     {
+        int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
         Vector3 size = new Vector3(1,1,1);
         if (phase == 1) {
             spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
@@ -286,9 +288,11 @@ public class BossEnemy : MonoBehaviour
         }
 
         if (phase == 3) {
-            int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
             if (currentBeat % 4 == 0) {
                 StartCoroutine(LineAttack());
+            }
+            if (currentBeat % 8 == 0) {
+                StartCoroutine(GraphQuestionAttack());
             }
             spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
             spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
@@ -301,6 +305,9 @@ public class BossEnemy : MonoBehaviour
         }
 
         // Change attack
+        if (currentBeat % 32 == 0) {
+            changeAttack(2);
+        }
     }
 
     void changeAttack (int i) {
@@ -335,22 +342,128 @@ public class BossEnemy : MonoBehaviour
         yield break;
     }
 
+    private bool isFirstAttack = true;
+
+    private void Shuffle<T>(List<T> list) {
+        for (int i = list.Count - 1; i > 0; i--) {
+            int j = Random.Range(0, i + 1);
+            T temp = list[i];
+            list[i] = list[j];
+            list[j] = temp;
+        }
+    }
+
+    private IEnumerator spawnGraphQuestionAttackTower(Vector3 location) {
+        Quaternion defaultRotation = Quaternion.Euler(0, 0, 0);
+        GameObject newTower = Instantiate(graphQuestionAttackTower, location, defaultRotation);
+        yield return new WaitForSeconds(2.5f);
+        Destroy(newTower);
+    }
+
+    private IEnumerator GraphQuestionAttack() {
+        int startBeat = BeatManager.Instance.GetCurrentBeatNumber();
+
+        Vector3 playerPos = player.transform.position;
+        List<Vector3> pathPositions = new List<Vector3> {
+            playerPos + new Vector3(0, 0, 15),   // Forward
+            playerPos + new Vector3(15, 0, 0),   // Right
+            playerPos + new Vector3(0, 0, -15),  // Backward
+            playerPos + new Vector3(-15, 0, 0)   // Left
+        };
+
+        if (!isFirstAttack) {
+            Shuffle(pathPositions);
+        }
+        isFirstAttack = false;
+
+        // Beats 0–3: spawn one tower per beat
+        for (int i = 0; i < 4; i++) {
+            int targetBeat = startBeat + i;
+            yield return new WaitUntil(() => BeatManager.Instance.GetCurrentBeatNumber() >= targetBeat);
+            StartCoroutine(spawnGraphQuestionAttackTower(pathPositions[i]));
+        }
+
+        // Beat 5–7: move pedestrian through points
+        yield return new WaitUntil(() => BeatManager.Instance.GetCurrentBeatNumber() >= startBeat + 5);
+
+        GameObject pedestrian = Instantiate(orangePedestrian, pathPositions[0], Quaternion.identity);
+
+        float beatDuration = (float) BeatManager.Instance.secondsPerBeat; // Duration of a single beat in seconds
+        for (int i = 1; i < pathPositions.Count; i++) {
+            Vector3 start = pathPositions[i - 1];
+            Vector3 end = pathPositions[i];
+            float elapsed = 0f;
+            while (elapsed < beatDuration) {
+                if (pedestrian == null) yield break; // Exit if the object was somehow destroyed
+                pedestrian.transform.position = Vector3.Lerp(start, end, elapsed / beatDuration);
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+            pedestrian.transform.position = end;
+
+            // Wait until next beat
+            yield return new WaitUntil(() => BeatManager.Instance.GetCurrentBeatNumber() >= startBeat + 5 + i);
+        }
+
+        Destroy(pedestrian);
+    }
+
     void Attack2()
     {
+        int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
+        Vector3 size = new Vector3(1,1,1);
         if (phase == 1) {
-            Vector3 size = new Vector3(1,1,1);
             spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
             spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
             spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
             spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
+            Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+            float d = Vector3.Distance(transform.position, player.transform.position);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
         }
 
         if (phase == 2) {
-
+            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 20);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 20);
+            Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+            float d = Vector3.Distance(transform.position, player.transform.position);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            target = new Vector3(player.transform.position.x + 5, player.transform.position.y, player.transform.position.z);
+            d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            target = new Vector3(player.transform.position.x - 5, player.transform.position.y, player.transform.position.z);
+            d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            if (currentBeat % 8 == 0) {
+                StartCoroutine(GraphQuestionAttack());
+            }
         }
 
         if (phase == 3) {
-            
+            if (currentBeat % 8 == 0) {
+                StartCoroutine(GraphQuestionAttack());
+            }
+            Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+            float d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            target = new Vector3(player.transform.position.x + 5, player.transform.position.y, player.transform.position.z);
+            d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            target = new Vector3(player.transform.position.x - 5, player.transform.position.y, player.transform.position.z);
+            d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            target = new Vector3(player.transform.position.x + 10, player.transform.position.y, player.transform.position.z);
+            d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            target = new Vector3(player.transform.position.x - 10, player.transform.position.y, player.transform.position.z);
+            d = Vector3.Distance(transform.position, target);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
         }
 
         if (phase == 4) {
@@ -358,6 +471,9 @@ public class BossEnemy : MonoBehaviour
         }
 
         // Change attack
+        if (currentBeat % 32 == 0) {
+            changeAttack(1);
+        }
     }
 
     void Die() {
@@ -366,7 +482,7 @@ public class BossEnemy : MonoBehaviour
 
     private IEnumerator DieCoroutine()
     {
-        Debug.Log("test");
+        //Debug.Log("test");
         player.GetComponent<Player_Movement_Boss>().isInvincible = true;
         yield return new WaitForSeconds(3f);
         //SceneManager.LoadScene(2); //Replace with actual scene when we make it
