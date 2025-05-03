@@ -146,11 +146,13 @@ public class BossEnemy : MonoBehaviour
             if (healthRatio <= 0.50f && !startedPhase3) {
                 phase = 3;
                 Debug.Log("phase 3 entered");
+                StartCoroutine(changeAttackPhase());
                 startedPhase3 = true;
             }
             if (healthRatio <= 0.25f && !startedPhase4) {
                 phase = 4;
                 Debug.Log("phase 4 entered");
+                StartCoroutine(changeAttackPhase());
                 startedPhase4 = true;
             }
 
@@ -245,7 +247,10 @@ public class BossEnemy : MonoBehaviour
     {
         isInvincible = true;
         // Will do a cutscene?
-        yield return new WaitForSeconds(.5f);
+        // mazeGenerator.GenerateGraph();
+        // mazeGenerator.GenerateMaze();
+        // mazeGenerator.DeleteAllWallsAtOnce();
+        yield return new WaitForSeconds(0.5f);
         isInvincible = false;
         yield return null;
     }
@@ -281,7 +286,14 @@ public class BossEnemy : MonoBehaviour
         }
 
         if (phase == 3) {
-            
+            int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
+            if (currentBeat % 4 == 0) {
+                StartCoroutine(LineAttack());
+            }
+            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
         }
 
         if (phase == 4) {
@@ -308,6 +320,19 @@ public class BossEnemy : MonoBehaviour
         newPerson.transform.localScale = size;
         newPerson.GetComponent<Orange_Pedestrian>().startingPos = pedestrianDirection;
         newPerson.GetComponent<Orange_Pedestrian>().speed = speed;
+    }
+
+    private IEnumerator LineAttack()
+    {
+        Vector3 size = new Vector3(1,1,1);
+        Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
+        for (int i = 0; i < 10; i++)
+        {
+            float d = Vector3.Distance(transform.position, player.transform.position);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            yield return new WaitForSeconds(0.1f); // 10 bullets per second
+        }
+        yield break;
     }
 
     void Attack2()

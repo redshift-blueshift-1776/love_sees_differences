@@ -40,7 +40,7 @@ public class Maze_Generator : MonoBehaviour
         
     }
 
-    private void GenerateGraph() {
+    public void GenerateGraph() {
         // Create a weighted undirected graph representing the grid. Add each grid space as a vertex.
         graph = new Dictionary<int, List<(int, float)>>();
 
@@ -72,7 +72,7 @@ public class Maze_Generator : MonoBehaviour
 
     }
 
-    private void GenerateMaze() {
+    public void GenerateMaze() {
         mstEdges = new List<(int, int)>();
         // Run Prim's algorithm to get a minimum spanning tree.
         HashSet<int> visited = new HashSet<int>();
@@ -145,7 +145,7 @@ public class Maze_Generator : MonoBehaviour
         StartCoroutine(DeleteWallsOneByOne());
     }
 
-    private IEnumerator DeleteWallsOneByOne()
+    public IEnumerator DeleteWallsOneByOne()
     {
         foreach (var edge in mstEdges)
         {

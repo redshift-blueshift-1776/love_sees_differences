@@ -154,6 +154,9 @@ public class Player_Movement_Boss : MonoBehaviour
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
+        if (transform.position.y > 100) {
+            playerVelocity.y = gravityValue * speedUp;
+        }
         if (gameScript.gameActive) {
             controller.Move(move * Time.deltaTime);
             controller.Move(playerVelocity * Time.deltaTime);
