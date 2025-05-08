@@ -52,6 +52,7 @@ public class Game_Boss : MonoBehaviour
 
     [Header("UI Canvas New")]
     [SerializeField] private TextMeshProUGUI scoreTextNew;
+    [SerializeField] private TextMeshProUGUI healthTextNew;
     [SerializeField] private TextMeshProUGUI arrowsTextNew;
 
     [SerializeField] private TextMeshProUGUI peopleAtWTextNew;
@@ -237,6 +238,12 @@ public class Game_Boss : MonoBehaviour
         {
             EndGame();
         }
+        if (maxCarryCapacity <= 0) {
+            EndGame();
+        }
+        if (player.transform.position.y < -10) {
+            EndGame();
+        }
 
         HandleBuildingInteraction();
 
@@ -322,6 +329,11 @@ public class Game_Boss : MonoBehaviour
     {
         collisions++;
         arrows = Mathf.Max(0, arrows - 1);
+        maxCarryCapacity--;
+        peopleCarriedW = 0;
+        peopleCarriedA = 0;
+        peopleCarriedS = 0;
+        peopleCarriedD = 0;
     }
 
     public bool fireArrow() {
@@ -338,7 +350,7 @@ public class Game_Boss : MonoBehaviour
             // Score = deliveries - collisions. Display on the UI.
             arrowsText.text = $"Arrows: {arrows}";
             int score = deliveries - collisions;
-            scoreTextNew.text = $"Boss Health: {BossHealth}";
+            scoreText.text = $"Boss Health: {BossHealth}";
             peopleAtWText.text = $"People at W: {peopleAtW}";
             peopleAtAText.text = $"People at A: {peopleAtA}";
             peopleAtSText.text = $"People at S: {peopleAtS}";
@@ -348,6 +360,7 @@ public class Game_Boss : MonoBehaviour
             arrowsTextNew.text = $"Arrows: {arrows}";
             int score = deliveries - collisions;
             scoreTextNew.text = $"Boss Health: {BossHealth}";
+            healthTextNew.text = $"Health: {maxCarryCapacity}";
 
             //peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
 
@@ -431,6 +444,7 @@ public class Game_Boss : MonoBehaviour
         UICanvas.SetActive(false);
         UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(true);
+        gameAudio.SetActive(false);
         int score = deliveries - collisions;
         finalScoreText.text = $"Score: {score}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";

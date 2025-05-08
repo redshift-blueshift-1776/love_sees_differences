@@ -125,7 +125,9 @@ public class BossEnemy : MonoBehaviour
                 {
                     Vector3 nextPos = pathQueue.Peek();
                     //Debug.Log(nextPos);
-                    transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+                    if (!isInvincible) {
+                        transform.position = Vector3.MoveTowards(transform.position, nextPos, speed * Time.deltaTime);
+                    }
 
                     if (Vector3.Distance(transform.position, nextPos) < 15f)
                     {
@@ -212,6 +214,9 @@ public class BossEnemy : MonoBehaviour
     }
 
     bool ShouldAttackThisBeat(int beat) {
+        if (isInvincible) {
+            return false;
+        }
         switch (phase) {
             case 1:
                 return beat % 8 == 0; // Slower
@@ -248,10 +253,10 @@ public class BossEnemy : MonoBehaviour
     {
         isInvincible = true;
         // Will do a cutscene?
-        // mazeGenerator.GenerateGraph();
-        // mazeGenerator.GenerateMaze();
-        // mazeGenerator.DeleteAllWallsAtOnce();
-        yield return new WaitForSeconds(0.5f);
+        mazeGenerator.GenerateGraph();
+        mazeGenerator.GenerateMaze();
+        yield return new WaitForSeconds(2f);
+        mazeGenerator.DeleteAllWallsAtOnce();
         isInvincible = false;
         yield return null;
     }
@@ -266,25 +271,25 @@ public class BossEnemy : MonoBehaviour
         int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
         Vector3 size = new Vector3(1,1,1);
         if (phase == 1) {
-            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 20);
-            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 20);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 25);
         } 
 
         if (phase == 2) {
-            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 20);
-            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 20);
-            spawnOrangePedestrian(size, new Vector3(0.6f, 0, 0.8f), 20);
-            spawnOrangePedestrian(size, new Vector3(0.8f, 0, 0.6f), 20);
-            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, 0.8f), 20);
-            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, 0.6f), 20);
-            spawnOrangePedestrian(size, new Vector3(0.6f, 0, -0.8f), 20);
-            spawnOrangePedestrian(size, new Vector3(0.8f, 0, -0.6f), 20);
-            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, -0.8f), 20);
-            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, -0.6f), 20);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 25);
+            spawnOrangePedestrian(size, new Vector3(0.6f, 0, 0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.8f, 0, 0.6f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, 0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, 0.6f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.6f, 0, -0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.8f, 0, -0.6f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, -0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, -0.6f), 25);
         }
 
         if (phase == 3) {
@@ -294,10 +299,10 @@ public class BossEnemy : MonoBehaviour
             if (currentBeat % 8 == 0) {
                 StartCoroutine(GraphQuestionAttack());
             }
-            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 50);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 50);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 50);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 50);
         }
 
         if (phase == 4) {
@@ -336,7 +341,7 @@ public class BossEnemy : MonoBehaviour
         for (int i = 0; i < 10; i++)
         {
             float d = Vector3.Distance(transform.position, player.transform.position);
-            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 100f);
             yield return new WaitForSeconds(0.1f); // 10 bullets per second
         }
         yield break;
@@ -413,24 +418,24 @@ public class BossEnemy : MonoBehaviour
         int currentBeat = BeatManager.Instance.GetCurrentBeatNumber();
         Vector3 size = new Vector3(1,1,1);
         if (phase == 1) {
-            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(1, 0, -1), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 25);
             Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             float d = Vector3.Distance(transform.position, player.transform.position);
             spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
         }
 
         if (phase == 2) {
-            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 20);
-            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 20);
-            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 20);
-            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 20);
-            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 20);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(1, 0, -1), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, -1), 25);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 25);
             Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             float d = Vector3.Distance(transform.position, player.transform.position);
             spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
@@ -451,19 +456,19 @@ public class BossEnemy : MonoBehaviour
             }
             Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             float d = Vector3.Distance(transform.position, target);
-            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 75f);
             target = new Vector3(player.transform.position.x + 5, player.transform.position.y, player.transform.position.z);
             d = Vector3.Distance(transform.position, target);
-            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 75f);
             target = new Vector3(player.transform.position.x - 5, player.transform.position.y, player.transform.position.z);
             d = Vector3.Distance(transform.position, target);
-            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 75f);
             target = new Vector3(player.transform.position.x + 10, player.transform.position.y, player.transform.position.z);
             d = Vector3.Distance(transform.position, target);
-            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 75f);
             target = new Vector3(player.transform.position.x - 10, player.transform.position.y, player.transform.position.z);
             d = Vector3.Distance(transform.position, target);
-            spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 75f);
         }
 
         if (phase == 4) {

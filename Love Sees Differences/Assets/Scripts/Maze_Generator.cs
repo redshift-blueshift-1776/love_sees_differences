@@ -41,6 +41,14 @@ public class Maze_Generator : MonoBehaviour
     }
 
     public void GenerateGraph() {
+        foreach (Transform child in transform)
+        {
+            if (child.name.StartsWith("Wall_"))
+            {
+                child.gameObject.SetActive(true);
+                walls.Add(child.gameObject);
+            }
+        }
         // Create a weighted undirected graph representing the grid. Add each grid space as a vertex.
         graph = new Dictionary<int, List<(int, float)>>();
 
@@ -155,7 +163,7 @@ public class Maze_Generator : MonoBehaviour
             if (wallToDelete)
             {
                 walls.Remove(wallToDelete);
-                Destroy(wallToDelete);
+                wallToDelete.SetActive(false);
             }
             yield return new WaitForSeconds(0.1f); // 10 walls per second
         }
@@ -173,7 +181,7 @@ public class Maze_Generator : MonoBehaviour
             if (wallToDelete)
             {
                 walls.Remove(wallToDelete);
-                Destroy(wallToDelete);
+                wallToDelete.SetActive(false);
             }
         }
     }
