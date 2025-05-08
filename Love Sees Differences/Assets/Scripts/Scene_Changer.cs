@@ -126,6 +126,11 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(23);
     }
 
+    public void LoadLetsScreamDown()
+    {
+        SceneManager.LoadScene(24);
+    }
+
     
 
     public void restartLevel() {
