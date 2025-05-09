@@ -218,6 +218,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = defaultRotation;
                 rightArmTarget = zn90;
                 rightArmLowerTarget = zn90;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.WeightsDance1;
                 break;
 
@@ -226,6 +230,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = z90;
                 rightArmTarget = z180;
                 rightArmLowerTarget = defaultRotation;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.WeightsDance2;
                 break;
 
@@ -247,6 +255,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = zn90;
                 rightArmTarget = x60zn45;
                 rightArmLowerTarget = z45;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.Aluminum1;
                 break;
 
@@ -255,6 +267,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = zn45;
                 rightArmTarget = x90zn45;
                 rightArmLowerTarget = z90;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.Aluminum2;
                 break;
 
@@ -311,6 +327,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = defaultRotation;
                 rightArmTarget = xn45z45;
                 rightArmLowerTarget = defaultRotation;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.Floss7;
                 break;
 
@@ -319,6 +339,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = defaultRotation;
                 rightArmTarget = zn90;
                 rightArmLowerTarget = defaultRotation;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.Floss8;
                 break;
 
@@ -327,6 +351,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = defaultRotation;
                 rightArmTarget = x45z45;
                 rightArmLowerTarget = defaultRotation;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.Floss9;
                 break;
 
@@ -335,6 +363,10 @@ public class Love_Truck_Passenger : MonoBehaviour
                 leftArmLowerTarget = defaultRotation;
                 rightArmTarget = zn90;
                 rightArmLowerTarget = defaultRotation;
+                leftLegTarget = defaultRotation;
+                leftLegLowerTarget = defaultRotation;
+                rightLegTarget = defaultRotation;
+                rightLegLowerTarget = defaultRotation;
                 currentPose = Pose.Floss10;
                 break;
 
