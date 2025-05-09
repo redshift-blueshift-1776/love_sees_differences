@@ -195,6 +195,9 @@ public class Love_Truck_Passenger : MonoBehaviour
 
         Quaternion z45 = Quaternion.Euler(0, 0, 45);
         Quaternion zn15 = Quaternion.Euler(0, 0, -15);
+        Quaternion zn45 = Quaternion.Euler(0, 0, -45);
+        Quaternion x60z45 = Quaternion.Euler(60, 0, 45);
+        Quaternion x60zn45 = Quaternion.Euler(60, 0, -45);
 
         switch (pose)
         {
@@ -240,17 +243,17 @@ public class Love_Truck_Passenger : MonoBehaviour
                 break;
 
             case Pose.Aluminum1:
-                leftArmTarget = x45z45;
+                leftArmTarget = x90z45;
                 leftArmLowerTarget = zn90;
-                rightArmTarget = x45zn45;
-                rightArmLowerTarget = defaultRotation;
+                rightArmTarget = x60zn45;
+                rightArmLowerTarget = z45;
                 currentPose = Pose.Aluminum1;
                 break;
 
             case Pose.Aluminum2:
-                leftArmTarget = x45z45;
-                leftArmLowerTarget = defaultRotation;
-                rightArmTarget = x45zn45;
+                leftArmTarget = x60z45;
+                leftArmLowerTarget = zn45;
+                rightArmTarget = x90zn45;
                 rightArmLowerTarget = z90;
                 currentPose = Pose.Aluminum2;
                 break;

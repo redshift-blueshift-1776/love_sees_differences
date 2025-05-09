@@ -131,6 +131,16 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(24);
     }
 
+    public void LoadWinScreen()
+    {
+        SceneManager.LoadScene(25);
+    }
+
+    public void LoadEclipseNight()
+    {
+        SceneManager.LoadScene(26);
+    }
+
     
 
     public void restartLevel() {
