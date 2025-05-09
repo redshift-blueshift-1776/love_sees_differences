@@ -74,6 +74,7 @@ public class Player_Movement_Boss : MonoBehaviour
         polarD = false;
         selfPolar = false;
         boosted = false;
+        isInvincible = false;
 
         mainCamera.SetActive(true);
         alternateCamera.SetActive(false);
@@ -199,10 +200,10 @@ public class Player_Movement_Boss : MonoBehaviour
         gameScript.addCollision();
     }
 
-    void OnControllerColliderHit(ControllerColliderHit hit) {
-        if (hit.rigidbody != null) {
-            Vector3 horizontalDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
-            hit.rigidbody.AddForce(horizontalDir * 1000);
-        }
-    }
+    // void OnControllerColliderHit(ControllerColliderHit hit) {
+    //     if (hit.rigidbody != null) {
+    //         Vector3 horizontalDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);
+    //         hit.rigidbody.AddForce(horizontalDir * 1000);
+    //     }
+    // }
 }

@@ -327,13 +327,15 @@ public class Game_Boss : MonoBehaviour
 
     public void addCollision()
     {
-        collisions++;
-        arrows = Mathf.Max(0, arrows - 1);
-        maxCarryCapacity--;
-        peopleCarriedW = 0;
-        peopleCarriedA = 0;
-        peopleCarriedS = 0;
-        peopleCarriedD = 0;
+        if (!playerMovement.isInvincible) {
+            collisions++;
+            arrows = Mathf.Max(0, arrows - 1);
+            maxCarryCapacity--;
+            peopleCarriedW = 0;
+            peopleCarriedA = 0;
+            peopleCarriedS = 0;
+            peopleCarriedD = 0;
+        }
     }
 
     public bool fireArrow() {
@@ -371,7 +373,8 @@ public class Game_Boss : MonoBehaviour
                 peopleAtDImages[i].SetActive(i < peopleAtD);
             }
 
-            for (int i = 0; i < maxCarryCapacity; i++) {
+            //for (int i = 0; i < maxCarryCapacity; i++) {
+            for (int i = 0; i < 10; i++) {
                 if (i < peopleCarriedW) {
                     peopleCarriedImages[i].SetActive(true);
                     peopleCarriedImages[i].GetComponent<RawImage>().texture = W_to_S;
