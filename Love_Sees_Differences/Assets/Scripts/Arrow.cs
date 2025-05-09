@@ -23,7 +23,7 @@ public class Arrow : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider c) {
-        Debug.Log(c.name);
+        //Debug.Log(c.name);
         if (c.name.Contains("Wall")) {
             Destroy(gameObject);
         }

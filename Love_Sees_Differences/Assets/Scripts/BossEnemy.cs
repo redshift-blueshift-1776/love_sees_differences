@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public enum EnemyState
 {
@@ -540,7 +541,7 @@ public class BossEnemy : MonoBehaviour
         //Debug.Log("test");
         player.GetComponent<Player_Movement_Boss>().isInvincible = true;
         yield return new WaitForSeconds(3f);
-        //SceneManager.LoadScene(2); //Replace with actual scene when we make it
+        SceneManager.LoadScene(25); //Replace with actual scene when we make it
         Destroy(gameObject);
         yield return null;
     }

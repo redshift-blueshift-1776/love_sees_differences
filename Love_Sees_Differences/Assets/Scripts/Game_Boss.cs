@@ -242,6 +242,7 @@ public class Game_Boss : MonoBehaviour
         BossHealth = bossScript.HP;
         if (BossHealth <= 0)
         {
+            Debug.Log("You win!");
             EndGame();
         }
         if (maxCarryCapacity <= 0) {
