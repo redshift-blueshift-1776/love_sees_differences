@@ -378,7 +378,7 @@ public class Game_Boss : MonoBehaviour
             arrowsTextNew.text = $"Arrows: {arrows}";
             int score = deliveries - collisions;
             scoreTextNew.text = $"Boss Health: {BossHealth}";
-            healthTextNew.text = $"Health: {maxCarryCapacity}";
+            healthTextNew.text = $"Health (Capacity): {maxCarryCapacity}";
 
             //peopleCarriedTextNew.text = $"Carried: {peopleCarried}/{maxCarryCapacity}";
 

@@ -215,7 +215,7 @@ public class Player_Movement_Boss : MonoBehaviour
         //     orangeGlow.transform.localScale = new Vector3(i, i, i);
         //     yield return new WaitForSeconds(0.05f);
         // }
-        float iframeLength = 0.5f; // Duration to move the building (you can adjust this)
+        float iframeLength = 1f;
         Vector3 startPosition = new Vector3(0, 0, 0);
         Vector3 targetPosition = new Vector3(20, 20, 20);
         float elapsedTime = 0f;

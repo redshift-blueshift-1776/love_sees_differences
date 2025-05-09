@@ -8,7 +8,7 @@ public class Passenger_Spawner : MonoBehaviour
     // [SerializeField] private float zSpeed = 1.0f;
 
     [SerializeField] public float speed = 20f;
-    [SerializeField] private float despawnTime = 30f; // Distance at which pedestrian despawns
+    //[SerializeField] private float despawnTime = 30f; // Distance at which pedestrian despawns
 
     [SerializeField] public GameObject player;
     private Player_Movement playerMovement;
