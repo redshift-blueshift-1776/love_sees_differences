@@ -55,6 +55,8 @@ public class Player_Movement_Boss : MonoBehaviour
 
     [SerializeField] public GameObject arrow;
 
+    [SerializeField] public GameObject orangeGlow;
+
     public bool isInvincible;
 
     private void Start()
@@ -78,6 +80,7 @@ public class Player_Movement_Boss : MonoBehaviour
 
         mainCamera.SetActive(true);
         alternateCamera.SetActive(false);
+        orangeGlow.SetActive(false);
     }
 
     void Update()
@@ -207,8 +210,24 @@ public class Player_Movement_Boss : MonoBehaviour
     public IEnumerator iframe()
     { 
         isInvincible = true;
-        yield return new WaitForSeconds(1f);
+        orangeGlow.SetActive(true);
+        // for (int i = 1; i <= 20; i++) {
+        //     orangeGlow.transform.localScale = new Vector3(i, i, i);
+        //     yield return new WaitForSeconds(0.05f);
+        // }
+        float iframeLength = 1f; // Duration to move the building (you can adjust this)
+        Vector3 startPosition = new Vector3(0, 0, 0);
+        Vector3 targetPosition = new Vector3(20, 20, 20);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < iframeLength)
+        {
+            orangeGlow.transform.localScale = Vector3.Lerp(startPosition, targetPosition, (elapsedTime / iframeLength));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
         isInvincible = false;
+        orangeGlow.SetActive(false);
         yield return null;
     }
 

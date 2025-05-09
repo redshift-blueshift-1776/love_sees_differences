@@ -254,10 +254,37 @@ public class BossEnemy : MonoBehaviour
         // Will do a cutscene?
         mazeGenerator.GenerateGraph();
         mazeGenerator.GenerateMaze();
+        if (phase == 2) {
+            StartCoroutine(MoveBuildingToTarget(gameScript.BuildingW, new Vector3(-50, 10, 100)));
+        }
+        if (phase == 3) {
+            StartCoroutine(MoveBuildingToTarget(gameScript.BuildingA, new Vector3(-50, 10, 0)));
+        }
+        if (phase == 4) {
+            StartCoroutine(MoveBuildingToTarget(gameScript.BuildingS, new Vector3(00, 10, -50)));
+            StartCoroutine(MoveBuildingToTarget(gameScript.BuildingD, new Vector3(100, 10, -50)));
+        }
         yield return new WaitForSeconds(2f);
         mazeGenerator.DeleteAllWallsAtOnce();
         isInvincible = false;
         yield return null;
+    }
+
+    private IEnumerator MoveBuildingToTarget(GameObject building, Vector3 targetPosition)
+    {
+        float timeToMove = 1f; // Duration to move the building (you can adjust this)
+        Vector3 startPosition = building.transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timeToMove)
+        {
+            building.transform.position = Vector3.Lerp(startPosition, targetPosition, (elapsedTime / timeToMove));
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the building reaches the target position exactly
+        building.transform.position = targetPosition;
     }
 
     private bool IsPlayerInRange(float range)
