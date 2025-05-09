@@ -200,6 +200,18 @@ public class Player_Movement_Boss : MonoBehaviour
         gameScript.addCollision();
     }
 
+    public void hit() {
+        StartCoroutine(iframe());
+    }
+
+    public IEnumerator iframe()
+    { 
+        isInvincible = true;
+        yield return new WaitForSeconds(1f);
+        isInvincible = false;
+        yield return null;
+    }
+
     // void OnControllerColliderHit(ControllerColliderHit hit) {
     //     if (hit.rigidbody != null) {
     //         Vector3 horizontalDir = new Vector3(hit.moveDirection.x, 0, hit.moveDirection.z);

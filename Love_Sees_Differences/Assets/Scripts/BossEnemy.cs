@@ -62,7 +62,6 @@ public class BossEnemy : MonoBehaviour
     [SerializeField] public float topLeftZ = 100f;  // Distance between grid points in Unity world units
 
     private Queue<Vector3> pathQueue = new Queue<Vector3>();
-    private bool isMoving = false;
 
     private Vector2Int startCell;
     private Vector2Int goalCell;

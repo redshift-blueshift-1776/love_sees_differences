@@ -328,6 +328,7 @@ public class Game_Boss : MonoBehaviour
     public void addCollision()
     {
         if (!playerMovement.isInvincible) {
+            playerMovement.hit();
             collisions++;
             arrows = Mathf.Max(0, arrows - 1);
             maxCarryCapacity--;
