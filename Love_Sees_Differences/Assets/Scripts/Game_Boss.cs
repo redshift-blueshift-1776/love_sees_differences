@@ -10,6 +10,8 @@ public class Game_Boss : MonoBehaviour
     [SerializeField] public GameObject player;
     [SerializeField] public GameObject boss;
 
+    [SerializeField] public GameObject bossIntroduction;
+
     public BossEnemy bossScript;
 
     public bool gameActive;
@@ -183,7 +185,13 @@ public class Game_Boss : MonoBehaviour
         BuildingA.transform.position = new Vector3(-100, 10, 0);
         BuildingS.transform.position = new Vector3(0, 10, -100);
         BuildingD.transform.position = new Vector3(100, 10, 0);
-        
+
+        // Boss introduction disabled until pressed
+        bossIntroduction.SetActive(false);
+    }
+
+    public void IntroduceBoss() {
+        bossIntroduction.SetActive(true);
     }
 
     private GameObject[] GetChildImages(Transform parent)

@@ -140,8 +140,9 @@ public class Boss_Introduction : MonoBehaviour
 
         duration = 2f;
         elapsed = 0f;
-        targetPosition = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 50, mainCamera.transform.position.z - 50);
-        targetRotation = originalCameraPosition.rotation;
+        Quaternion x90 = Quaternion.Euler(90, 0, 0);
+        targetPosition = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y + 150, mainCamera.transform.position.z - 50);
+        targetRotation = x90;
         oldPosition = new Vector3(mainCamera.transform.position.x, mainCamera.transform.position.y, mainCamera.transform.position.z);
         oldRotation = mainCamera.transform.rotation;
         while (elapsed < duration) {

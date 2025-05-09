@@ -3237,13 +3237,25 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1040524792}
     - target: {fileID: 1349637307085012407, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
+      propertyPath: bossIntroduction
+      value: 
+      objectReference: {fileID: 457201312}
+    - target: {fileID: 1349637307085012407, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
       propertyPath: regenerationInterval
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1479129144308685374, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 432265182}
+      objectReference: {fileID: 696916128}
+    - target: {fileID: 1479129144308685374, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: IntroduceBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479129144308685374, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Game_Boss, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 3719589322219885200, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3283,6 +3295,10 @@ PrefabInstance:
     - target: {fileID: 3719589322219885200, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4081419687339295500, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
+      propertyPath: m_text
+      value: Boss Intro
       objectReference: {fileID: 0}
     - target: {fileID: 5778785678674229839, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -3594,6 +3610,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8322409856256257792, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
   m_PrefabInstance: {fileID: 622040279}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &696916128 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1349637307085012407, guid: 34e3fa02618874a1ba6e6077acab1d77, type: 3}
+  m_PrefabInstance: {fileID: 622040279}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 696916127}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00f28ef60bd6f41a29a12f1777d49705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &700813122
 GameObject:
   m_ObjectHideFlags: 0
