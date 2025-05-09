@@ -58,8 +58,8 @@ public class Orange_Pedestrian : MonoBehaviour
             Destroy(gameObject);
         }
         if (c.name == "Truck_Thing_Boss" && !despawning) {
-            despawning = true;
             sound.Play();
+            despawning = true;
             Die();
             return;
         }

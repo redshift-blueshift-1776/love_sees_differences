@@ -305,7 +305,17 @@ public class BossEnemy : MonoBehaviour
         }
 
         if (phase == 4) {
-            
+            if (currentBeat % 4 == 0) {
+                StartCoroutine(LineAttack());
+            }
+            spawnOrangePedestrian(size, new Vector3(0.5f, 0, 0.5f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.5f, 0, 0.5f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.5f, 0, -0.5f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.5f, 0, -0.5f), 25);
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 25);
         }
 
         // Change attack
@@ -471,7 +481,21 @@ public class BossEnemy : MonoBehaviour
         }
 
         if (phase == 4) {
-            
+            if (currentBeat % 4 == 0) {
+                StartCoroutine(LineAttack());
+            }
+            spawnOrangePedestrian(size, new Vector3(1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, 1), 25);
+            spawnOrangePedestrian(size, new Vector3(0, 0, -1), 25);
+            spawnOrangePedestrian(size, new Vector3(0.6f, 0, 0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.8f, 0, 0.6f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, 0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, 0.6f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.6f, 0, -0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(0.8f, 0, -0.6f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.6f, 0, -0.8f), 25);
+            spawnOrangePedestrian(size, new Vector3(-0.8f, 0, -0.6f), 25);
         }
 
         // Change attack

@@ -177,6 +177,12 @@ public class Game_Boss : MonoBehaviour
 
         // Start the people regeneration coroutine
         StartCoroutine(RegeneratePeople());
+
+        // Initial building positions
+        BuildingW.transform.position = new Vector3(0, 10, 100);
+        BuildingA.transform.position = new Vector3(-100, 10, 0);
+        BuildingS.transform.position = new Vector3(0, 10, -100);
+        BuildingD.transform.position = new Vector3(100, 10, 0);
         
     }
 
