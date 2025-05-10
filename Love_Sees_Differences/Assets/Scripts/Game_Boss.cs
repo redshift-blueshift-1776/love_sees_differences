@@ -354,6 +354,12 @@ public class Game_Boss : MonoBehaviour
         }
     }
 
+    public void addHealth() {
+        if (maxCarryCapacity < 10) {
+            maxCarryCapacity++;
+        }
+    }
+
     public bool fireArrow() {
         bool ret = (arrows > 0);
         if (arrows > 0) {

@@ -265,6 +265,7 @@ public class BossEnemy : MonoBehaviour
             StartCoroutine(MoveBuildingToTarget(gameScript.BuildingS, new Vector3(00, 10, -50)));
             StartCoroutine(MoveBuildingToTarget(gameScript.BuildingD, new Vector3(100, 10, -50)));
         }
+        gameScript.addHealth();
         yield return new WaitForSeconds(2f);
         mazeGenerator.DeleteAllWallsAtOnce();
         isInvincible = false;
