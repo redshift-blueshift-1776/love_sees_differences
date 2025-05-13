@@ -37,6 +37,13 @@ public class CallableLyricsDisplay : MonoBehaviour
     private double nextLyricTime;
     private float secondsPerBeat;
 
+    private Coroutine doLyricsCoroutine;
+    // private Coroutine doProgressCoroutine;
+    private bool isAutoPlaying = true;
+
+    [SerializeField] private RectTransform lyricsProgressBarFill;
+    private float originalLyricsBarWidth;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -48,6 +55,7 @@ public class CallableLyricsDisplay : MonoBehaviour
         currentLine = 0;
         lyricsDisplay.text = ""; // Start with an empty display
         canvas.SetActive(false);
+        originalLyricsBarWidth = lyricsProgressBarFill.sizeDelta.x;
     }
 
     // Update is called once per frame
@@ -55,33 +63,122 @@ public class CallableLyricsDisplay : MonoBehaviour
 
     }
 
+    public void StopAutoPlay() {
+        isAutoPlaying = false;
+
+        if (doLyricsCoroutine != null) {
+            StopCoroutine(doLyricsCoroutine);
+            doLyricsCoroutine = null;
+        }
+    }
+
+    public void OnNextPressed() {
+        if (currentLine < lyrics.Count - 1) {
+            if (!isAutoPlaying) {
+                currentLine++;
+            }
+            StopAutoPlay();
+            UpdateLyricsDisplay();
+        } else {
+            // Reached the end manually – treat like skip
+            StopAutoPlay();
+            lyricsDisplay.text = "";
+            canvas.SetActive(false);
+            doLyricsCoroutine = null;
+        }
+        if (currentLine >= lyrics.Count - 1) {
+            lyricsDisplay.text = "";
+            canvas.SetActive(false);
+            doLyricsCoroutine = null;
+        }
+    }
+
+    public void OnBackPressed() {
+        if (currentLine > 0) {
+            currentLine--;
+            if (isAutoPlaying) {
+                currentLine--;
+            }
+            StopAutoPlay();
+            UpdateLyricsDisplay();
+        }
+    }
+
+    public void OnSkipPressed() {
+        //StopCoroutine(doLyricsCoroutine);
+        lyricsDisplay.text = "";
+        canvas.SetActive(false);
+    }
+
     public void showLyrics() {
         nextLyricTime = 0;
         currentLine = 0;
         lyricsDisplay.text = "";
         canvas.SetActive(true);
-        StartCoroutine(doLyrics());
+        isAutoPlaying = true;
+
+        ResetLyricsProgressBar();
+
+        if (doLyricsCoroutine != null)
+            StopCoroutine(doLyricsCoroutine);
+
+        doLyricsCoroutine = StartCoroutine(doLyrics());
+        // doProgressCoroutine = StartCoroutine(progressBar());
     }
+
+    // public IEnumerator progressBar() {
+    //     while (isAutoPlaying) {
+    //         UpdateLyricsProgressBar();
+    //         yield return null;
+    //     }
+    //     yield return null;
+    // }
 
     public IEnumerator doLyrics() {
         if (nextLyricTime == 0) {
-            // Sync with the exact DSP time when the audio starts playing
             nextLyricTime = AudioSettings.dspTime;
         }
-        
-        while (currentLine < lyrics.Count) {
+
+        while (currentLine < lyrics.Count && isAutoPlaying) {
             double currentTime = AudioSettings.dspTime;
             double waitTime = nextLyricTime - currentTime;
 
             if (waitTime > 0)
                 yield return new WaitForSecondsRealtime((float)waitTime);
 
-            lyricsDisplay.text = lyrics[currentLine].text;
+            UpdateLyricsDisplay();
             nextLyricTime += lyrics[currentLine].duration * secondsPerBeat;
             currentLine++;
         }
-        lyricsDisplay.text = "";
-        canvas.SetActive(false);
+
+        if (isAutoPlaying) {
+            lyricsDisplay.text = "";
+            canvas.SetActive(false);
+        }
+
+        doLyricsCoroutine = null;
+    }
+
+    private void UpdateLyricsDisplay() {
+        if (currentLine >= 0 && currentLine < lyrics.Count) {
+            lyricsDisplay.text = lyrics[currentLine].text;
+        }
+        UpdateLyricsProgressBar();
+    }
+
+    private void UpdateLyricsProgressBar() {
+        float percentage = (float)currentLine / (lyrics.Count - 1);
+
+        //Debug.Log(percentage);
+
+        lyricsProgressBarFill.sizeDelta = new Vector2(
+            percentage * originalLyricsBarWidth,
+            lyricsProgressBarFill.sizeDelta.y
+        );
+    }
+
+    private void ResetLyricsProgressBar() {
+        lyricsProgressBarFill.sizeDelta = new Vector2(0, lyricsProgressBarFill.sizeDelta.y);
     }
 
 }
