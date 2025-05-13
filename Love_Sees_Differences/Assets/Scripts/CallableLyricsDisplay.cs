@@ -28,7 +28,6 @@ public class CallableLyricsDisplay : MonoBehaviour
         }
     }
 
-    [SerializeField] private GameObject gameAudio;
     [SerializeField] private TMPro.TextMeshProUGUI lyricsDisplay;
     [SerializeField] private float beatsPerMinute = 120f;
 
@@ -40,7 +39,6 @@ public class CallableLyricsDisplay : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        audioSource = gameAudio.GetComponent<AudioSource>();
         secondsPerBeat = 60f / beatsPerMinute;
         ParseLyrics();
         
@@ -52,20 +50,21 @@ public class CallableLyricsDisplay : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
-        if (!audioSource.isPlaying) {
-            // If the audio isn't playing, reset and show nothing
-            currentLine = 0;
-            nextLyricTime = 0;
-            lyricsDisplay.text = "";
-            return;
-        }
 
-        if (nextLyricTime == 0) {
-            // Sync with the exact DSP time when the audio starts playing
-            nextLyricTime = AudioSettings.dspTime;
-        }
+    }
 
-        if (currentLine < lyrics.Count && AudioSettings.dspTime >= nextLyricTime) {
+    public void showLyrics() {
+        StartCoroutine(doLyrics());
+    }
+
+    public IEnumerator doLyrics() {
+        while (currentLine < lyrics.Count) {
+            double currentTime = AudioSettings.dspTime;
+            double waitTime = nextLyricTime - currentTime;
+
+            if (waitTime > 0)
+                yield return new WaitForSecondsRealtime((float)waitTime);
+
             lyricsDisplay.text = lyrics[currentLine].text;
             nextLyricTime += lyrics[currentLine].duration * secondsPerBeat;
             currentLine++;
