@@ -31,7 +31,8 @@ public class CallableLyricsDisplay : MonoBehaviour
     [SerializeField] private TMPro.TextMeshProUGUI lyricsDisplay;
     [SerializeField] private float beatsPerMinute = 120f;
 
-    private AudioSource audioSource;
+    [SerializeField] private GameObject canvas;
+
     private int currentLine = 0;
     private double nextLyricTime;
     private float secondsPerBeat;
@@ -46,6 +47,7 @@ public class CallableLyricsDisplay : MonoBehaviour
         nextLyricTime = 0;
         currentLine = 0;
         lyricsDisplay.text = ""; // Start with an empty display
+        canvas.SetActive(false);
     }
 
     // Update is called once per frame
@@ -54,10 +56,19 @@ public class CallableLyricsDisplay : MonoBehaviour
     }
 
     public void showLyrics() {
+        nextLyricTime = 0;
+        currentLine = 0;
+        lyricsDisplay.text = "";
+        canvas.SetActive(true);
         StartCoroutine(doLyrics());
     }
 
     public IEnumerator doLyrics() {
+        if (nextLyricTime == 0) {
+            // Sync with the exact DSP time when the audio starts playing
+            nextLyricTime = AudioSettings.dspTime;
+        }
+        
         while (currentLine < lyrics.Count) {
             double currentTime = AudioSettings.dspTime;
             double waitTime = nextLyricTime - currentTime;
@@ -69,6 +80,8 @@ public class CallableLyricsDisplay : MonoBehaviour
             nextLyricTime += lyrics[currentLine].duration * secondsPerBeat;
             currentLine++;
         }
+        lyricsDisplay.text = "";
+        canvas.SetActive(false);
     }
 
 }
