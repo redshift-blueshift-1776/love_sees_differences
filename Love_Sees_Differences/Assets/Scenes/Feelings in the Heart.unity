@@ -618,6 +618,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 188873516044753828, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 586794578594593876, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
       propertyPath: m_Name
       value: Callable_Lyrics_Sync_Display_Fixed
@@ -664,7 +668,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
       propertyPath: lyricsText.Array.size
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
       propertyPath: lyricsText.Array.data[5]
@@ -688,21 +692,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
       propertyPath: lyricsText.Array.data[9]
-      value: 4:You can also boost with left shift, and jump with B.
+      value: 8:You can also boost with left shift, and jump with B.
       objectReference: {fileID: 0}
     - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
       propertyPath: lyricsText.Array.data[10]
-      value: 4:You can also boost with left shift, and jump with B.
+      value: 12:Be careful about how you navigate through the map. It's not always
+        as it seems.
       objectReference: {fileID: 0}
     - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
       propertyPath: lyricsText.Array.data[11]
+      value: 12:For example, pressing A at the beginning will pull you left towards
+        A, but pressing D after that does not necessarily pull you right.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[12]
+      value: 12:You can press A again to push yourself away from A, and the net pull
+        will then be towards D.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[13]
+      value: 12:If it helps, you can think of it as four expanding or contracting
+        ropes controlling the movement.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[14]
       value: "12:We\u2019re starting you off in a relatively simple part of the city,
         the Feelings in the Heart district. Let\u2019s see how many deliveries you
         can do today!"
       objectReference: {fileID: 0}
     - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
-      propertyPath: lyricsText.Array.data[12]
+      propertyPath: lyricsText.Array.data[15]
       value: '1:'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[16]
+      value: 12:For example, pressing A at the beginning will pull you left towards
+        A, but pressing D after that does not necessarily pull you right.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[17]
+      value: 8:If it helps, you can think of it as four expanding or contracting
+        ropes controlling the movement.
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -1897,6 +1897,104 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403236016}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &415578855
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 586794578594593876, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_Name
+      value: Callable_Lyrics_Sync_Display_Fixed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[0]
+      value: 4:This district is a bit more complex.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[1]
+      value: 8:The walls of this district randomly form a maze. We have no idea how
+        that happens.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[2]
+      value: 12:We think it has to do with the solidness of the doors. Perhaps destroying
+        some of the Least Solid Doors.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[3]
+      value: 8:You might have to navigate a bit more carefully in the Champion district.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[4]
+      value: 4:Jumping could also be useful.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[5]
+      value: 4:Good luck!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+--- !u!114 &415578856 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+  m_PrefabInstance: {fileID: 415578855}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505ff7c95efcd42028a15afc9871c6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &422339663
 GameObject:
   m_ObjectHideFlags: 0
@@ -5809,6 +5907,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3745479634503709, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 415578856}
+    - target: {fileID: 3745479634503709, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showLyrics
+      objectReference: {fileID: 0}
     - target: {fileID: 1479129144308685374, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -7972,6 +8078,7 @@ SceneRoots:
   - {fileID: 823535974}
   - {fileID: 465637997}
   - {fileID: 82405094}
+  - {fileID: 415578855}
   - {fileID: 190289498}
   - {fileID: 1411835788}
   - {fileID: 2141117964}
