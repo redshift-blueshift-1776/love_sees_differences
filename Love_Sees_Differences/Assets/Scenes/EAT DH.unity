@@ -2789,6 +2789,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488346182}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &508679337 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+  m_PrefabInstance: {fileID: 1702762377}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505ff7c95efcd42028a15afc9871c6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &545348485
 GameObject:
   m_ObjectHideFlags: 0
@@ -6735,6 +6746,109 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1702762377
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 586794578594593876, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_Name
+      value: Callable_Lyrics_Sync_Display_Fixed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[0]
+      value: 12:This is the EAT DH district, and if you're wondering what that stands
+        for, no one really knows.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[1]
+      value: 8:What we do know is that this is one of the most complex districts
+        in the city.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[2]
+      value: 12:There are no mid walls to help you jump, so you might have to work
+        with the layout.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[3]
+      value: "16:The pedestrians here are advanced: they move using Breadth-First
+        Search, which means they\u2019ll take the shortest path they can find."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[4]
+      value: 8:Watch their movements carefully and stay out of their way.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[5]
+      value: 12:The buildings are placed in a way that challenges your understanding
+        of polarity vectors. This is where geometry really starts to matter.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[6]
+      value: 8:Think in angles. Push and pull with purpose.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[7]
+      value: 8:If you can master this map, you're truly one of the city's elite Love
+        Truckers.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[8]
+      value: '1:'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
 --- !u!1 &1740729754
 GameObject:
   m_ObjectHideFlags: 0
@@ -8520,6 +8634,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3745479634503709, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 508679337}
+    - target: {fileID: 3745479634503709, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showLyrics
+      objectReference: {fileID: 0}
     - target: {fileID: 1479129144308685374, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -8882,3 +9004,4 @@ SceneRoots:
   - {fileID: 782089390}
   - {fileID: 251628016}
   - {fileID: 112545367}
+  - {fileID: 1702762377}
