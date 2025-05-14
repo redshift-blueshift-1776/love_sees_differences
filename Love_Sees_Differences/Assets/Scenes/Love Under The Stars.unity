@@ -6310,6 +6310,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3745479634503709, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1759936237}
+    - target: {fileID: 3745479634503709, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showLyrics
+      objectReference: {fileID: 0}
     - target: {fileID: 1479129144308685374, guid: 7376c49153ad54d9c8b2461d21dbe2f8, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -6650,6 +6658,118 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2081523285}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1759936236
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 586794578594593876, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_Name
+      value: Callable_Lyrics_Sync_Display_Fixed
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[0]
+      value: 4:Welcome to the Love Under the Stars district.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[1]
+      value: 8:Here, the city lights fade and the stars above shine.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[2]
+      value: 8:The walls here form a diagonal maze, slightly different from the Champion
+        district.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[3]
+      value: 12:You'll also notice that the buildings are in the corners of the map,
+        which can make navigation a bit more complex.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[4]
+      value: "8:Try thinking in diagonals. Love doesn\u2019t always move in straight
+        lines."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[5]
+      value: 8:As always, pressing "Visualize" will show you the maze layout.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[6]
+      value: 12:You're still working with the usual attraction mechanics, so stay
+        aware of the polarities and direction.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[7]
+      value: 8:Good luck helping people find their Love Under the Stars.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+      propertyPath: lyricsText.Array.data[8]
+      value: '1:'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+--- !u!114 &1759936237 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4142341844719259511, guid: 5c270302c720e49b9a66b94a749f43ee, type: 3}
+  m_PrefabInstance: {fileID: 1759936236}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505ff7c95efcd42028a15afc9871c6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1851650841
 GameObject:
   m_ObjectHideFlags: 0
@@ -7980,3 +8100,4 @@ SceneRoots:
   - {fileID: 865157036}
   - {fileID: 1647208569}
   - {fileID: 791165242}
+  - {fileID: 1759936236}
