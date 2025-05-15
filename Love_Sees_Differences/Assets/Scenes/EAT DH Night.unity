@@ -385,6 +385,47 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[0]
+      value: "8:EAT DH is one of the most strategic districts in the city \u2014
+        and that holds true even at night."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[1]
+      value: 8:This map has no ramps, and the maze layout forces you to think before
+        you move.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[2]
+      value: "8:There\u2019s little room for error, and speed without planning will
+        only get you stuck."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[3]
+      value: "12:Every patient you pick up will require careful routing \u2014 which
+        way is fastest, where should you turn, and when should you boost?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[4]
+      value: 8:This is not a district for reckless driving.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[5]
+      value: "8:If you want to excel here, it\u2019s all about precision, patience,
+        and preparation."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[6]
+      value: "4:You\u2019ve trained for this. Now prove it."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[7]
+      value: '1:'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3320,6 +3361,18 @@ PrefabInstance:
     - target: {fileID: 6833750670636167814, guid: 027764478158748839f2c49478a28dbc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1785947253}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showLyrics
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CallableLyricsDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8039362175946616473, guid: 027764478158748839f2c49478a28dbc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
@@ -7384,6 +7437,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784201353}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1785947253 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+  m_PrefabInstance: {fileID: 49970221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505ff7c95efcd42028a15afc9871c6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1797946241
 GameObject:
   m_ObjectHideFlags: 0
