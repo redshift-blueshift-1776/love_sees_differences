@@ -30,7 +30,7 @@ public class Arrow : MonoBehaviour
     }
 
     private IEnumerator shootArrow() {
-        float duration = 2f;
+        float duration = 1f;
         float elapsed = 0f;
         Vector3 oldPosition = startPosition;
         while (elapsed < duration) {

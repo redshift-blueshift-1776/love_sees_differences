@@ -72,6 +72,8 @@ public class BossEnemy : MonoBehaviour
 
     private int lastProcessedBeat = -1;
 
+    [SerializeField] private AudioSource shotSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -236,6 +238,7 @@ public class BossEnemy : MonoBehaviour
     {
         if (c.name.Contains("Arrow") && currState != EnemyState.Die && !isInvincible) {
             Destroy(c.gameObject);
+            shotSound.Play();
             HP -= 1;
         } else if (c.name == "Truck_Thing_Boss") {
             if (!player.GetComponent<Player_Movement_Boss>().isInvincible) {

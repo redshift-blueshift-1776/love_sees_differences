@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
+
 
 
 public class Game_Boss : MonoBehaviour
@@ -251,7 +253,7 @@ public class Game_Boss : MonoBehaviour
         if (BossHealth <= 0)
         {
             Debug.Log("You win!");
-            EndGame();
+            SceneManager.LoadScene(25);
         }
         if (maxCarryCapacity <= 0) {
             EndGame();
