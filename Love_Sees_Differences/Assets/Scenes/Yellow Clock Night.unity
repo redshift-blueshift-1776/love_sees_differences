@@ -1124,6 +1124,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1208627098}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showLyrics
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CallableLyricsDisplay, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1545,6 +1557,116 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 830a58ff2152748e590cae6cb8116779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1001 &1208627097
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 586794578594593876, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_Name
+      value: Callable_Lyrics_Sync_Display_Fixed_Night
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3118247797494399757, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[0]
+      value: "8:You\u2019re heading to Yellow Clock tonight \u2014 one of the more
+        demanding districts in the city."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[1]
+      value: 8:The hospital is far from most pickup zones, so long-distance driving
+        is a given.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[2]
+      value: "8:There are ramps, but they\u2019re not just for fun \u2014 they\u2019re
+        about speed and efficiency."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[3]
+      value: "12:This level also introduces critical passengers \u2014 they\u2019re
+        in serious condition, and you\u2019ll need to reach them before time runs
+        out."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[4]
+      value: "12:You\u2019ll also see many people waiting on the ground tonight,
+        so stay alert and be ready to pick them up as you go."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[5]
+      value: '8:Managing your priorities is key: who needs you now, and who can wait?'
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[6]
+      value: "8:Stay sharp \u2014 the night doesn\u2019t wait."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[7]
+      value: '1:'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+--- !u!114 &1208627098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+  m_PrefabInstance: {fileID: 1208627097}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505ff7c95efcd42028a15afc9871c6e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1250430524
@@ -3141,3 +3263,4 @@ SceneRoots:
   - {fileID: 1374707653}
   - {fileID: 1680569061}
   - {fileID: 1823299934}
+  - {fileID: 1208627097}
