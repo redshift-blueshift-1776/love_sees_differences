@@ -233,13 +233,17 @@ public class BossEnemy : MonoBehaviour
         }
     }
 
+    private HashSet<Collider> alreadyHitArrows = new HashSet<Collider>();
 
     private void OnTriggerEnter(Collider c)
     {
         if (c.name.Contains("Arrow") && currState != EnemyState.Die && !isInvincible) {
-            Destroy(c.gameObject);
-            shotSound.Play();
-            HP -= 1;
+            if (!alreadyHitArrows.Contains(c)) {
+                alreadyHitArrows.Add(c); // Mark this arrow as handled
+                Destroy(c.gameObject);   // Will destroy at end of frame
+                shotSound.Play();
+                HP -= 1;
+            }
         } else if (c.name == "Truck_Thing_Boss") {
             if (!player.GetComponent<Player_Movement_Boss>().isInvincible) {
                 gameScript.addCollision();
