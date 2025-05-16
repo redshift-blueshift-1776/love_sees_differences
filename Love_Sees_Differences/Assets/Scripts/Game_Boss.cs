@@ -330,7 +330,7 @@ public class Game_Boss : MonoBehaviour
         // as they can, with the maximum they can carry at a time being 10.
         if (peopleToDrop > 0) {
             deliverSound.Play();
-            arrows += peopleToDrop;
+            arrows = Mathf.Min(arrows + peopleToDrop, 50); // Cap the number of arrows at 50.
         }
         deliveries += peopleToDrop;
         peopleToDrop = 0;
