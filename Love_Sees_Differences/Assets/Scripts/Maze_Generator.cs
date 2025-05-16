@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class Maze_Generator : MonoBehaviour
@@ -13,6 +14,32 @@ public class Maze_Generator : MonoBehaviour
     [SerializeField] public GameObject cam2;
 
     private List<GameObject> walls;
+
+    private class Edge : IComparable<Edge>
+    {
+        public int From;
+        public int To;
+        public float Weight;
+
+        public Edge(int from, int to, float weight)
+        {
+            From = from;
+            To = to;
+            Weight = weight;
+        }
+
+        public int CompareTo(Edge other)
+        {
+            int cmp = Weight.CompareTo(other.Weight);
+            if (cmp == 0)
+            {
+                // Ensure uniqueness in SortedSet by using a tie-breaker
+                cmp = (From, To).CompareTo((other.From, other.To));
+            }
+            return cmp;
+        }
+    }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -64,7 +91,7 @@ public class Maze_Generator : MonoBehaviour
             // Horizontal edges (exclude right edge)
             if ((i + 1) % size != 0)
             {
-                float weight = Random.Range(0f, 1f);
+                float weight = UnityEngine.Random.Range(0f, 1f);
                 graph[i].Add((i + 1, weight));
                 graph[i + 1].Add((i, weight));
             }
@@ -72,7 +99,7 @@ public class Maze_Generator : MonoBehaviour
             // Vertical edges (exclude bottom row)
             if (i + size < size * size)
             {
-                float weight = Random.Range(0f, 1f);
+                float weight = UnityEngine.Random.Range(0f, 1f);
                 graph[i].Add((i + size, weight));
                 graph[i + size].Add((i, weight));
             }
@@ -80,57 +107,106 @@ public class Maze_Generator : MonoBehaviour
 
     }
 
+    // public void GenerateMaze() {
+    //     mstEdges = new List<(int, int)>();
+    //     // Run Prim's algorithm to get a minimum spanning tree.
+    //     HashSet<int> visited = new HashSet<int>();
+    //     List<(int from, int to, float weight)> edges = new List<(int, int, float)>();
+
+    //     int startVertex = (size * size - 1) / 2;
+    //     visited.Add(startVertex);
+
+    //     foreach (var edge in graph[startVertex])
+    //     {
+    //         edges.Add((startVertex, edge.neighbor, edge.weight));
+    //     }
+
+    //     // Loop until we visit all vertices
+    //     while (mstEdges.Count < size * size - 1)
+    //     {
+    //         // Sort edges by weight
+    //         edges.Sort((x, y) => x.weight.CompareTo(y.weight));
+
+    //         // Find the smallest edge leading to an unvisited vertex
+    //         (int from, int to, float weight) minEdge = (0, 0, float.MaxValue);
+    //         foreach (var edge in edges)
+    //         {
+    //             if (!visited.Contains(edge.to))
+    //             {
+    //                 minEdge = edge;
+    //                 break;
+    //             }
+    //         }
+
+    //         if (minEdge.weight == float.MaxValue)
+    //         {
+    //             Debug.LogError("MST construction failed!");
+    //             break;
+    //         }
+
+    //         // Add the edge to the MST
+    //         mstEdges.Add((minEdge.from, minEdge.to));
+    //         visited.Add(minEdge.to);
+
+    //         // Remove the edge from the list
+    //         edges.Remove(minEdge);
+
+    //         // Add new edges from the newly visited vertex
+    //         foreach (var edge in graph[minEdge.to])
+    //         {
+    //             if (!visited.Contains(edge.neighbor))
+    //             {
+    //                 // For each edge added to the MST, add it to a list.
+    //                 edges.Add((minEdge.to, edge.neighbor, edge.weight));
+    //             }
+    //         }
+    //     }
+
+    //     Debug.Log($"Maze Generated! Expected edges: {size * size - 1}, Found edges: {mstEdges.Count}");
+    // }
+
     public void GenerateMaze() {
         mstEdges = new List<(int, int)>();
-        // Run Prim's algorithm to get a minimum spanning tree.
         HashSet<int> visited = new HashSet<int>();
-        List<(int from, int to, float weight)> edges = new List<(int, int, float)>();
+        SortedSet<Edge> pq = new SortedSet<Edge>(); // Priority queue
 
+        // Start from the middle of the graph
         int startVertex = (size * size - 1) / 2;
         visited.Add(startVertex);
 
+        // Add all edges from the start vertex to the priority queue
         foreach (var edge in graph[startVertex])
         {
-            edges.Add((startVertex, edge.neighbor, edge.weight));
+            pq.Add(new Edge(startVertex, edge.neighbor, edge.weight));
         }
 
-        // Loop until we visit all vertices
+        // Loop until we add the right number of edges to make the maze
         while (mstEdges.Count < size * size - 1)
         {
-            // Sort edges by weight
-            edges.Sort((x, y) => x.weight.CompareTo(y.weight));
-
-            // Find the smallest edge leading to an unvisited vertex
-            (int from, int to, float weight) minEdge = (0, 0, float.MaxValue);
-            foreach (var edge in edges)
+            // If nothing in priority queue, there's a problem
+            if (pq.Count == 0)
             {
-                if (!visited.Contains(edge.to))
-                {
-                    minEdge = edge;
-                    break;
-                }
-            }
-
-            if (minEdge.weight == float.MaxValue)
-            {
-                Debug.LogError("MST construction failed!");
+                Debug.LogError("MST construction failed! Graph may be disconnected.");
                 break;
             }
 
-            // Add the edge to the MST
-            mstEdges.Add((minEdge.from, minEdge.to));
-            visited.Add(minEdge.to);
+            // Get the minimum edge and remove it
+            Edge minEdge = pq.Min;
+            pq.Remove(minEdge);
 
-            // Remove the edge from the list
-            edges.Remove(minEdge);
+            // Skip if it goes back into the visited vertices
+            if (visited.Contains(minEdge.To)) continue;
 
-            // Add new edges from the newly visited vertex
-            foreach (var edge in graph[minEdge.to])
+            // Otherwise, add it to the mst
+            visited.Add(minEdge.To);
+            mstEdges.Add((minEdge.From, minEdge.To));
+
+            // Add the other edges to the priority queue
+            foreach (var edge in graph[minEdge.To])
             {
                 if (!visited.Contains(edge.neighbor))
                 {
-                    // For each edge added to the MST, add it to a list.
-                    edges.Add((minEdge.to, edge.neighbor, edge.weight));
+                    pq.Add(new Edge(minEdge.To, edge.neighbor, edge.weight));
                 }
             }
         }
