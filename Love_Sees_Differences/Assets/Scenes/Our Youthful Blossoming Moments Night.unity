@@ -1344,6 +1344,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[0]
+      value: 8:Welcome to the Fast Emergency Nocturnal Team!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[1]
+      value: 12:We are a new group helping residents of our city get the medical
+        attention they need.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[2]
+      value: 8:We specialize in our speed and our ability to work at night.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[3]
+      value: 12:Luckily for us, we have hospitals in every district of our city,
+        so we can stay in the districts with no problem.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[4]
+      value: 12:I heard that the Love Sees Differences team has to avoid pedestrians
+        in this area of the city.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[5]
+      value: "12:But sometimes, they hit the pedestrians, and it\u2019s our job to
+        get those people to the hospital."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[6]
+      value: "12:We\u2019ll start you off in this district, the Our Youthful Blossoming
+        Moments district. Relatively simple district."
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[7]
+      value: 12:You can drive the ambulance by pressing W and S to go forwards and
+        backwards, while A and D turn.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[8]
+      value: 12:You can also press left shift to boost, but note that you only have
+        a certain amount of boost.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[9]
+      value: 8:You can refill the boost by staying near the hospital.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[10]
+      value: 16:The ambulance can only hold 30 people, so make sure to plan your
+        routes to the buildings carefully.
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[11]
+      value: 4:Good luck!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+      propertyPath: lyricsText.Array.data[12]
+      value: '1:'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2213,6 +2277,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2104542974 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4142341844719259511, guid: c2073b5c41d5e4b0d8d222a41c7fc652, type: 3}
+  m_PrefabInstance: {fileID: 1045031219}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505ff7c95efcd42028a15afc9871c6e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2125106328
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,6 +2484,18 @@ PrefabInstance:
     - target: {fileID: 6833750670636167814, guid: 027764478158748839f2c49478a28dbc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2104542974}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: showLyrics
+      objectReference: {fileID: 0}
+    - target: {fileID: 7300678142969928064, guid: 027764478158748839f2c49478a28dbc, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CallableLyricsDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
