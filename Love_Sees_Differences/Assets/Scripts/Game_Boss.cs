@@ -38,6 +38,7 @@ public class Game_Boss : MonoBehaviour
     [Header("Audio")]
     [SerializeField] public GameObject loadingAudio;
     [SerializeField] public GameObject gameAudio;
+    [SerializeField] public GameObject gameOverAudio;
     [SerializeField] private AudioSource deliverSound;
 
     [Header("UI Canvas Old")]
@@ -173,6 +174,7 @@ public class Game_Boss : MonoBehaviour
         // Play loadingAudio
         loadingAudio.SetActive(true);
         gameAudio.SetActive(false);
+        gameOverAudio.SetActive(false);
 
         playerMovement = player.GetComponent<Player_Movement_Boss>();
         bossScript = boss.GetComponent<BossEnemy>();
@@ -520,6 +522,7 @@ public class Game_Boss : MonoBehaviour
         UICanvasNew.SetActive(false);
         EndScreenCanvas.SetActive(true);
         gameAudio.SetActive(false);
+        gameOverAudio.SetActive(true);
         int score = deliveries - collisions;
         finalScoreText.text = $"Score: {score}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";
