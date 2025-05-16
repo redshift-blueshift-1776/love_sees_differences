@@ -353,12 +353,14 @@ public class Game_Boss : MonoBehaviour
             peopleCarriedA = 0;
             peopleCarriedS = 0;
             peopleCarriedD = 0;
+            FlashTextRed(healthTextNew);
         }
     }
 
     public void addHealth() {
         if (maxCarryCapacity < 10) {
             maxCarryCapacity++;
+            FlashTextGreen(healthTextNew);
         }
     }
 
@@ -368,6 +370,52 @@ public class Game_Boss : MonoBehaviour
             arrows--;
         }
         return ret;
+    }
+
+    private Coroutine redFlashCoroutine;
+    private Coroutine greenFlashCoroutine;
+
+    private bool isRedFlashing = false;
+    private bool isGreenFlashing = false;
+
+    private IEnumerator FlashColorFade(TextMeshProUGUI text, Color flashColor, float fadeDuration, System.Action onFinish)
+    {
+        isRedFlashing = (flashColor == Color.red);
+        isGreenFlashing = (flashColor == Color.green);
+
+        Color originalColor = text.color;
+        text.color = flashColor;
+
+        float t = 0f;
+        while (t < fadeDuration)
+        {
+            t += Time.deltaTime;
+            text.color = Color.Lerp(flashColor, originalColor, t / fadeDuration);
+            yield return null;
+        }
+
+        text.color = originalColor;
+        onFinish?.Invoke();
+    }
+
+    private void FlashTextRed(TextMeshProUGUI text)
+    {
+        if (isRedFlashing) return; // Protect against multiple calls in the same frame
+        if (redFlashCoroutine != null) StopCoroutine(redFlashCoroutine);
+
+        redFlashCoroutine = StartCoroutine(
+            FlashColorFade(text, Color.red, 0.5f, () => isRedFlashing = false)
+        );
+    }
+
+    private void FlashTextGreen(TextMeshProUGUI text)
+    {
+        if (isGreenFlashing) return; // Protect against multiple calls in the same frame
+        if (greenFlashCoroutine != null) StopCoroutine(greenFlashCoroutine);
+
+        greenFlashCoroutine = StartCoroutine(
+            FlashColorFade(text, Color.green, 0.5f, () => isGreenFlashing = false)
+        );
     }
 
     private void UpdateScore()
