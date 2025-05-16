@@ -470,6 +470,7 @@ public class BossEnemy : MonoBehaviour
             Vector3 target = new Vector3(player.transform.position.x, player.transform.position.y, player.transform.position.z);
             float d = Vector3.Distance(transform.position, player.transform.position);
             spawnOrangePedestrian(size, (target - transform.position) / d, 50f);
+            spawnOrangePedestrian(size, (target - transform.position) / d, 25f);
         }
 
         if (phase == 2) {

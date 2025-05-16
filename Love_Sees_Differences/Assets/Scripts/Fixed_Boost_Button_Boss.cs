@@ -10,7 +10,7 @@ public class Fixed_Boost_Button_Boss : MonoBehaviour, IPointerDownHandler, IPoin
 
     void Start()
     {
-        player = GameObject.Find("Truck_Thing");
+        player = GameObject.Find("Truck_Thing_Boss");
         playerMovement = player.GetComponent<Player_Movement_Boss>();
         // Remove onClick since it only works for clicks
         boostButton.onClick.RemoveAllListeners(); 

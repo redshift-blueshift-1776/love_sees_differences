@@ -10,7 +10,7 @@ public class Fixed_Jump_Button_Boss : MonoBehaviour, IPointerDownHandler, IPoint
 
     void Start()
     {
-        player = GameObject.Find("Truck_Thing");
+        player = GameObject.Find("Truck_Thing_Boss");
         playerMovement = player.GetComponent<Player_Movement_Boss>();
         // Remove onClick since it only works for clicks
         jumpButton.onClick.RemoveAllListeners(); 
