@@ -346,7 +346,7 @@ public class Game : MonoBehaviour
 
     private void FlashTextRed(TextMeshProUGUI text)
     {
-        if (isRedFlashing) return; // Protect against multiple calls in the same frame
+        if (isRedFlashing || isGreenFlashing) return; // Protect against multiple calls in the same frame
         if (redFlashCoroutine != null) StopCoroutine(redFlashCoroutine);
 
         redFlashCoroutine = StartCoroutine(
@@ -356,7 +356,7 @@ public class Game : MonoBehaviour
 
     private void FlashTextGreen(TextMeshProUGUI text)
     {
-        if (isGreenFlashing) return; // Protect against multiple calls in the same frame
+        if (isRedFlashing || isGreenFlashing) return; // Protect against multiple calls in the same frame
         if (greenFlashCoroutine != null) StopCoroutine(greenFlashCoroutine);
 
         greenFlashCoroutine = StartCoroutine(

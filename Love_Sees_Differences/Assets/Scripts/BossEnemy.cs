@@ -310,6 +310,9 @@ public class BossEnemy : MonoBehaviour
             spawnOrangePedestrian(size, new Vector3(-1, 0, 0), 12.5f);
             spawnOrangePedestrian(size, new Vector3(0, 0, 1), 12.5f);
             spawnOrangePedestrian(size, new Vector3(0, 0, -1), 12.5f);
+            if (currentBeat % 16 == 8) {
+                StartCoroutine(GraphQuestionAttack());
+            }
         } 
 
         if (phase == 2) {

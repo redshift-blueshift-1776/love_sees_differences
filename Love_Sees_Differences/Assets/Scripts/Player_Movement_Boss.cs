@@ -90,13 +90,7 @@ public class Player_Movement_Boss : MonoBehaviour
         }
 
         if (gameScript.gameActive && Input.GetKeyDown(KeyCode.G)) {
-            if (gameScript.fireArrow()) {
-                var projectile = Instantiate(arrow, transform);
-                projectile.SetActive(true);
-                var projectileScript = projectile.GetComponent<Arrow>();
-                projectileScript.targetPosition = gameScript.boss.transform.position;
-                projectileScript.startPosition = transform.position;
-            }
+            tryFireArrow();
         }
 
         if (gameScript.gameActive && Input.GetKeyDown(KeyCode.C)) {
@@ -197,6 +191,16 @@ public class Player_Movement_Boss : MonoBehaviour
             }
         }
 
+    }
+
+    public void tryFireArrow() {
+        if (gameScript.fireArrow()) {
+            var projectile = Instantiate(arrow, transform);
+            projectile.SetActive(true);
+            var projectileScript = projectile.GetComponent<Arrow>();
+            projectileScript.targetPosition = gameScript.boss.transform.position;
+            projectileScript.startPosition = transform.position;
+        }
     }
 
     public void addCollision() {
