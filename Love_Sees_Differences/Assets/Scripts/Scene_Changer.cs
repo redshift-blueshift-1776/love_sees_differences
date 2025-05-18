@@ -141,6 +141,15 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(26);
     }
 
+    public void LoadHighScoresDay()
+    {
+        SceneManager.LoadScene(27);
+    }
+
+    public void LoadHighScoresNight()
+    {
+        SceneManager.LoadScene(28);
+    }
     
 
     public void restartLevel() {
