@@ -431,6 +431,14 @@ public class Game_2_Endless : MonoBehaviour
         finalScoreText.text = $"Score: {score}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";
         finalFailuresText.text = $"Failures: {failures}";
+        // Save the highest score to player prefs. Use "Endless_High_Score" as the key.
+        int savedScore = PlayerPrefs.GetInt("Endless_High_Score", int.MinValue);
+
+        if (score > savedScore)
+        {
+            PlayerPrefs.SetInt("Endless_High_Score", score);
+            PlayerPrefs.Save();
+        }
     }
 
     private IEnumerator RegeneratePeople()

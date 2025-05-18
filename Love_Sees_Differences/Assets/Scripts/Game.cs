@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 
 public class Game : MonoBehaviour
@@ -467,6 +468,15 @@ public class Game : MonoBehaviour
         finalScoreText.text = $"Score: {score}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";
         finalCollisionsText.text = $"Collisions: {collisions}";
+        // Save the highest score to player prefs. Use levelName + "day" as the key.
+        string key = SceneManager.GetActiveScene().name + "_day";
+        int savedScore = PlayerPrefs.GetInt(key, int.MinValue);
+
+        if (score > savedScore)
+        {
+            PlayerPrefs.SetInt(key, score);
+            PlayerPrefs.Save();
+        }
     }
 
     private IEnumerator RegeneratePeople()

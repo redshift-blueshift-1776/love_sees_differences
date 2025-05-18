@@ -255,6 +255,15 @@ public class Game_Boss : MonoBehaviour
         if (BossHealth <= 0)
         {
             Debug.Log("You win!");
+            // Save the high score (minimum time) to player prefs
+            float currentTime = Mathf.Round(timer);
+            float savedTime = PlayerPrefs.GetFloat("Boss_High_Score", float.MaxValue);
+
+            if (currentTime < savedTime)
+            {
+                PlayerPrefs.SetFloat("Boss_High_Score", currentTime);
+                PlayerPrefs.Save();
+            }
             SceneManager.LoadScene(25);
         }
         if (maxCarryCapacity <= 0) {

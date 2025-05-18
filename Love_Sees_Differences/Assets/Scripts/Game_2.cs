@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Game_2 : MonoBehaviour
 {
@@ -462,6 +463,15 @@ public class Game_2 : MonoBehaviour
         finalScoreText.text = $"Score: {score}";
         finalDeliveriesText.text = $"Deliveries: {deliveries}";
         finalFailuresText.text = $"Failures: {failures}";
+        // Save the highest score to player prefs. Use level_name + "night" as the key.
+        string key = SceneManager.GetActiveScene().name + "_night";
+        int savedScore = PlayerPrefs.GetInt(key, int.MinValue);
+
+        if (score > savedScore)
+        {
+            PlayerPrefs.SetInt(key, score);
+            PlayerPrefs.Save();
+        }
     }
 
     private IEnumerator RegeneratePeople()
