@@ -28,7 +28,7 @@ public class HighScoreDisplay : MonoBehaviour
                 if (score >= 0)
                     AddHighScoreText($"{name}: {score}");
             }
-            int bossScore = PlayerPrefs.GetInt("Boss_High_Score", -1);
+            int bossScore = (int) PlayerPrefs.GetFloat("Boss_High_Score", -1);
             if (bossScore >= 0)
                 AddHighScoreText($"Boss Time: {bossScore}");
         }
@@ -40,8 +40,9 @@ public class HighScoreDisplay : MonoBehaviour
                 string sceneName = System.IO.Path.GetFileNameWithoutExtension(path);
                 if (sceneName.Contains("Night"))
                 {
-                    string key = sceneName + "night";
+                    string key = sceneName + "_night";
                     int score = PlayerPrefs.GetInt(key, -1);
+                    Debug.Log(key + score);
                     if (score >= 0)
                         AddHighScoreText($"{sceneName}: {score}");
                 }

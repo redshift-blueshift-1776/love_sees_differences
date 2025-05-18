@@ -131,7 +131,7 @@ public class Game : MonoBehaviour
     {
         //boostButton.onClick.RemoveAllListeners(); 
         ClearCollisionData();
-        OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 1) == 1;
+        OldUIEnabled = PlayerPrefs.GetInt("UseOldUI", 0) == 1;
         gameActive = false;
         timer = 0;
         secondsPerBeat = 60f / tempo;
